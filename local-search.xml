@@ -4,13 +4,19 @@
   
   
   <entry>
-    <title>My First Post</title>
+    <title>docker安装</title>
     <link href="/2024/11/14/My-First-Post/"/>
     <url>/2024/11/14/My-First-Post/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<h3 id="docker安装"><a href="#docker安装" class="headerlink" title="docker安装"></a>docker安装</h3><p><a href="https://blog.csdn.net/weixin_42571882/article/details/134015815">https://blog.csdn.net/weixin_42571882/article/details/134015815</a></p><h3 id="docker镜像源（国外）"><a href="#docker镜像源（国外）" class="headerlink" title="docker镜像源（国外）"></a>docker镜像源（国外）</h3><p><a href="https://blog.csdn.net/llc580231/article/details/139979603">https://blog.csdn.net/llc580231/article/details/139979603</a></p>]]></content>
     
     
+    
+    <tags>
+      
+      <tag>docker</tag>
+      
+    </tags>
     
   </entry>
   
