@@ -10,6 +10,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+function saveMusicState(isPlaying, songUrl) {
+    localStorage.setItem('isMusicPlaying', isPlaying);
+    localStorage.setItem('musicUrl', songUrl);
+}
+// 假设这是播放音乐的函数，在播放时调用保存状态的函数
+function playMusic() {
+    var musicIframe = document.getElementById('music - player - container').getElementsByTagName('iframe')[0];
+    saveMusicState(true, musicIframe.src);
+}
+// 假设这是暂停音乐的函数，在暂停时调用保存状态的函数
+function pauseMusic() {
+    saveMusicState(false, '');
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    var isPlaying = localStorage.getItem('isMusicPlaying') === 'true';
+    var musicUrl = localStorage.getItem('musicUrl');
+    if (isPlaying && musicUrl) {
+        var musicIframe = document.createElement('iframe');
+        musicIframe.src = musicUrl;
+        document.body.appendChild(musicIframe);
+    }
+});
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
     const starsContainer = document.createElement('div');
     starsContainer.style.position = 'fixed';
