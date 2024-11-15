@@ -1,27 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>docker安装</title>
-    <url>/2024/11/14/docker/</url>
-    <content><![CDATA[<p>dockerx 相关技术的内容</p>
-<span id="more"></span>
-
-
-
-<h3 id="docker安装"><a href="#docker安装" class="headerlink" title="docker安装"></a>docker安装</h3><p><a href="https://blog.csdn.net/weixin_42571882/article/details/134015815">https://blog.csdn.net/weixin_42571882/article/details/134015815</a></p>
-<h3 id="docker镜像源（国外）"><a href="#docker镜像源（国外）" class="headerlink" title="docker镜像源（国外）"></a>docker镜像源（国外）</h3><p><a href="https://blog.csdn.net/llc580231/article/details/139979603">https://blog.csdn.net/llc580231/article/details/139979603</a></p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2024/11/14/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <span id="more"></span>
 
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
@@ -46,9 +28,28 @@
       </tags>
   </entry>
   <entry>
+    <title>技术相关网站</title>
+    <url>/2024/11/14/%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3%E7%BD%91%E7%AB%99/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><p>介绍一些搭建个人博客参考的网站，以及后续的进展</p>
+<span id="more"></span>
+
+<p>个人博客搭建</p>
+<p><a href="https://juejin.cn/column/7150928014518272007">https://juejin.cn/column/7150928014518272007</a></p>
+<p><a href="https://blog.kevinchu.top/categories/">https://blog.kevinchu.top/categories/</a></p>
+<p>评论、网易云、星星</p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>tech</tag>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>12306项目</title>
     <url>/2024/11/14/12306/</url>
-    <content><![CDATA[<p>12306项目的笔记</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><p>12306项目的笔记</p>
 <span id="more"></span>
 
 <p>Spring Boot 基础框架   3.0.7  <a href="https://spring.io/projects/spring-boot">https://spring.io/projects/spring-boot</a></p>
@@ -79,22 +80,22 @@
       </tags>
   </entry>
   <entry>
-    <title>技术相关网站</title>
-    <url>/2024/11/14/%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3%E7%BD%91%E7%AB%99/</url>
-    <content><![CDATA[<p>介绍一些搭建个人博客参考的网站，以及后续的进展</p>
+    <title>docker安装</title>
+    <url>/2024/11/14/docker/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><p>dockerx 相关技术的内容</p>
 <span id="more"></span>
 
-<p>个人博客搭建</p>
-<p><a href="https://juejin.cn/column/7150928014518272007">https://juejin.cn/column/7150928014518272007</a></p>
-<p><a href="https://blog.kevinchu.top/categories/">https://blog.kevinchu.top/categories/</a></p>
-<p>评论、网易云、星星</p>
+
+
+
+<h3 id="docker安装"><a href="#docker安装" class="headerlink" title="docker安装"></a>docker安装</h3><p><a href="https://blog.csdn.net/weixin_42571882/article/details/134015815">https://blog.csdn.net/weixin_42571882/article/details/134015815</a></p>
+<h3 id="docker镜像源（国外）"><a href="#docker镜像源（国外）" class="headerlink" title="docker镜像源（国外）"></a>docker镜像源（国外）</h3><p><a href="https://blog.csdn.net/llc580231/article/details/139979603">https://blog.csdn.net/llc580231/article/details/139979603</a></p>
 ]]></content>
       <categories>
-        <category>tech</category>
+        <category>java</category>
       </categories>
       <tags>
-        <tag>tech</tag>
-        <tag>web</tag>
+        <tag>docker</tag>
       </tags>
   </entry>
 </search>

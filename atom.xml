@@ -23,7 +23,7 @@
     <published>2024-11-14T15:06:22.000Z</published>
     <updated>2024-11-15T11:07:42.068Z</updated>
     
-    <content type="html"><![CDATA[<p>介绍一些搭建个人博客参考的网站，以及后续的进展</p><span id="more"></span><p>个人博客搭建</p><p><a href="https://juejin.cn/column/7150928014518272007">https://juejin.cn/column/7150928014518272007</a></p><p><a href="https://blog.kevinchu.top/categories/">https://blog.kevinchu.top/categories/</a></p><p>评论、网易云、星星</p>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><p>介绍一些搭建个人博客参考的网站，以及后续的进展</p><span id="more"></span><p>个人博客搭建</p><p><a href="https://juejin.cn/column/7150928014518272007">https://juejin.cn/column/7150928014518272007</a></p><p><a href="https://blog.kevinchu.top/categories/">https://blog.kevinchu.top/categories/</a></p><p>评论、网易云、星星</p>]]></content>
     
     
     <summary type="html">&lt;p&gt;介绍一些搭建个人博客参考的网站，以及后续的进展&lt;/p&gt;</summary>
@@ -40,34 +40,13 @@
   </entry>
   
   <entry>
-    <title>docker安装</title>
-    <link href="https://xuhuilun.github.io/2024/11/14/docker/"/>
-    <id>https://xuhuilun.github.io/2024/11/14/docker/</id>
-    <published>2024-11-14T00:28:43.000Z</published>
-    <updated>2024-11-15T10:04:51.975Z</updated>
-    
-    <content type="html"><![CDATA[<p>dockerx 相关技术的内容</p><span id="more"></span><h3 id="docker安装"><a href="#docker安装" class="headerlink" title="docker安装"></a>docker安装</h3><p><a href="https://blog.csdn.net/weixin_42571882/article/details/134015815">https://blog.csdn.net/weixin_42571882/article/details/134015815</a></p><h3 id="docker镜像源（国外）"><a href="#docker镜像源（国外）" class="headerlink" title="docker镜像源（国外）"></a>docker镜像源（国外）</h3><p><a href="https://blog.csdn.net/llc580231/article/details/139979603">https://blog.csdn.net/llc580231/article/details/139979603</a></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;dockerx 相关技术的内容&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="java" scheme="https://xuhuilun.github.io/categories/java/"/>
-    
-    
-    <category term="docker" scheme="https://xuhuilun.github.io/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
     <title>12306项目</title>
     <link href="https://xuhuilun.github.io/2024/11/14/12306/"/>
     <id>https://xuhuilun.github.io/2024/11/14/12306/</id>
     <published>2024-11-14T00:28:43.000Z</published>
     <updated>2024-11-15T10:05:20.292Z</updated>
     
-    <content type="html"><![CDATA[<p>12306项目的笔记</p><span id="more"></span><p>Spring Boot 基础框架   3.0.7  <a href="https://spring.io/projects/spring-boot">https://spring.io/projects/spring-boot</a></p><p>MyBatis-Plus   持久层框架  3.5.3.1 <a href="https://baomidou.com/">https://baomidou.com</a></p><p>Redis  分布式缓存数据库   Latest  <a href="https://redis.io/">https://redis.io</a></p><p>RocketMQ   消息队列   2.2.3  <a href="https://rocketmq.apache.org/">https://rocketmq.apache.org</a></p><p>ShardingSphere  数据库生态系统 5.3.2  <a href="https://shardingsphere.apache.org/">https://shardingsphere.apache.org</a></p><p>SpringCloud Alibaba 分布式框架  2022.0.0.0-RC2  <a href="https://github.com/alibaba/spring-cloud-alibaba">https://github.com/alibaba/spring-cloud-alibaba</a></p><p>SpringCloud Gateway 网关框架   2022.0.3   <a href="https://spring.io/projects/spring-cloud-gateway">https://spring.io/projects/spring-cloud-gateway</a></p><p>TTL 增强版 ThreadLocal 2.14.3  <a href="https://github.com/alibaba/transmittable-thread-local">https://github.com/alibaba/transmittable-thread-local</a></p><p>FastJson2  JSON 序列化工具  2.0.36  <a href="https://github.com/alibaba/fastjson2">https://github.com/alibaba/fastjson2</a></p><p>Canal  BinLog 订阅组件 1.1.6  <a href="https://github.com/alibaba/canal">https://github.com/alibaba/canal</a></p><p>HuTool  小而全的工具集项目  5.8.2  <a href="https://hutool.cn/">https://hutool.cn</a></p><p>Redisson   Redis Java 客户端  3.21.3  <a href="https://redisson.org/">https://redisson.org</a></p><p>Sentinel   流控防护框架  1.8.6  <a href="https://github.com/alibaba/Sentinel">https://github.com/alibaba/Sentinel</a></p><p>Hippo4j 动态线程池框架 1.5.0  <a href="https://hippo4j.cn/">https://hippo4j.cn</a></p><p>XXL-Job 分布式定时任务框架  2.4.0  <a href="http://www.xuxueli.com/xxl-job">http://www.xuxueli.com/xxl-job</a></p><p>SkyWalking  分布式链路追踪框架  9.5.0  <a href="https://skywalking.apache.org/">https://skywalking.apache.org</a></p>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><p>12306项目的笔记</p><span id="more"></span><p>Spring Boot 基础框架   3.0.7  <a href="https://spring.io/projects/spring-boot">https://spring.io/projects/spring-boot</a></p><p>MyBatis-Plus   持久层框架  3.5.3.1 <a href="https://baomidou.com/">https://baomidou.com</a></p><p>Redis  分布式缓存数据库   Latest  <a href="https://redis.io/">https://redis.io</a></p><p>RocketMQ   消息队列   2.2.3  <a href="https://rocketmq.apache.org/">https://rocketmq.apache.org</a></p><p>ShardingSphere  数据库生态系统 5.3.2  <a href="https://shardingsphere.apache.org/">https://shardingsphere.apache.org</a></p><p>SpringCloud Alibaba 分布式框架  2022.0.0.0-RC2  <a href="https://github.com/alibaba/spring-cloud-alibaba">https://github.com/alibaba/spring-cloud-alibaba</a></p><p>SpringCloud Gateway 网关框架   2022.0.3   <a href="https://spring.io/projects/spring-cloud-gateway">https://spring.io/projects/spring-cloud-gateway</a></p><p>TTL 增强版 ThreadLocal 2.14.3  <a href="https://github.com/alibaba/transmittable-thread-local">https://github.com/alibaba/transmittable-thread-local</a></p><p>FastJson2  JSON 序列化工具  2.0.36  <a href="https://github.com/alibaba/fastjson2">https://github.com/alibaba/fastjson2</a></p><p>Canal  BinLog 订阅组件 1.1.6  <a href="https://github.com/alibaba/canal">https://github.com/alibaba/canal</a></p><p>HuTool  小而全的工具集项目  5.8.2  <a href="https://hutool.cn/">https://hutool.cn</a></p><p>Redisson   Redis Java 客户端  3.21.3  <a href="https://redisson.org/">https://redisson.org</a></p><p>Sentinel   流控防护框架  1.8.6  <a href="https://github.com/alibaba/Sentinel">https://github.com/alibaba/Sentinel</a></p><p>Hippo4j 动态线程池框架 1.5.0  <a href="https://hippo4j.cn/">https://hippo4j.cn</a></p><p>XXL-Job 分布式定时任务框架  2.4.0  <a href="http://www.xuxueli.com/xxl-job">http://www.xuxueli.com/xxl-job</a></p><p>SkyWalking  分布式链路追踪框架  9.5.0  <a href="https://skywalking.apache.org/">https://skywalking.apache.org</a></p>]]></content>
     
     
     <summary type="html">&lt;p&gt;12306项目的笔记&lt;/p&gt;</summary>
@@ -88,13 +67,34 @@
   </entry>
   
   <entry>
+    <title>docker安装</title>
+    <link href="https://xuhuilun.github.io/2024/11/14/docker/"/>
+    <id>https://xuhuilun.github.io/2024/11/14/docker/</id>
+    <published>2024-11-14T00:28:43.000Z</published>
+    <updated>2024-11-15T13:12:30.261Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><p>dockerx 相关技术的内容</p><span id="more"></span><h3 id="docker安装"><a href="#docker安装" class="headerlink" title="docker安装"></a>docker安装</h3><p><a href="https://blog.csdn.net/weixin_42571882/article/details/134015815">https://blog.csdn.net/weixin_42571882/article/details/134015815</a></p><h3 id="docker镜像源（国外）"><a href="#docker镜像源（国外）" class="headerlink" title="docker镜像源（国外）"></a>docker镜像源（国外）</h3><p><a href="https://blog.csdn.net/llc580231/article/details/139979603">https://blog.csdn.net/llc580231/article/details/139979603</a></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;dockerx 相关技术的内容&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="java" scheme="https://xuhuilun.github.io/categories/java/"/>
+    
+    
+    <category term="docker" scheme="https://xuhuilun.github.io/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Hello World</title>
     <link href="https://xuhuilun.github.io/2024/11/14/hello-world/"/>
     <id>https://xuhuilun.github.io/2024/11/14/hello-world/</id>
     <published>2024-11-14T00:17:08.312Z</published>
     <updated>2024-11-15T10:03:11.135Z</updated>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><span id="more"></span><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><span id="more"></span><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
     
     
     <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;</summary>
