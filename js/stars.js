@@ -1,3 +1,15 @@
+
+document.addEventListener('DOMContentLoaded', function () {
+    var musicPlayer = document.getElementById('music - player - container');
+    if (musicPlayer) {
+        var iframe = musicPlayer.getElementsByTagName('iframe')[0];
+        // 模拟用户点击事件来触发播放
+        iframe.contentWindow.postMessage('{"name": "play"}', '*');
+    }
+});
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
     const starsContainer = document.createElement('div');
     starsContainer.style.position = 'fixed';
