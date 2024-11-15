@@ -1,0 +1,17 @@
+.star {
+    background: -webkit-radial-gradient(circle, white, transparent 70%);
+    background: radial-gradient(circle, white, transparent 70%);
+    animation: twinkle 1.5s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.7;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
