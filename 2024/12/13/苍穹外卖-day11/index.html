@@ -1,0 +1,939 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="欢迎来到我的博客，让我们一起进步！">
+  <meta name="author" content="Chandler Bing">
+  <meta name="keywords" content="">
+  
+  <title>day11 - 辉のblog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/stars.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"xuhuilun.github.io","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="辉のblog" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">&nbsp;
+
+    <strong class="navbar-title">辉のblog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+
+
+
+
+
+
+          
+
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+
+
+
+          
+        
+          
+          
+          
+
+
+
+
+
+
+          
+
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+
+
+
+          
+        
+          
+          
+          
+
+
+
+
+
+
+          
+
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+
+
+
+          
+        
+          
+          
+          
+
+
+
+
+
+
+          
+
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+
+
+
+          
+        
+          
+          
+          
+
+
+
+
+
+
+          
+
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+
+
+
+          
+        
+
+
+
+
+
+
+
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+
+          <li class="nav-item"><a class="nav-link"  href="/atom.xml" target="_blank" rel="noopener noreferrer">RSS订阅</a></li>
+
+
+
+
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="day11">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2024-12-13 00:00" pubdate>
+        2024年12月13日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      65
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">day11</h1>
+            
+            <div class="markdown-body">
+              <h1 id="苍穹外卖-day11"><a href="#苍穹外卖-day11" class="headerlink" title="苍穹外卖-day11"></a>苍穹外卖-day11</h1><h2 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h2><ul>
+<li>Apache ECharts</li>
+<li>营业额统计</li>
+<li>用户统计</li>
+<li>订单统计</li>
+<li>销量排名Top10</li>
+</ul>
+<p>功能实现：<strong>数据统计</strong></p>
+<p><strong>数据统计效果图：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355557.png" srcset="/img/loading.gif" lazyload alt="image-20230101152725417" style="zoom:80%;" /> 
+
+
+
+<h2 id="1-Apache-ECharts"><a href="#1-Apache-ECharts" class="headerlink" title="1. Apache ECharts"></a>1. Apache ECharts</h2><h3 id="1-1-介绍"><a href="#1-1-介绍" class="headerlink" title="1.1 介绍"></a>1.1 介绍</h3><p>Apache ECharts 是一款基于 Javascript 的数据可视化图表库，提供直观，生动，可交互，可个性化定制的数据可视化图表。<br>官网地址：<a target="_blank" rel="noopener" href="https://echarts.apache.org/zh/index.html">https://echarts.apache.org/zh/index.html</a></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355559.png" srcset="/img/loading.gif" lazyload alt="image-20230101153041348" style="zoom:50%;" /> 
+
+
+
+<p><strong>常见效果展示：</strong></p>
+<p>1). 柱形图</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355560.png" srcset="/img/loading.gif" lazyload alt="image-20230101153748714" style="zoom:50%;" /> 
+
+
+
+<p>2). 饼形图</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355561.png" srcset="/img/loading.gif" lazyload alt="image-20230101153230868" style="zoom:50%;" /> 
+
+
+
+<p>3). 折线图</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355562.png" srcset="/img/loading.gif" lazyload alt="image-20230101153824086" style="zoom:50%;" /> 
+
+
+
+<p><strong>总结：</strong>不管是哪种形式的图形，最本质的东西实际上是数据，它其实是对数据的一种可视化展示。</p>
+<h3 id="1-2-入门案例"><a href="#1-2-入门案例" class="headerlink" title="1.2 入门案例"></a>1.2 入门案例</h3><p>Apache Echarts官方提供的快速入门：<a target="_blank" rel="noopener" href="https://echarts.apache.org/handbook/zh/get-started/">https://echarts.apache.org/handbook/zh/get-started/</a></p>
+<p><strong>效果展示：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355563.png" srcset="/img/loading.gif" lazyload alt="image-20230101155524477" style="zoom:50%;" /> 
+
+
+
+<p><strong>实现步骤：</strong></p>
+<p>1). 引入echarts.js 文件(当天资料已提供)</p>
+<p>2). 为 ECharts 准备一个设置宽高的 DOM</p>
+<p>3). 初始化echarts实例</p>
+<p>4). 指定图表的配置项和数据</p>
+<p>5). 使用指定的配置项和数据显示图表</p>
+<p><strong>代码开发：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>ECharts<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- 引入刚刚下载的 ECharts 文件 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;echarts.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- 为 ECharts 准备一个定义了宽高的 DOM --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;main&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;width: 600px;height:400px;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">      <span class="hljs-comment">// 基于准备好的dom，初始化echarts实例</span></span><br><span class="language-javascript">      <span class="hljs-keyword">var</span> myChart = echarts.<span class="hljs-title function_">init</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;main&#x27;</span>));</span><br><span class="language-javascript"></span><br><span class="language-javascript">      <span class="hljs-comment">// 指定图表的配置项和数据</span></span><br><span class="language-javascript">      <span class="hljs-keyword">var</span> option = &#123;</span><br><span class="language-javascript">        <span class="hljs-attr">title</span>: &#123;</span><br><span class="language-javascript">          <span class="hljs-attr">text</span>: <span class="hljs-string">&#x27;ECharts 入门示例&#x27;</span></span><br><span class="language-javascript">        &#125;,</span><br><span class="language-javascript">        <span class="hljs-attr">tooltip</span>: &#123;&#125;,</span><br><span class="language-javascript">        <span class="hljs-attr">legend</span>: &#123;</span><br><span class="language-javascript">          <span class="hljs-attr">data</span>: [<span class="hljs-string">&#x27;销量&#x27;</span>]</span><br><span class="language-javascript">        &#125;,</span><br><span class="language-javascript">        <span class="hljs-attr">xAxis</span>: &#123;</span><br><span class="language-javascript">          <span class="hljs-attr">data</span>: [<span class="hljs-string">&#x27;衬衫&#x27;</span>, <span class="hljs-string">&#x27;羊毛衫&#x27;</span>, <span class="hljs-string">&#x27;雪纺衫&#x27;</span>, <span class="hljs-string">&#x27;裤子&#x27;</span>, <span class="hljs-string">&#x27;高跟鞋&#x27;</span>, <span class="hljs-string">&#x27;袜子&#x27;</span>]</span><br><span class="language-javascript">        &#125;,</span><br><span class="language-javascript">        <span class="hljs-attr">yAxis</span>: &#123;&#125;,</span><br><span class="language-javascript">        <span class="hljs-attr">series</span>: [</span><br><span class="language-javascript">          &#123;</span><br><span class="language-javascript">            <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;销量&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;bar&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-attr">data</span>: [<span class="hljs-number">5</span>, <span class="hljs-number">20</span>, <span class="hljs-number">36</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">20</span>]</span><br><span class="language-javascript">          &#125;</span><br><span class="language-javascript">        ]</span><br><span class="language-javascript">      &#125;;</span><br><span class="language-javascript"></span><br><span class="language-javascript">      <span class="hljs-comment">// 使用刚指定的配置项和数据显示图表。</span></span><br><span class="language-javascript">      myChart.<span class="hljs-title function_">setOption</span>(option);</span><br><span class="language-javascript">    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>测试：</strong>(当天资料中已提供)</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355564.png" srcset="/img/loading.gif" lazyload alt="image-20230101160244104" style="zoom:50%;" /> 
+
+<p>使用浏览器方式打开即可。</p>
+<p><strong>总结：</strong>使用Echarts，重点在于研究当前图表所需的数据格式。通常是需要后端提供符合格式要求的动态数据，然后响应给前端来展示图表。</p>
+<h2 id="2-营业额统计"><a href="#2-营业额统计" class="headerlink" title="2. 营业额统计"></a>2. 营业额统计</h2><h3 id="2-1-需求分析和设计"><a href="#2-1-需求分析和设计" class="headerlink" title="2.1 需求分析和设计"></a>2.1 需求分析和设计</h3><h4 id="2-1-1-产品原型"><a href="#2-1-1-产品原型" class="headerlink" title="2.1.1 产品原型"></a>2.1.1 产品原型</h4><p>营业额统计是基于折现图来展现，并且按照天来展示的。实际上，就是某一个时间范围之内的每一天的营业额。同时，不管光标放在哪个点上，那么它就会把具体的数值展示出来。并且还需要注意日期并不是固定写死的，是由上边时间选择器来决定。比如选择是近7天、或者是近30日，或者是本周，就会把相应这个时间段之内的每一天日期通过横坐标展示。</p>
+<p><strong>原型图：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355565.png" srcset="/img/loading.gif" lazyload alt="image-20230101160747433" style="zoom:50%;" /> 
+
+
+
+<p><strong>业务规则：</strong></p>
+<ul>
+<li>营业额指订单状态为已完成的订单金额合计</li>
+<li>基于可视化报表的折线图展示营业额数据，X轴为日期，Y轴为营业额</li>
+<li>根据时间选择区间，展示每天的营业额数据</li>
+</ul>
+<h4 id="2-1-2-接口设计"><a href="#2-1-2-接口设计" class="headerlink" title="2.1.2 接口设计"></a>2.1.2 接口设计</h4><p>通过上述原型图，设计出对应的接口。</p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355566.png" srcset="/img/loading.gif" lazyload alt="image-20230101160801758" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355567.png" srcset="/img/loading.gif" lazyload alt="image-20230101160812029" style="zoom:50%;" /> </p>
+<p><strong>注意：</strong>具体返回数据一般由前端来决定，前端展示图表，具体折现图对应数据是什么格式，是有固定的要求的。<br>所以说，后端需要去适应前端，它需要什么格式的数据，我们就给它返回什么格式的数据。</p>
+<h3 id="2-2-代码开发"><a href="#2-2-代码开发" class="headerlink" title="2.2 代码开发"></a>2.2 代码开发</h3><h4 id="2-2-1-VO设计"><a href="#2-2-1-VO设计" class="headerlink" title="2.2.1 VO设计"></a>2.2.1 VO设计</h4><p><strong>根据接口定义设计对应的VO：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355568.png" srcset="/img/loading.gif" lazyload alt="image-20230101164058056" style="zoom:50%;" /> 
+
+<p>在sky-pojo模块，TurnoverReportVO.java已定义</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.vo;<br><br><span class="hljs-keyword">import</span> lombok.AllArgsConstructor;<br><span class="hljs-keyword">import</span> lombok.Builder;<br><span class="hljs-keyword">import</span> lombok.Data;<br><span class="hljs-keyword">import</span> lombok.NoArgsConstructor;<br><br><span class="hljs-keyword">import</span> java.io.Serializable;<br><br><span class="hljs-meta">@Data</span><br><span class="hljs-meta">@Builder</span><br><span class="hljs-meta">@NoArgsConstructor</span><br><span class="hljs-meta">@AllArgsConstructor</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TurnoverReportVO</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span> &#123;<br><br>    <span class="hljs-comment">//日期，以逗号分隔，例如：2022-10-01,2022-10-02,2022-10-03</span><br>    <span class="hljs-keyword">private</span> String dateList;<br><br>    <span class="hljs-comment">//营业额，以逗号分隔，例如：406.0,1520.0,75.0</span><br>    <span class="hljs-keyword">private</span> String turnoverList;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-2-2-Controller层"><a href="#2-2-2-Controller层" class="headerlink" title="2.2.2 Controller层"></a>2.2.2 Controller层</h4><p><strong>根据接口定义创建ReportController：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.controller.admin;<br><br><span class="hljs-keyword">import</span> com.sky.result.Result;<br><span class="hljs-keyword">import</span> com.sky.service.ReportService;<br><span class="hljs-keyword">import</span> com.sky.vo.TurnoverReportVO;<br><span class="hljs-keyword">import</span> io.swagger.annotations.Api;<br><span class="hljs-keyword">import</span> io.swagger.annotations.ApiOperation;<br><span class="hljs-keyword">import</span> lombok.extern.slf4j.Slf4j;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.format.annotation.DateTimeFormat;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.GetMapping;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RestController;<br><span class="hljs-keyword">import</span> java.time.LocalDate;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 报表</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(&quot;/admin/report&quot;)</span><br><span class="hljs-meta">@Slf4j</span><br><span class="hljs-meta">@Api(tags = &quot;统计报表相关接口&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ReportController</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> ReportService reportService;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 营业额数据统计</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> begin</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> end</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@GetMapping(&quot;/turnoverStatistics&quot;)</span><br>    <span class="hljs-meta">@ApiOperation(&quot;营业额数据统计&quot;)</span><br>    <span class="hljs-keyword">public</span> Result&lt;TurnoverReportVO&gt; <span class="hljs-title function_">turnoverStatistics</span><span class="hljs-params">(</span><br><span class="hljs-params">            <span class="hljs-meta">@DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)</span></span><br><span class="hljs-params">                    LocalDate begin,</span><br><span class="hljs-params">            <span class="hljs-meta">@DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)</span></span><br><span class="hljs-params">                    LocalDate end)</span> &#123;<br>        <span class="hljs-keyword">return</span> Result.success(reportService.getTurnover(begin, end));<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-2-3-Service层接口"><a href="#2-2-3-Service层接口" class="headerlink" title="2.2.3 Service层接口"></a>2.2.3 Service层接口</h4><p><strong>创建ReportService接口，声明getTurnover方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.service;<br><br><span class="hljs-keyword">import</span> com.sky.vo.TurnoverReportVO;<br><span class="hljs-keyword">import</span> java.time.LocalDate;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ReportService</span> &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 根据时间区间统计营业额</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> beginTime</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> endTime</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    TurnoverReportVO <span class="hljs-title function_">getTurnover</span><span class="hljs-params">(LocalDate beginTime, LocalDate endTime)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-2-4-Service层实现类"><a href="#2-2-4-Service层实现类" class="headerlink" title="2.2.4 Service层实现类"></a>2.2.4 Service层实现类</h4><p><strong>创建ReportServiceImpl实现类，实现getTurnover方法:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.service.impl;<br><br><span class="hljs-keyword">import</span> com.sky.entity.Orders;<br><span class="hljs-keyword">import</span> com.sky.mapper.OrderMapper;<br><span class="hljs-keyword">import</span> com.sky.service.ReportService;<br><span class="hljs-keyword">import</span> com.sky.vo.TurnoverReportVO;<br><span class="hljs-keyword">import</span> lombok.extern.slf4j.Slf4j;<br><span class="hljs-keyword">import</span> org.apache.commons.lang.StringUtils;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Service;<br><span class="hljs-keyword">import</span> java.time.LocalDate;<br><span class="hljs-keyword">import</span> java.time.LocalDateTime;<br><span class="hljs-keyword">import</span> java.time.LocalTime;<br><span class="hljs-keyword">import</span> java.util.ArrayList;<br><span class="hljs-keyword">import</span> java.util.HashMap;<br><span class="hljs-keyword">import</span> java.util.List;<br><span class="hljs-keyword">import</span> java.util.Map;<br><br><span class="hljs-meta">@Service</span><br><span class="hljs-meta">@Slf4j</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ReportServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ReportService</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> OrderMapper orderMapper;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 根据时间区间统计营业额</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> begin</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> end</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> TurnoverReportVO <span class="hljs-title function_">getTurnover</span><span class="hljs-params">(LocalDate begin, LocalDate end)</span> &#123;<br>        List&lt;LocalDate&gt; dateList = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        dateList.add(begin);<br><br>        <span class="hljs-keyword">while</span> (!begin.equals(end))&#123;<br>            begin = begin.plusDays(<span class="hljs-number">1</span>);<span class="hljs-comment">//日期计算，获得指定日期后1天的日期</span><br>            dateList.add(begin);<br>        &#125;<br>        <br>       List&lt;Double&gt; turnoverList = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (LocalDate date : dateList) &#123;<br>            <span class="hljs-type">LocalDateTime</span> <span class="hljs-variable">beginTime</span> <span class="hljs-operator">=</span> LocalDateTime.of(date, LocalTime.MIN);<br>            <span class="hljs-type">LocalDateTime</span> <span class="hljs-variable">endTime</span> <span class="hljs-operator">=</span> LocalDateTime.of(date, LocalTime.MAX);<br>            <span class="hljs-type">Map</span> <span class="hljs-variable">map</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>();<br>        	map.put(<span class="hljs-string">&quot;status&quot;</span>, Orders.COMPLETED);<br>        	map.put(<span class="hljs-string">&quot;begin&quot;</span>,beginTime);<br>        	map.put(<span class="hljs-string">&quot;end&quot;</span>, endTime);<br>            <span class="hljs-type">Double</span> <span class="hljs-variable">turnover</span> <span class="hljs-operator">=</span> orderMapper.sumByMap(map); <br>            turnover = turnover == <span class="hljs-literal">null</span> ? <span class="hljs-number">0.0</span> : turnover;<br>            turnoverList.add(turnover);<br>        &#125;<br><br>        <span class="hljs-comment">//数据封装</span><br>        <span class="hljs-keyword">return</span> TurnoverReportVO.builder()<br>                .dateList(StringUtils.join(dateList,<span class="hljs-string">&quot;,&quot;</span>))<br>                .turnoverList(StringUtils.join(turnoverList,<span class="hljs-string">&quot;,&quot;</span>))<br>                .build();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-2-5-Mapper层"><a href="#2-2-5-Mapper层" class="headerlink" title="2.2.5 Mapper层"></a>2.2.5 Mapper层</h4><p><strong>在OrderMapper接口声明sumByMap方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 根据动态条件统计营业额</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> map</span><br><span class="hljs-comment">    */</span><br>   Double <span class="hljs-title function_">sumByMap</span><span class="hljs-params">(Map map)</span>;<br></code></pre></td></tr></table></figure>
+
+<p><strong>在OrderMapper.xml文件中编写动态SQL：</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;sumByMap&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;java.lang.Double&quot;</span>&gt;</span><br>        select sum(amount) from orders<br>        <span class="hljs-tag">&lt;<span class="hljs-name">where</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;status != null&quot;</span>&gt;</span><br>                and status = #&#123;status&#125;<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;begin != null&quot;</span>&gt;</span><br>                and order_time <span class="hljs-symbol">&amp;gt;</span>= #&#123;begin&#125;<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;end != null&quot;</span>&gt;</span><br>                and order_time <span class="hljs-symbol">&amp;lt;</span>= #&#123;end&#125;<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">where</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-3-功能测试"><a href="#2-3-功能测试" class="headerlink" title="2.3 功能测试"></a>2.3 功能测试</h3><p>可以通过如下方式进行测试：</p>
+<ul>
+<li>接口文档测试</li>
+<li>前后端联调测试</li>
+</ul>
+<p>启动服务器，启动nginx，直接采用前后端联调测试。</p>
+<p>进入数据统计模块</p>
+<p><strong>1). 查看近7日营业额统计</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355569.png" srcset="/img/loading.gif" lazyload alt="image-20230101172807757" style="zoom:50%;" /> 
+
+<p>进入开发者模式，查看返回数据</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355570.png" srcset="/img/loading.gif" lazyload alt="image-20230101173031357" style="zoom:80%;" /> 
+
+
+
+<p><strong>2). 查看近30日营业额统计</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355571.png" srcset="/img/loading.gif" lazyload alt="image-20230101173201667" style="zoom:50%;" /> 
+
+<p>进入开发者模式，查看返回数据</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355572.png" srcset="/img/loading.gif" lazyload alt="image-20230101173304127" style="zoom:80%;" /> 
+
+<p>也可通过断点方式启动，查看每步执行情况。</p>
+<h3 id="2-4-代码提交"><a href="#2-4-代码提交" class="headerlink" title="2.4 代码提交"></a>2.4 代码提交</h3><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355573.png" srcset="/img/loading.gif" lazyload alt="image-20230107183427167" style="zoom:50%;" /> 
+
+<p>后续步骤和其它功能代码提交一致，不再赘述。</p>
+<h2 id="3-用户统计"><a href="#3-用户统计" class="headerlink" title="3. 用户统计"></a>3. 用户统计</h2><h3 id="3-1-需求分析和设计"><a href="#3-1-需求分析和设计" class="headerlink" title="3.1 需求分析和设计"></a>3.1 需求分析和设计</h3><h4 id="3-1-1-产品原型"><a href="#3-1-1-产品原型" class="headerlink" title="3.1.1 产品原型"></a>3.1.1 产品原型</h4><p>所谓用户统计，实际上统计的是用户的数量。通过折线图来展示，上面这根蓝色线代表的是用户总量，下边这根绿色线代表的是新增用户数量，是具体到每一天。所以说用户统计主要统计<strong>两个数据</strong>，一个是<strong>总的用户数量</strong>，另外一个是<strong>新增用户数量</strong>。</p>
+<p><strong>原型图：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355574.png" srcset="/img/loading.gif" lazyload alt="image-20230102213727736" style="zoom:50%;" /> 
+
+<p><strong>业务规则：</strong></p>
+<ul>
+<li>基于可视化报表的折线图展示用户数据，X轴为日期，Y轴为用户数</li>
+<li>根据时间选择区间，展示每天的用户总量和新增用户量数据</li>
+</ul>
+<h4 id="3-1-2-接口设计"><a href="#3-1-2-接口设计" class="headerlink" title="3.1.2 接口设计"></a>3.1.2 接口设计</h4><p>根据上述原型图设计接口。</p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355575.png" srcset="/img/loading.gif" lazyload alt="image-20230102213809414" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355576.png" srcset="/img/loading.gif" lazyload alt="image-20230102213818334" style="zoom:50%;" /> </p>
+<h3 id="3-2-代码开发"><a href="#3-2-代码开发" class="headerlink" title="3.2 代码开发"></a>3.2 代码开发</h3><h4 id="3-2-1-VO设计"><a href="#3-2-1-VO设计" class="headerlink" title="3.2.1 VO设计"></a>3.2.1 VO设计</h4><p><strong>根据用户统计接口的返回结果设计VO：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355577.png" srcset="/img/loading.gif" lazyload alt="image-20230102211004237" style="zoom:50%;" /> 
+
+<p>在sky-pojo模块，UserReportVO.java已定义</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.vo;<br><br><span class="hljs-keyword">import</span> lombok.AllArgsConstructor;<br><span class="hljs-keyword">import</span> lombok.Builder;<br><span class="hljs-keyword">import</span> lombok.Data;<br><span class="hljs-keyword">import</span> lombok.NoArgsConstructor;<br><span class="hljs-keyword">import</span> java.io.Serializable;<br><br><span class="hljs-meta">@Data</span><br><span class="hljs-meta">@Builder</span><br><span class="hljs-meta">@NoArgsConstructor</span><br><span class="hljs-meta">@AllArgsConstructor</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserReportVO</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span> &#123;<br><br>    <span class="hljs-comment">//日期，以逗号分隔，例如：2022-10-01,2022-10-02,2022-10-03</span><br>    <span class="hljs-keyword">private</span> String dateList;<br><br>    <span class="hljs-comment">//用户总量，以逗号分隔，例如：200,210,220</span><br>    <span class="hljs-keyword">private</span> String totalUserList;<br><br>    <span class="hljs-comment">//新增用户，以逗号分隔，例如：20,21,10</span><br>    <span class="hljs-keyword">private</span> String newUserList;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-2-2-Controller层"><a href="#3-2-2-Controller层" class="headerlink" title="3.2.2 Controller层"></a>3.2.2 Controller层</h4><p><strong>根据接口定义，在ReportController中创建userStatistics方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 用户数据统计</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> begin</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> end</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@GetMapping(&quot;/userStatistics&quot;)</span><br>    <span class="hljs-meta">@ApiOperation(&quot;用户数据统计&quot;)</span><br>    <span class="hljs-keyword">public</span> Result&lt;UserReportVO&gt; <span class="hljs-title function_">userStatistics</span><span class="hljs-params">(</span><br><span class="hljs-params">            <span class="hljs-meta">@DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)</span> LocalDate begin,</span><br><span class="hljs-params">            <span class="hljs-meta">@DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)</span> LocalDate end)</span>&#123;<br><br>        <span class="hljs-keyword">return</span> Result.success(reportService.getUserStatistics(begin,end));            <br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-2-3-Service层接口"><a href="#3-2-3-Service层接口" class="headerlink" title="3.2.3 Service层接口"></a>3.2.3 Service层接口</h4><p><strong>在ReportService接口中声明getUserStatistics方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 根据时间区间统计用户数量</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> begin</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> end</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">    */</span><br>   UserReportVO <span class="hljs-title function_">getUserStatistics</span><span class="hljs-params">(LocalDate begin, LocalDate end)</span>;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-2-4-Service层实现类"><a href="#3-2-4-Service层实现类" class="headerlink" title="3.2.4 Service层实现类"></a>3.2.4 Service层实现类</h4><p><strong>在ReportServiceImpl实现类中实现getUserStatistics方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br>   <span class="hljs-keyword">public</span> UserReportVO <span class="hljs-title function_">getUserStatistics</span><span class="hljs-params">(LocalDate begin, LocalDate end)</span> &#123;<br>       List&lt;LocalDate&gt; dateList = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>       dateList.add(begin);<br><br>       <span class="hljs-keyword">while</span> (!begin.equals(end))&#123;<br>           begin = begin.plusDays(<span class="hljs-number">1</span>);<br>           dateList.add(begin);<br>       &#125;<br>       List&lt;Integer&gt; newUserList = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(); <span class="hljs-comment">//新增用户数</span><br>       List&lt;Integer&gt; totalUserList = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(); <span class="hljs-comment">//总用户数</span><br><br>       <span class="hljs-keyword">for</span> (LocalDate date : dateList) &#123;<br>           <span class="hljs-type">LocalDateTime</span> <span class="hljs-variable">beginTime</span> <span class="hljs-operator">=</span> LocalDateTime.of(date, LocalTime.MIN);<br>           <span class="hljs-type">LocalDateTime</span> <span class="hljs-variable">endTime</span> <span class="hljs-operator">=</span> LocalDateTime.of(date, LocalTime.MAX);<br>           <span class="hljs-comment">//新增用户数量 select count(id) from user where create_time &gt; ? and create_time &lt; ?</span><br>           <span class="hljs-type">Integer</span> <span class="hljs-variable">newUser</span> <span class="hljs-operator">=</span> getUserCount(beginTime, endTime);<br>           <span class="hljs-comment">//总用户数量 select count(id) from user where  create_time &lt; ?</span><br>           <span class="hljs-type">Integer</span> <span class="hljs-variable">totalUser</span> <span class="hljs-operator">=</span> getUserCount(<span class="hljs-literal">null</span>, endTime);<br><br>           newUserList.add(newUser);<br>           totalUserList.add(totalUser);<br>       &#125;<br><br>       <span class="hljs-keyword">return</span> UserReportVO.builder()<br>               .dateList(StringUtils.join(dateList,<span class="hljs-string">&quot;,&quot;</span>))<br>               .newUserList(StringUtils.join(newUserList,<span class="hljs-string">&quot;,&quot;</span>))<br>               .totalUserList(StringUtils.join(totalUserList,<span class="hljs-string">&quot;,&quot;</span>))<br>               .build();<br>   &#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>在ReportServiceImpl实现类中创建私有方法getUserCount：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 根据时间区间统计用户数量</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> beginTime</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> endTime</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">    */</span><br>   <span class="hljs-keyword">private</span> Integer <span class="hljs-title function_">getUserCount</span><span class="hljs-params">(LocalDateTime beginTime, LocalDateTime endTime)</span> &#123;<br>       <span class="hljs-type">Map</span> <span class="hljs-variable">map</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>();<br>       map.put(<span class="hljs-string">&quot;begin&quot;</span>,beginTime);<br>       map.put(<span class="hljs-string">&quot;end&quot;</span>, endTime);<br>       <span class="hljs-keyword">return</span> userMapper.countByMap(map);<br>   &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-2-5-Mapper层"><a href="#3-2-5-Mapper层" class="headerlink" title="3.2.5 Mapper层"></a>3.2.5 Mapper层</h4><p><strong>在UserMapper接口中声明countByMap方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 根据动态条件统计用户数量</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> map</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">    */</span><br>   Integer <span class="hljs-title function_">countByMap</span><span class="hljs-params">(Map map)</span>;<br></code></pre></td></tr></table></figure>
+
+<p><strong>在UserMapper.xml文件中编写动态SQL：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;select id=<span class="hljs-string">&quot;countByMap&quot;</span> resultType=<span class="hljs-string">&quot;java.lang.Integer&quot;</span>&gt;<br>        select <span class="hljs-title function_">count</span><span class="hljs-params">(id)</span> from user<br>        &lt;where&gt;<br>            &lt;<span class="hljs-keyword">if</span> test=<span class="hljs-string">&quot;begin != null&quot;</span>&gt;<br>                and create_time &amp;gt;= #&#123;begin&#125;<br>            &lt;/<span class="hljs-keyword">if</span>&gt;<br>            &lt;<span class="hljs-keyword">if</span> test=<span class="hljs-string">&quot;end != null&quot;</span>&gt;<br>                and create_time &amp;lt;= #&#123;end&#125;<br>            &lt;/<span class="hljs-keyword">if</span>&gt;<br>        &lt;/where&gt;<br>&lt;/select&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-3-功能测试"><a href="#3-3-功能测试" class="headerlink" title="3.3 功能测试"></a>3.3 功能测试</h3><p>可以通过如下方式进行测试：</p>
+<ul>
+<li>接口文档测试</li>
+<li>前后端联调测试</li>
+</ul>
+<p>进入数据统计模块</p>
+<p><strong>1). 查看近7日用户统计</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355578.png" srcset="/img/loading.gif" lazyload alt="image-20230107191339668" style="zoom:50%;" /> 
+
+<p>进入开发者模式，查看返回数据</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355579.png" srcset="/img/loading.gif" lazyload alt="image-20230107191532175" style="zoom:50%;" /> 
+
+
+
+<p><strong>2). 查看近30日用户统计</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355580.png" srcset="/img/loading.gif" lazyload alt="image-20230107191613369" style="zoom:50%;" /> 
+
+<p>进入开发者模式，查看返回数据</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355581.png" srcset="/img/loading.gif" lazyload alt="image-20230107191707568" style="zoom:50%;" /> 
+
+<p>也可通过断点方式启动，查看每步执行情况。</p>
+<h3 id="3-4-代码提交"><a href="#3-4-代码提交" class="headerlink" title="3.4 代码提交"></a>3.4 代码提交</h3><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355582.png" srcset="/img/loading.gif" lazyload alt="image-20230107191949566" style="zoom:50%;" /> 
+
+<p>后续步骤和其它功能代码提交一致，不再赘述。</p>
+<h2 id="4-订单统计"><a href="#4-订单统计" class="headerlink" title="4. 订单统计"></a>4. 订单统计</h2><h3 id="4-1-需求分析和设计"><a href="#4-1-需求分析和设计" class="headerlink" title="4.1 需求分析和设计"></a>4.1 需求分析和设计</h3><h4 id="4-1-1-产品原型"><a href="#4-1-1-产品原型" class="headerlink" title="4.1.1 产品原型"></a>4.1.1 产品原型</h4><p>订单统计通过一个折现图来展现，折线图上有两根线，这根蓝色的线代表的是订单总数，而下边这根绿色的线代表的是有效订单数，指的就是状态是已完成的订单就属于有效订单，分别反映的是每一天的数据。上面还有3个数字，分别是订单总数、有效订单、订单完成率，它指的是整个时间区间之内总的数据。</p>
+<p><strong>原型图：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355583.png" srcset="/img/loading.gif" lazyload alt="image-20230107192859270" style="zoom:50%;" /> 
+
+<p><strong>业务规则：</strong></p>
+<ul>
+<li>有效订单指状态为 “已完成” 的订单</li>
+<li>基于可视化报表的折线图展示订单数据，X轴为日期，Y轴为订单数量</li>
+<li>根据时间选择区间，展示每天的订单总数和有效订单数</li>
+<li>展示所选时间区间内的有效订单数、总订单数、订单完成率，订单完成率 = 有效订单数 / 总订单数 * 100%</li>
+</ul>
+<h4 id="4-1-2-接口设计"><a href="#4-1-2-接口设计" class="headerlink" title="4.1.2 接口设计"></a>4.1.2 接口设计</h4><p>根据上述原型图设计接口。</p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355584.png" srcset="/img/loading.gif" lazyload alt="image-20230107192942872" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355585.png" srcset="/img/loading.gif" lazyload alt="image-20230107192952958" style="zoom:50%;" /> </p>
+<h3 id="4-2-代码开发"><a href="#4-2-代码开发" class="headerlink" title="4.2 代码开发"></a>4.2 代码开发</h3><h4 id="4-2-1-VO设计"><a href="#4-2-1-VO设计" class="headerlink" title="4.2.1 VO设计"></a>4.2.1 VO设计</h4><p><strong>根据订单统计接口的返回结果设计VO：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355586.png" srcset="/img/loading.gif" lazyload alt="image-20230107195325915" style="zoom:50%;" /> 
+
+<p>在sky-pojo模块，OrderReportVO.java已定义</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.vo;<br><br><span class="hljs-keyword">import</span> lombok.AllArgsConstructor;<br><span class="hljs-keyword">import</span> lombok.Builder;<br><span class="hljs-keyword">import</span> lombok.Data;<br><span class="hljs-keyword">import</span> lombok.NoArgsConstructor;<br><span class="hljs-keyword">import</span> java.io.Serializable;<br><br><span class="hljs-meta">@Data</span><br><span class="hljs-meta">@Builder</span><br><span class="hljs-meta">@NoArgsConstructor</span><br><span class="hljs-meta">@AllArgsConstructor</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OrderReportVO</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span> &#123;<br><br>    <span class="hljs-comment">//日期，以逗号分隔，例如：2022-10-01,2022-10-02,2022-10-03</span><br>    <span class="hljs-keyword">private</span> String dateList;<br><br>    <span class="hljs-comment">//每日订单数，以逗号分隔，例如：260,210,215</span><br>    <span class="hljs-keyword">private</span> String orderCountList;<br><br>    <span class="hljs-comment">//每日有效订单数，以逗号分隔，例如：20,21,10</span><br>    <span class="hljs-keyword">private</span> String validOrderCountList;<br><br>    <span class="hljs-comment">//订单总数</span><br>    <span class="hljs-keyword">private</span> Integer totalOrderCount;<br><br>    <span class="hljs-comment">//有效订单数</span><br>    <span class="hljs-keyword">private</span> Integer validOrderCount;<br><br>    <span class="hljs-comment">//订单完成率</span><br>    <span class="hljs-keyword">private</span> Double orderCompletionRate;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-2-2-Controller层"><a href="#4-2-2-Controller层" class="headerlink" title="4.2.2 Controller层"></a>4.2.2 Controller层</h4><p><strong>在ReportController中根据订单统计接口创建orderStatistics方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 订单数据统计</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> begin</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> end</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@GetMapping(&quot;/ordersStatistics&quot;)</span><br>    <span class="hljs-meta">@ApiOperation(&quot;用户数据统计&quot;)</span><br>    <span class="hljs-keyword">public</span> Result&lt;OrderReportVO&gt; <span class="hljs-title function_">orderStatistics</span><span class="hljs-params">(</span><br><span class="hljs-params">            <span class="hljs-meta">@DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)</span></span><br><span class="hljs-params">                    LocalDate begin,</span><br><span class="hljs-params">            <span class="hljs-meta">@DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)</span></span><br><span class="hljs-params">                    LocalDate end)</span>&#123;<br><br>        <span class="hljs-keyword">return</span> Result.success(reportService.getOrderStatistics(begin,end));<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-2-3-Service层接口"><a href="#4-2-3-Service层接口" class="headerlink" title="4.2.3 Service层接口"></a>4.2.3 Service层接口</h4><p><strong>在ReportService接口中声明getOrderStatistics方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 根据时间区间统计订单数量</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> begin </span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> end</span><br><span class="hljs-comment">* <span class="hljs-doctag">@return</span> </span><br><span class="hljs-comment">*/</span><br>OrderReportVO <span class="hljs-title function_">getOrderStatistics</span><span class="hljs-params">(LocalDate begin, LocalDate end)</span>;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-2-4-Service层实现类"><a href="#4-2-4-Service层实现类" class="headerlink" title="4.2.4 Service层实现类"></a>4.2.4 Service层实现类</h4><p><strong>在ReportServiceImpl实现类中实现getOrderStatistics方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 根据时间区间统计订单数量</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> begin </span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> end</span><br><span class="hljs-comment">* <span class="hljs-doctag">@return</span> </span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">public</span> OrderReportVO <span class="hljs-title function_">getOrderStatistics</span><span class="hljs-params">(LocalDate begin, LocalDate end)</span>&#123;<br>	List&lt;LocalDate&gt; dateList = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>    dateList.add(begin);<br><br>    <span class="hljs-keyword">while</span> (!begin.equals(end))&#123;<br>          begin = begin.plusDays(<span class="hljs-number">1</span>);<br>          dateList.add(begin);<br>     &#125;<br>    <span class="hljs-comment">//每天订单总数集合</span><br>     List&lt;Integer&gt; orderCountList = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>    <span class="hljs-comment">//每天有效订单数集合</span><br>    List&lt;Integer&gt; validOrderCountList = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>    <span class="hljs-keyword">for</span> (LocalDate date : dateList) &#123;<br>         <span class="hljs-type">LocalDateTime</span> <span class="hljs-variable">beginTime</span> <span class="hljs-operator">=</span> LocalDateTime.of(date, LocalTime.MIN);<br>         <span class="hljs-type">LocalDateTime</span> <span class="hljs-variable">endTime</span> <span class="hljs-operator">=</span> LocalDateTime.of(date, LocalTime.MAX);<br>   <span class="hljs-comment">//查询每天的总订单数 select count(id) from orders where order_time &gt; ? and order_time &lt; ?</span><br>         <span class="hljs-type">Integer</span> <span class="hljs-variable">orderCount</span> <span class="hljs-operator">=</span> getOrderCount(beginTime, endTime, <span class="hljs-literal">null</span>);<br><br>  <span class="hljs-comment">//查询每天的有效订单数 select count(id) from orders where order_time &gt; ? and order_time &lt; ? and status = ?</span><br>         <span class="hljs-type">Integer</span> <span class="hljs-variable">validOrderCount</span> <span class="hljs-operator">=</span> getOrderCount(beginTime, endTime, Orders.COMPLETED);<br><br>         orderCountList.add(orderCount);<br>         validOrderCountList.add(validOrderCount);<br>        &#125;<br><br>    <span class="hljs-comment">//时间区间内的总订单数</span><br>    <span class="hljs-type">Integer</span> <span class="hljs-variable">totalOrderCount</span> <span class="hljs-operator">=</span> orderCountList.stream().reduce(Integer::sum).get();<br>    <span class="hljs-comment">//时间区间内的总有效订单数</span><br>    <span class="hljs-type">Integer</span> <span class="hljs-variable">validOrderCount</span> <span class="hljs-operator">=</span> validOrderCountList.stream().reduce(Integer::sum).get();<br>    <span class="hljs-comment">//订单完成率</span><br>    <span class="hljs-type">Double</span> <span class="hljs-variable">orderCompletionRate</span> <span class="hljs-operator">=</span> <span class="hljs-number">0.0</span>;<br>    <span class="hljs-keyword">if</span>(totalOrderCount != <span class="hljs-number">0</span>)&#123;<br>         orderCompletionRate = validOrderCount.doubleValue() / totalOrderCount;<br>     &#125;<br>    <span class="hljs-keyword">return</span> OrderReportVO.builder()<br>                .dateList(StringUtils.join(dateList, <span class="hljs-string">&quot;,&quot;</span>))<br>                .orderCountList(StringUtils.join(orderCountList, <span class="hljs-string">&quot;,&quot;</span>))<br>                .validOrderCountList(StringUtils.join(validOrderCountList, <span class="hljs-string">&quot;,&quot;</span>))<br>                .totalOrderCount(totalOrderCount)<br>                .validOrderCount(validOrderCount)<br>                .orderCompletionRate(orderCompletionRate)<br>                .build();<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>在ReportServiceImpl实现类中提供私有方法getOrderCount：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 根据时间区间统计指定状态的订单数量</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> beginTime</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> endTime</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> status</span><br><span class="hljs-comment">* <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">private</span> Integer <span class="hljs-title function_">getOrderCount</span><span class="hljs-params">(LocalDateTime beginTime, LocalDateTime endTime, Integer status)</span> &#123;<br>	<span class="hljs-type">Map</span> <span class="hljs-variable">map</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>();<br>	map.put(<span class="hljs-string">&quot;status&quot;</span>, status);<br>	map.put(<span class="hljs-string">&quot;begin&quot;</span>,beginTime);<br>	map.put(<span class="hljs-string">&quot;end&quot;</span>, endTime);<br>	<span class="hljs-keyword">return</span> orderMapper.countByMap(map);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-2-5-Mapper层"><a href="#4-2-5-Mapper层" class="headerlink" title="4.2.5 Mapper层"></a>4.2.5 Mapper层</h4><p><strong>在OrderMapper接口中声明countByMap方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">*根据动态条件统计订单数量</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> map</span><br><span class="hljs-comment">*/</span><br>Integer <span class="hljs-title function_">countByMap</span><span class="hljs-params">(Map map)</span>;<br></code></pre></td></tr></table></figure>
+
+<p><strong>在OrderMapper.xml文件中编写动态SQL：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;select id=<span class="hljs-string">&quot;countByMap&quot;</span> resultType=<span class="hljs-string">&quot;java.lang.Integer&quot;</span>&gt;<br>        select <span class="hljs-title function_">count</span><span class="hljs-params">(id)</span> from orders<br>        &lt;where&gt;<br>            &lt;<span class="hljs-keyword">if</span> test=<span class="hljs-string">&quot;status != null&quot;</span>&gt;<br>                <span class="hljs-type">and</span> <span class="hljs-variable">status</span> <span class="hljs-operator">=</span> #&#123;status&#125;<br>            &lt;/<span class="hljs-keyword">if</span>&gt;<br>            &lt;<span class="hljs-keyword">if</span> test=<span class="hljs-string">&quot;begin != null&quot;</span>&gt;<br>                and order_time &amp;gt;= #&#123;begin&#125;<br>            &lt;/<span class="hljs-keyword">if</span>&gt;<br>            &lt;<span class="hljs-keyword">if</span> test=<span class="hljs-string">&quot;end != null&quot;</span>&gt;<br>                and order_time &amp;lt;= #&#123;end&#125;<br>            &lt;/<span class="hljs-keyword">if</span>&gt;<br>        &lt;/where&gt;<br>&lt;/select&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-3-功能测试"><a href="#4-3-功能测试" class="headerlink" title="4.3 功能测试"></a>4.3 功能测试</h3><p>可以通过如下方式进行测试：</p>
+<ul>
+<li>接口文档测试</li>
+<li>前后端联调</li>
+</ul>
+<p>重启服务，直接采用前后端联调测试。</p>
+<p>进入数据统计模块</p>
+<p><strong>1). 查看近7日订单统计</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355587.png" srcset="/img/loading.gif" lazyload alt="image-20230107202854533" style="zoom:50%;" /> 
+
+<p>进入开发者模式，查看返回数据</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355588.png" srcset="/img/loading.gif" lazyload alt="image-20230107202953128" style="zoom:50%;" /> 
+
+
+
+<p><strong>2). 查看近30日订单统计</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355589.png" srcset="/img/loading.gif" lazyload alt="image-20230107203025165" style="zoom:50%;" /> 
+
+<p>进入开发者模式，查看返回数据</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355590.png" srcset="/img/loading.gif" lazyload alt="image-20230107203127308" style="zoom:50%;" /> 
+
+<p>也可通过断点方式启动，查看每步执行情况。</p>
+<h3 id="4-4-代码提交"><a href="#4-4-代码提交" class="headerlink" title="4.4 代码提交"></a>4.4 代码提交</h3><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355591.png" srcset="/img/loading.gif" lazyload alt="image-20230107203344774" style="zoom:50%;" /> 
+
+<p>后续步骤和其它功能代码提交一致，不再赘述。</p>
+<h2 id="5-销量排名Top10"><a href="#5-销量排名Top10" class="headerlink" title="5. 销量排名Top10"></a>5. 销量排名Top10</h2><h3 id="5-1-需求分析和设计"><a href="#5-1-需求分析和设计" class="headerlink" title="5.1 需求分析和设计"></a>5.1 需求分析和设计</h3><h4 id="5-1-1-产品原型"><a href="#5-1-1-产品原型" class="headerlink" title="5.1.1 产品原型"></a>5.1.1 产品原型</h4><p>所谓销量排名，销量指的是商品销售的数量。项目当中的商品主要包含两类：一个是<strong>套餐</strong>，一个是<strong>菜品</strong>，所以销量排名其实指的就是菜品和套餐销售的数量排名。通过柱形图来展示销量排名，这些销量是按照降序来排列，并且只需要统计销量排名前十的商品。</p>
+<p><strong>原型图：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355592.png" srcset="/img/loading.gif" lazyload alt="image-20230107203622747" style="zoom:50%;" /> 
+
+<p><strong>业务规则：</strong></p>
+<ul>
+<li>根据时间选择区间，展示销量前10的商品（包括菜品和套餐）</li>
+<li>基于可视化报表的柱状图降序展示商品销量</li>
+<li>此处的销量为商品销售的份数</li>
+</ul>
+<h4 id="5-1-2-接口设计"><a href="#5-1-2-接口设计" class="headerlink" title="5.1.2 接口设计"></a>5.1.2 接口设计</h4><p>根据上述原型图设计接口。</p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355593.png" srcset="/img/loading.gif" lazyload alt="image-20230107203720606" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355594.png" srcset="/img/loading.gif" lazyload alt="image-20230107203730681" style="zoom:50%;" /> </p>
+<h3 id="5-2-代码开发"><a href="#5-2-代码开发" class="headerlink" title="5.2 代码开发"></a>5.2 代码开发</h3><h4 id="5-2-1-VO设计"><a href="#5-2-1-VO设计" class="headerlink" title="5.2.1 VO设计"></a>5.2.1 VO设计</h4><p><strong>根据销量排名接口的返回结果设计VO：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355595.png" srcset="/img/loading.gif" lazyload alt="image-20230107204028895" style="zoom:50%;" /> 
+
+<p>在sky-pojo模块，SalesTop10ReportVO.java已定义</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.vo;<br><br><span class="hljs-keyword">import</span> lombok.AllArgsConstructor;<br><span class="hljs-keyword">import</span> lombok.Builder;<br><span class="hljs-keyword">import</span> lombok.Data;<br><span class="hljs-keyword">import</span> lombok.NoArgsConstructor;<br><span class="hljs-keyword">import</span> java.io.Serializable;<br><br><span class="hljs-meta">@Data</span><br><span class="hljs-meta">@Builder</span><br><span class="hljs-meta">@NoArgsConstructor</span><br><span class="hljs-meta">@AllArgsConstructor</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SalesTop10ReportVO</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span> &#123;<br><br>    <span class="hljs-comment">//商品名称列表，以逗号分隔，例如：鱼香肉丝,宫保鸡丁,水煮鱼</span><br>    <span class="hljs-keyword">private</span> String nameList;<br><br>    <span class="hljs-comment">//销量列表，以逗号分隔，例如：260,215,200</span><br>    <span class="hljs-keyword">private</span> String numberList;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="5-2-2-Controller层"><a href="#5-2-2-Controller层" class="headerlink" title="5.2.2 Controller层"></a>5.2.2 Controller层</h4><p><strong>在ReportController中根据销量排名接口创建top10方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 销量排名统计</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> begin</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> end</span><br><span class="hljs-comment">* <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">*/</span><br><span class="hljs-meta">@GetMapping(&quot;/top10&quot;)</span><br><span class="hljs-meta">@ApiOperation(&quot;销量排名统计&quot;)</span><br><span class="hljs-keyword">public</span> Result&lt;SalesTop10ReportVO&gt; <span class="hljs-title function_">top10</span><span class="hljs-params">(</span><br><span class="hljs-params">    <span class="hljs-meta">@DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)</span> LocalDate begin,</span><br><span class="hljs-params">    <span class="hljs-meta">@DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)</span> LocalDate end)</span>&#123;<br>	<span class="hljs-keyword">return</span> Result.success(reportService.getSalesTop10(begin,end));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="5-2-3-Service层接口"><a href="#5-2-3-Service层接口" class="headerlink" title="5.2.3 Service层接口"></a>5.2.3 Service层接口</h4><p><strong>在ReportService接口中声明getSalesTop10方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 查询指定时间区间内的销量排名top10 </span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> begin</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> end</span><br><span class="hljs-comment">* <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">*/</span><br>SalesTop10ReportVO <span class="hljs-title function_">getSalesTop10</span><span class="hljs-params">(LocalDate begin, LocalDate end)</span>;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="5-2-4-Service层实现类"><a href="#5-2-4-Service层实现类" class="headerlink" title="5.2.4 Service层实现类"></a>5.2.4 Service层实现类</h4><p><strong>在ReportServiceImpl实现类中实现getSalesTop10方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 查询指定时间区间内的销量排名top10</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> begin</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> end</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     * */</span><br>    <span class="hljs-keyword">public</span> SalesTop10ReportVO <span class="hljs-title function_">getSalesTop10</span><span class="hljs-params">(LocalDate begin, LocalDate end)</span>&#123;<br>        <span class="hljs-type">LocalDateTime</span> <span class="hljs-variable">beginTime</span> <span class="hljs-operator">=</span> LocalDateTime.of(begin, LocalTime.MIN);<br>        <span class="hljs-type">LocalDateTime</span> <span class="hljs-variable">endTime</span> <span class="hljs-operator">=</span> LocalDateTime.of(end, LocalTime.MAX);<br>        List&lt;GoodsSalesDTO&gt; goodsSalesDTOList = orderMapper.getSalesTop10(beginTime, endTime);<br><br>        <span class="hljs-type">String</span> <span class="hljs-variable">nameList</span> <span class="hljs-operator">=</span> StringUtils.join(goodsSalesDTOList.stream().map(GoodsSalesDTO::getName).collect(Collectors.toList()),<span class="hljs-string">&quot;,&quot;</span>);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">numberList</span> <span class="hljs-operator">=</span> StringUtils.join(goodsSalesDTOList.stream().map(GoodsSalesDTO::getNumber).collect(Collectors.toList()),<span class="hljs-string">&quot;,&quot;</span>);<br><br>        <span class="hljs-keyword">return</span> SalesTop10ReportVO.builder()<br>                .nameList(nameList)<br>                .numberList(numberList)<br>                .build();<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="5-2-5-Mapper层"><a href="#5-2-5-Mapper层" class="headerlink" title="5.2.5 Mapper层"></a>5.2.5 Mapper层</h4><p><strong>在OrderMapper接口中声明getSalesTop10方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 查询商品销量排名</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> begin</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> end</span><br><span class="hljs-comment">*/</span><br>List&lt;GoodsSalesDTO&gt; <span class="hljs-title function_">getSalesTop10</span><span class="hljs-params">(LocalDateTime begin, LocalDateTime end)</span>;<br></code></pre></td></tr></table></figure>
+
+<p><strong>在OrderMapper.xml文件中编写动态SQL：</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;getSalesTop10&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;com.sky.dto.GoodsSalesDTO&quot;</span>&gt;</span><br>        select od.name name,sum(od.number) number from order_detail od ,orders o<br>        where od.order_id = o.id<br>            and o.status = 5<br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;begin != null&quot;</span>&gt;</span><br>                and order_time <span class="hljs-symbol">&amp;gt;</span>= #&#123;begin&#125;<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;end != null&quot;</span>&gt;</span><br>                and order_time <span class="hljs-symbol">&amp;lt;</span>= #&#123;end&#125;<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>        group by name<br>        order by number desc<br>        limit 0, 10<br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-3-功能测试"><a href="#5-3-功能测试" class="headerlink" title="5.3 功能测试"></a>5.3 功能测试</h3><p>可以通过如下方式进行测试：</p>
+<ul>
+<li>接口文档测试</li>
+<li>前后端联调</li>
+</ul>
+<p>重启服务，直接采用前后端联调测试。</p>
+<p><strong>查看近30日销量排名Top10统计</strong></p>
+<p>若查询的某一段时间没有销量数据，则显示不出效果。</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355596.png" srcset="/img/loading.gif" lazyload alt="image-20230107210518821" style="zoom:50%;" /> 
+
+<p>进入开发者模式，查看返回数据</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355597.png" srcset="/img/loading.gif" lazyload alt="image-20230107210711326" style="zoom:50%;" /> 
+
+<p>也可通过断点方式启动，查看每步执行情况。</p>
+<h3 id="5-4-代码提交"><a href="#5-4-代码提交" class="headerlink" title="5.4 代码提交"></a>5.4 代码提交</h3><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122355598.png" srcset="/img/loading.gif" lazyload alt="image-20230107210835115" style="zoom:50%;" /> 
+
+<p>后续步骤和其它功能代码提交一致，不再赘述。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/java/">java</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/java/">java</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%A1%B9%E7%9B%AE/">项目</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/12/13/%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96-day12/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">day12</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/12/13/%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96-day10/">
+                        <span class="hidden-mobile">day10</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.lazyComments('valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#valine",
+          app_id: "RadrImfAZkhnNhTIg2kXza0k-gzGzoHsz",
+          app_key: "gwfTOuigi1nSaHGTs4OOTzO7",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <div id="music-player-container">
+    <div class="music-player" id="music - player - container">
+        <iframe allow="autoplay" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=70 src="//music.163.com/outchain/player?type=2&id=25638340&auto=1&height=66"></iframe>
+    </div>
+</div>
+
+  <footer class="text-center mt-5 py-3">
+  
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">正在载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("11/14/2024 08:00:00");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "🚀已持续航行&nbsp"+dnum+"&nbsp天";  
+          document.getElementById("times").innerHTML = hnum + "&nbsp时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }
+      setInterval("createtime()",250);
+      </script>
+    </div>
+    
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/stars.js"></script>
+<script src="/js/mouse-star.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

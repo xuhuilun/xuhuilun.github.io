@@ -1,0 +1,1274 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="欢迎来到我的博客，让我们一起进步！">
+  <meta name="author" content="Chandler Bing">
+  <meta name="keywords" content="">
+  
+  <title>day8 - 辉のblog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/stars.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"xuhuilun.github.io","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="辉のblog" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">&nbsp;
+
+    <strong class="navbar-title">辉のblog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+
+
+
+
+
+
+          
+
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+
+
+
+          
+        
+          
+          
+          
+
+
+
+
+
+
+          
+
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+
+
+
+          
+        
+          
+          
+          
+
+
+
+
+
+
+          
+
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+
+
+
+          
+        
+          
+          
+          
+
+
+
+
+
+
+          
+
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+
+
+
+          
+        
+          
+          
+          
+
+
+
+
+
+
+          
+
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+
+
+
+          
+        
+
+
+
+
+
+
+
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+
+          <li class="nav-item"><a class="nav-link"  href="/atom.xml" target="_blank" rel="noopener noreferrer">RSS订阅</a></li>
+
+
+
+
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="day8">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2024-12-12 23:59" pubdate>
+        2024年12月12日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      93
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">day8</h1>
+            
+            <div class="markdown-body">
+              <h1 id="苍穹外卖-day08"><a href="#苍穹外卖-day08" class="headerlink" title="苍穹外卖-day08"></a>苍穹外卖-day08</h1><h2 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h2><ul>
+<li>导入地址簿功能代码</li>
+<li>用户下单</li>
+<li>订单支付</li>
+</ul>
+<p>功能实现：<strong>用户下单</strong>、<strong>订单支付</strong></p>
+<p><strong>用户下单效果图：</strong></p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356270.png" srcset="/img/loading.gif" lazyload alt="image-20221214181127718" style="zoom:50%;" />    <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356271.png" srcset="/img/loading.gif" lazyload alt="image-20221214181140570" style="zoom:50%;" />     </p>
+<p><strong>订单支付效果图：</strong></p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122327808.png" srcset="/img/loading.gif" lazyload alt="image-20221214181221426">    <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356272.png" srcset="/img/loading.gif" lazyload alt="image-20221214181234208" style="zoom:50%;" />    <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356273.png" srcset="/img/loading.gif" lazyload alt="image-20221214181301304" style="zoom:50%;" /></p>
+<h2 id="1-导入地址簿功能代码"><a href="#1-导入地址簿功能代码" class="headerlink" title="1. 导入地址簿功能代码"></a>1. 导入地址簿功能代码</h2><h3 id="1-1-需求分析和设计"><a href="#1-1-需求分析和设计" class="headerlink" title="1.1 需求分析和设计"></a>1.1 需求分析和设计</h3><h4 id="1-1-1-产品原型"><a href="#1-1-1-产品原型" class="headerlink" title="1.1.1 产品原型"></a>1.1.1 产品原型</h4><p>地址簿，指的是消费者用户的地址信息，用户登录成功后可以维护自己的地址信息。同一个用户可以有多个地址信息，但是只能有一个<strong>默认地址</strong>。</p>
+<p><strong>效果图：</strong></p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356274.png" srcset="/img/loading.gif" lazyload alt="image-20221214183615228" style="zoom:50%;" />      <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356275.png" srcset="/img/loading.gif" lazyload alt="image-20221214183626673" style="zoom:50%;" />       <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356276.png" srcset="/img/loading.gif" lazyload alt="image-20221214183859446" style="zoom:50%;" /> </p>
+<p>对于地址簿管理，我们需要实现以下几个功能： </p>
+<ul>
+<li>查询地址列表</li>
+<li>新增地址</li>
+<li>修改地址</li>
+<li>删除地址</li>
+<li>设置默认地址</li>
+<li>查询默认地址</li>
+</ul>
+<h4 id="1-1-2-接口设计"><a href="#1-1-2-接口设计" class="headerlink" title="1.1.2 接口设计"></a>1.1.2 接口设计</h4><p>根据上述原型图先<strong>粗粒度</strong>设计接口，共包含7个接口。</p>
+<p><strong>接口设计：</strong></p>
+<ul>
+<li>新增地址</li>
+<li>查询登录用户所有地址</li>
+<li>查询默认地址</li>
+<li>根据id修改地址</li>
+<li>根据id删除地址</li>
+<li>根据id查询地址</li>
+<li>设置默认地址</li>
+</ul>
+<p>接下来<strong>细粒度</strong>分析每个接口，明确每个接口的请求方式、请求路径、传入参数和返回值。</p>
+<p><strong>1). 新增地址</strong></p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356277.png" srcset="/img/loading.gif" lazyload alt="image-20221214185000982" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356278.png" srcset="/img/loading.gif" lazyload alt="image-20221214185013172" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356279.png" srcset="/img/loading.gif" lazyload alt="image-20221214185028575" style="zoom:50%;" /> </p>
+<p><strong>2). 查询登录用户所有地址</strong></p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356280.png" srcset="/img/loading.gif" lazyload alt="image-20221214185112802" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356281.png" srcset="/img/loading.gif" lazyload alt="image-20221214185124296" style="zoom:50%;" /> </p>
+<p><strong>3). 查询默认地址</strong></p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356282.png" srcset="/img/loading.gif" lazyload alt="image-20221214185209235" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356283.png" srcset="/img/loading.gif" lazyload alt="image-20221214185221421" style="zoom:50%;" /> </p>
+<p><strong>4). 修改地址</strong></p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356284.png" srcset="/img/loading.gif" lazyload alt="image-20221214185309798" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356285.png" srcset="/img/loading.gif" lazyload alt="image-20221214185321203" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356286.png" srcset="/img/loading.gif" lazyload alt="image-20221214185334356" style="zoom:50%;" /> </p>
+<p><strong>5). 根据id删除地址</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356287.png" srcset="/img/loading.gif" lazyload alt="image-20221214185443519" style="zoom:50%;" /> 
+
+
+
+<p><strong>6). 根据id查询地址</strong></p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356288.png" srcset="/img/loading.gif" lazyload alt="image-20221214185534450" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356289.png" srcset="/img/loading.gif" lazyload alt="image-20221214185545692" style="zoom:50%;" /> </p>
+<p><strong>7). 设置默认地址</strong></p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356290.png" srcset="/img/loading.gif" lazyload alt="image-20221214185622092" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356291.png" srcset="/img/loading.gif" lazyload alt="image-20221214185631755" style="zoom:50%;" /> </p>
+<h4 id="1-1-3-表设计"><a href="#1-1-3-表设计" class="headerlink" title="1.1.3 表设计"></a>1.1.3 表设计</h4><p>用户的地址信息会存储在address_book表，即地址簿表中。具体表结构如下：</p>
+<table>
+<thead>
+<tr>
+<th><strong>字段名</strong></th>
+<th><strong>数据类型</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>备注</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>bigint</td>
+<td>主键</td>
+<td>自增</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>bigint</td>
+<td>用户id</td>
+<td>逻辑外键</td>
+</tr>
+<tr>
+<td>consignee</td>
+<td>varchar(50)</td>
+<td>收货人</td>
+<td></td>
+</tr>
+<tr>
+<td>sex</td>
+<td>varchar(2)</td>
+<td>性别</td>
+<td></td>
+</tr>
+<tr>
+<td>phone</td>
+<td>varchar(11)</td>
+<td>手机号</td>
+<td></td>
+</tr>
+<tr>
+<td>province_code</td>
+<td>varchar(12)</td>
+<td>省份编码</td>
+<td></td>
+</tr>
+<tr>
+<td>province_name</td>
+<td>varchar(32)</td>
+<td>省份名称</td>
+<td></td>
+</tr>
+<tr>
+<td>city_code</td>
+<td>varchar(12)</td>
+<td>城市编码</td>
+<td></td>
+</tr>
+<tr>
+<td>city_name</td>
+<td>varchar(32)</td>
+<td>城市名称</td>
+<td></td>
+</tr>
+<tr>
+<td>district_code</td>
+<td>varchar(12)</td>
+<td>区县编码</td>
+<td></td>
+</tr>
+<tr>
+<td>district_name</td>
+<td>varchar(32)</td>
+<td>区县名称</td>
+<td></td>
+</tr>
+<tr>
+<td>detail</td>
+<td>varchar(200)</td>
+<td>详细地址信息</td>
+<td>具体到门牌号</td>
+</tr>
+<tr>
+<td>label</td>
+<td>varchar(100)</td>
+<td>标签</td>
+<td>公司、家、学校</td>
+</tr>
+<tr>
+<td>is_default</td>
+<td>tinyint(1)</td>
+<td>是否默认地址</td>
+<td>1是 0否</td>
+</tr>
+</tbody></table>
+<p>这里面有一个字段is_default，实际上我们在设置默认地址时，只需要更新这个字段就可以了。</p>
+<h3 id="1-2-代码导入"><a href="#1-2-代码导入" class="headerlink" title="1.2 代码导入"></a>1.2 代码导入</h3><p>对于这一类的单表的增删改查，我们已经写过很多了，基本的开发思路都是一样的，那么本小节的用户地址簿管理的增删改查功能，我们就不再一一实现了，基本的代码我们都已经提供了，直接导入进来，做一个测试即可。</p>
+<p>导入课程资料中的地址簿模块功能代码：</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356292.png" srcset="/img/loading.gif" lazyload alt="image-20221214190135741" style="zoom:50%;" /> 
+
+<p>进入到sky-server模块中</p>
+<h4 id="1-2-1-Mapper层"><a href="#1-2-1-Mapper层" class="headerlink" title="1.2.1 Mapper层"></a>1.2.1 Mapper层</h4><p><strong>创建AddressBookMapper.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.mapper;<br><br><span class="hljs-keyword">import</span> com.sky.entity.AddressBook;<br><span class="hljs-keyword">import</span> org.apache.ibatis.annotations.*;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-meta">@Mapper</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">AddressBookMapper</span> &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 条件查询</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> addressBook</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    List&lt;AddressBook&gt; <span class="hljs-title function_">list</span><span class="hljs-params">(AddressBook addressBook)</span>;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 新增</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> addressBook</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Insert(&quot;insert into address_book&quot; +</span><br><span class="hljs-meta">            &quot;        (user_id, consignee, phone, sex, province_code, province_name, city_code, city_name, district_code,&quot; +</span><br><span class="hljs-meta">            &quot;         district_name, detail, label, is_default)&quot; +</span><br><span class="hljs-meta">            &quot;        values (#&#123;userId&#125;, #&#123;consignee&#125;, #&#123;phone&#125;, #&#123;sex&#125;, #&#123;provinceCode&#125;, #&#123;provinceName&#125;, #&#123;cityCode&#125;, #&#123;cityName&#125;,&quot; +</span><br><span class="hljs-meta">            &quot;                #&#123;districtCode&#125;, #&#123;districtName&#125;, #&#123;detail&#125;, #&#123;label&#125;, #&#123;isDefault&#125;)&quot;)</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">insert</span><span class="hljs-params">(AddressBook addressBook)</span>;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 根据id查询</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> id</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Select(&quot;select * from address_book where id = #&#123;id&#125;&quot;)</span><br>    AddressBook <span class="hljs-title function_">getById</span><span class="hljs-params">(Long id)</span>;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 根据id修改</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> addressBook</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">update</span><span class="hljs-params">(AddressBook addressBook)</span>;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 根据 用户id修改 是否默认地址</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> addressBook</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Update(&quot;update address_book set is_default = #&#123;isDefault&#125; where user_id = #&#123;userId&#125;&quot;)</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">updateIsDefaultByUserId</span><span class="hljs-params">(AddressBook addressBook)</span>;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 根据id删除地址</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> id</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Delete(&quot;delete from address_book where id = #&#123;id&#125;&quot;)</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">deleteById</span><span class="hljs-params">(Long id)</span>;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>创建AddressBookMapper.xml</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span> ?&gt;</span><br><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">mapper</span> <span class="hljs-keyword">PUBLIC</span> <span class="hljs-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span> <span class="hljs-string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span> &gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">&quot;com.sky.mapper.AddressBookMapper&quot;</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;list&quot;</span> <span class="hljs-attr">parameterType</span>=<span class="hljs-string">&quot;AddressBook&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;AddressBook&quot;</span>&gt;</span><br>        select * from address_book<br>        <span class="hljs-tag">&lt;<span class="hljs-name">where</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;userId != null&quot;</span>&gt;</span><br>                and user_id = #&#123;userId&#125;<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;phone != null&quot;</span>&gt;</span><br>                and phone = #&#123;phone&#125;<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;isDefault != null&quot;</span>&gt;</span><br>                and is_default = #&#123;isDefault&#125;<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">where</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">update</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;update&quot;</span> <span class="hljs-attr">parameterType</span>=<span class="hljs-string">&quot;addressBook&quot;</span>&gt;</span><br>        update address_book<br>        <span class="hljs-tag">&lt;<span class="hljs-name">set</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;consignee != null&quot;</span>&gt;</span><br>                consignee = #&#123;consignee&#125;,<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;sex != null&quot;</span>&gt;</span><br>                sex = #&#123;sex&#125;,<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;phone != null&quot;</span>&gt;</span><br>                phone = #&#123;phone&#125;,<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;detail != null&quot;</span>&gt;</span><br>                detail = #&#123;detail&#125;,<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;label != null&quot;</span>&gt;</span><br>                label = #&#123;label&#125;,<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;isDefault != null&quot;</span>&gt;</span><br>                is_default = #&#123;isDefault&#125;,<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">set</span>&gt;</span><br>        where id = #&#123;id&#125;<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">update</span>&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">mapper</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-2-2-Service层"><a href="#1-2-2-Service层" class="headerlink" title="1.2.2 Service层"></a>1.2.2 Service层</h4><p><strong>创建AddressBookService.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.service;<br><br><span class="hljs-keyword">import</span> com.sky.entity.AddressBook;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">AddressBookService</span> &#123;<br><br>    List&lt;AddressBook&gt; <span class="hljs-title function_">list</span><span class="hljs-params">(AddressBook addressBook)</span>;<br><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">save</span><span class="hljs-params">(AddressBook addressBook)</span>;<br><br>    AddressBook <span class="hljs-title function_">getById</span><span class="hljs-params">(Long id)</span>;<br><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">update</span><span class="hljs-params">(AddressBook addressBook)</span>;<br><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">setDefault</span><span class="hljs-params">(AddressBook addressBook)</span>;<br><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">deleteById</span><span class="hljs-params">(Long id)</span>;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>创建AddressBookServiceImpl.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.service.impl;<br><br><span class="hljs-keyword">import</span> com.sky.context.BaseContext;<br><span class="hljs-keyword">import</span> com.sky.entity.AddressBook;<br><span class="hljs-keyword">import</span> com.sky.mapper.AddressBookMapper;<br><span class="hljs-keyword">import</span> com.sky.service.AddressBookService;<br><span class="hljs-keyword">import</span> lombok.extern.slf4j.Slf4j;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Service;<br><span class="hljs-keyword">import</span> org.springframework.transaction.annotation.Transactional;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-meta">@Service</span><br><span class="hljs-meta">@Slf4j</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AddressBookServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">AddressBookService</span> &#123;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> AddressBookMapper addressBookMapper;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 条件查询</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> addressBook</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> List&lt;AddressBook&gt; <span class="hljs-title function_">list</span><span class="hljs-params">(AddressBook addressBook)</span> &#123;<br>        <span class="hljs-keyword">return</span> addressBookMapper.list(addressBook);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 新增地址</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> addressBook</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">save</span><span class="hljs-params">(AddressBook addressBook)</span> &#123;<br>        addressBook.setUserId(BaseContext.getCurrentId());<br>        addressBook.setIsDefault(<span class="hljs-number">0</span>);<br>        addressBookMapper.insert(addressBook);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 根据id查询</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> id</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> AddressBook <span class="hljs-title function_">getById</span><span class="hljs-params">(Long id)</span> &#123;<br>        <span class="hljs-type">AddressBook</span> <span class="hljs-variable">addressBook</span> <span class="hljs-operator">=</span> addressBookMapper.getById(id);<br>        <span class="hljs-keyword">return</span> addressBook;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 根据id修改地址</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> addressBook</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">update</span><span class="hljs-params">(AddressBook addressBook)</span> &#123;<br>        addressBookMapper.update(addressBook);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 设置默认地址</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> addressBook</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Transactional</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setDefault</span><span class="hljs-params">(AddressBook addressBook)</span> &#123;<br>        <span class="hljs-comment">//1、将当前用户的所有地址修改为非默认地址 update address_book set is_default = ? where user_id = ?</span><br>        addressBook.setIsDefault(<span class="hljs-number">0</span>);<br>        addressBook.setUserId(BaseContext.getCurrentId());<br>        addressBookMapper.updateIsDefaultByUserId(addressBook);<br><br>        <span class="hljs-comment">//2、将当前地址改为默认地址 update address_book set is_default = ? where id = ?</span><br>        addressBook.setIsDefault(<span class="hljs-number">1</span>);<br>        addressBookMapper.update(addressBook);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 根据id删除地址</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> id</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">deleteById</span><span class="hljs-params">(Long id)</span> &#123;<br>        addressBookMapper.deleteById(id);<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-2-3-Controller层"><a href="#1-2-3-Controller层" class="headerlink" title="1.2.3 Controller层"></a>1.2.3 Controller层</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.controller.user;<br><br><span class="hljs-keyword">import</span> com.sky.context.BaseContext;<br><span class="hljs-keyword">import</span> com.sky.entity.AddressBook;<br><span class="hljs-keyword">import</span> com.sky.result.Result;<br><span class="hljs-keyword">import</span> com.sky.service.AddressBookService;<br><span class="hljs-keyword">import</span> io.swagger.annotations.Api;<br><span class="hljs-keyword">import</span> io.swagger.annotations.ApiOperation;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.*;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(&quot;/user/addressBook&quot;)</span><br><span class="hljs-meta">@Api(tags = &quot;C端地址簿接口&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AddressBookController</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> AddressBookService addressBookService;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 查询当前登录用户的所有地址信息</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@GetMapping(&quot;/list&quot;)</span><br>    <span class="hljs-meta">@ApiOperation(&quot;查询当前登录用户的所有地址信息&quot;)</span><br>    <span class="hljs-keyword">public</span> Result&lt;List&lt;AddressBook&gt;&gt; <span class="hljs-title function_">list</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">AddressBook</span> <span class="hljs-variable">addressBook</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AddressBook</span>();<br>        addressBook.setUserId(BaseContext.getCurrentId());<br>        List&lt;AddressBook&gt; list = addressBookService.list(addressBook);<br>        <span class="hljs-keyword">return</span> Result.success(list);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 新增地址</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> addressBook</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@PostMapping</span><br>    <span class="hljs-meta">@ApiOperation(&quot;新增地址&quot;)</span><br>    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">save</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> AddressBook addressBook)</span> &#123;<br>        addressBookService.save(addressBook);<br>        <span class="hljs-keyword">return</span> Result.success();<br>    &#125;<br><br>    <span class="hljs-meta">@GetMapping(&quot;/&#123;id&#125;&quot;)</span><br>    <span class="hljs-meta">@ApiOperation(&quot;根据id查询地址&quot;)</span><br>    <span class="hljs-keyword">public</span> Result&lt;AddressBook&gt; <span class="hljs-title function_">getById</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable</span> Long id)</span> &#123;<br>        <span class="hljs-type">AddressBook</span> <span class="hljs-variable">addressBook</span> <span class="hljs-operator">=</span> addressBookService.getById(id);<br>        <span class="hljs-keyword">return</span> Result.success(addressBook);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 根据id修改地址</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> addressBook</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@PutMapping</span><br>    <span class="hljs-meta">@ApiOperation(&quot;根据id修改地址&quot;)</span><br>    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">update</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> AddressBook addressBook)</span> &#123;<br>        addressBookService.update(addressBook);<br>        <span class="hljs-keyword">return</span> Result.success();<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 设置默认地址</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> addressBook</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@PutMapping(&quot;/default&quot;)</span><br>    <span class="hljs-meta">@ApiOperation(&quot;设置默认地址&quot;)</span><br>    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">setDefault</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> AddressBook addressBook)</span> &#123;<br>        addressBookService.setDefault(addressBook);<br>        <span class="hljs-keyword">return</span> Result.success();<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 根据id删除地址</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> id</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@DeleteMapping</span><br>    <span class="hljs-meta">@ApiOperation(&quot;根据id删除地址&quot;)</span><br>    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">deleteById</span><span class="hljs-params">(Long id)</span> &#123;<br>        addressBookService.deleteById(id);<br>        <span class="hljs-keyword">return</span> Result.success();<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 查询默认地址</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@GetMapping(&quot;default&quot;)</span><br>    <span class="hljs-meta">@ApiOperation(&quot;查询默认地址&quot;)</span><br>    <span class="hljs-keyword">public</span> Result&lt;AddressBook&gt; <span class="hljs-title function_">getDefault</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-comment">//SQL:select * from address_book where user_id = ? and is_default = 1</span><br>        <span class="hljs-type">AddressBook</span> <span class="hljs-variable">addressBook</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AddressBook</span>();<br>        addressBook.setIsDefault(<span class="hljs-number">1</span>);<br>        addressBook.setUserId(BaseContext.getCurrentId());<br>        List&lt;AddressBook&gt; list = addressBookService.list(addressBook);<br><br>        <span class="hljs-keyword">if</span> (list != <span class="hljs-literal">null</span> &amp;&amp; list.size() == <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-keyword">return</span> Result.success(list.get(<span class="hljs-number">0</span>));<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> Result.error(<span class="hljs-string">&quot;没有查询到默认地址&quot;</span>);<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-3-功能测试"><a href="#1-3-功能测试" class="headerlink" title="1.3 功能测试"></a>1.3 功能测试</h3><p>可以通过如下方式进行测试：</p>
+<ul>
+<li>查看控制台sql和数据库中的数据变化</li>
+<li>Swagger接口文档测试</li>
+<li>前后端联调</li>
+</ul>
+<p>我们直接使用<strong>前后端联调</strong>测试：</p>
+<p>启动后台服务，编译小程序</p>
+<p>登录进入首页–&gt;进入个人中心–&gt;进入地址管理</p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356293.png" srcset="/img/loading.gif" lazyload alt="image-20221214192141197" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356294.png" srcset="/img/loading.gif" lazyload alt="image-20221214192446868" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356295.png" srcset="/img/loading.gif" lazyload alt="image-20221214192610374" style="zoom:50%;" /> </p>
+<p><strong>1). 新增收货地址</strong></p>
+<p><strong>添加两条收货地址：</strong></p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356296.png" srcset="/img/loading.gif" lazyload alt="image-20221214193135164" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356297.png" srcset="/img/loading.gif" lazyload alt="image-20221214193314440" style="zoom:50%;" /> </p>
+<p><strong>查看收货地址：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356298.png" srcset="/img/loading.gif" lazyload alt="image-20221214193437578" style="zoom:50%;" /> 
+
+
+
+<p><strong>查看数据库：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356299.png" srcset="/img/loading.gif" lazyload alt="image-20221214193552879" style="zoom:80%;" /> 
+
+
+
+<p><strong>2). 设置默认收货地址</strong></p>
+<p><strong>设置默认地址：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356300.png" srcset="/img/loading.gif" lazyload alt="image-20221214193714137" style="zoom:50%;" /> 
+
+<p><strong>查看数据库：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356301.png" srcset="/img/loading.gif" lazyload alt="image-20221214193829043" style="zoom:80%;" /> 
+
+
+
+<p><strong>3). 删除收货地址</strong></p>
+<p><strong>进行编辑：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356302.png" srcset="/img/loading.gif" lazyload alt="image-20221214194051783" style="zoom:50%;" /> 
+
+<p><strong>删除地址：</strong></p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356303.png" srcset="/img/loading.gif" lazyload alt="image-20221214194126920" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356304.png" srcset="/img/loading.gif" lazyload alt="image-20221214194227711" style="zoom:50%;" /></p>
+<p><strong>查看数据库：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356305.png" srcset="/img/loading.gif" lazyload alt="image-20221214194251343" style="zoom:80%;" /> 
+
+
+
+<h3 id="1-4-代码提交"><a href="#1-4-代码提交" class="headerlink" title="1.4 代码提交"></a>1.4 代码提交</h3><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356306.png" srcset="/img/loading.gif" lazyload alt="image-20221214204411614" style="zoom:50%;" /> 
+
+<p>后续步骤和其它功能代码提交一致，不再赘述。</p>
+<h2 id="2-用户下单"><a href="#2-用户下单" class="headerlink" title="2. 用户下单"></a>2. 用户下单</h2><h3 id="2-1-需求分析和设计"><a href="#2-1-需求分析和设计" class="headerlink" title="2.1 需求分析和设计"></a>2.1 需求分析和设计</h3><h4 id="2-1-1-产品原型"><a href="#2-1-1-产品原型" class="headerlink" title="2.1.1 产品原型"></a>2.1.1 产品原型</h4><p><strong>用户下单业务说明：</strong><br>在电商系统中，用户是通过下单的方式通知商家，用户已经购买了商品，需要商家进行备货和发货。<br>用户下单后会产生订单相关数据，订单数据需要能够体现如下信息：</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356307.png" srcset="/img/loading.gif" lazyload alt="image-20221214195633802" style="zoom:50%;" /> 
+
+<p>用户将菜品或者套餐加入购物车后，可以点击购物车中的 “去结算” 按钮，页面跳转到订单确认页面，点击 “去支付” 按钮则完成下单操作。</p>
+<p><strong>用户点餐业务流程(效果图)：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356308.png" srcset="/img/loading.gif" lazyload alt="image-20221214195913467" style="zoom:80%;" /> 
+
+
+
+
+
+<h4 id="2-1-2-接口设计"><a href="#2-1-2-接口设计" class="headerlink" title="2.1.2 接口设计"></a>2.1.2 接口设计</h4><p><strong>接口分析：</strong></p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356309.png" srcset="/img/loading.gif" lazyload alt="image-20221214200913654" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356310.png" srcset="/img/loading.gif" lazyload alt="image-20221214200959943" style="zoom:50%;" /> </p>
+<p><strong>接口设计：</strong></p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356311.png" srcset="/img/loading.gif" lazyload alt="image-20221214201211364" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356312.png" srcset="/img/loading.gif" lazyload alt="image-20221214201220993" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356314.png" srcset="/img/loading.gif" lazyload alt="image-20221214201236107" style="zoom:50%;" /> </p>
+<h4 id="2-1-3-表设计"><a href="#2-1-3-表设计" class="headerlink" title="2.1.3 表设计"></a>2.1.3 表设计</h4><p>用户下单业务对应的数据表为orders表和order_detail表(一对多关系,一个订单关联多个订单明细)：</p>
+<table>
+<thead>
+<tr>
+<th>表名</th>
+<th>含义</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>orders</td>
+<td>订单表</td>
+<td>主要存储订单的基本信息(如: 订单号、状态、金额、支付方式、下单用户、收件地址等)</td>
+</tr>
+<tr>
+<td>order_detail</td>
+<td>订单明细表</td>
+<td>主要存储订单详情信息(如: 该订单关联的套餐及菜品的信息)</td>
+</tr>
+</tbody></table>
+<p>具体的表结构如下: </p>
+<p><strong>1). orders订单表</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>字段名</strong></th>
+<th><strong>数据类型</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>备注</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>bigint</td>
+<td>主键</td>
+<td>自增</td>
+</tr>
+<tr>
+<td>number</td>
+<td>varchar(50)</td>
+<td>订单号</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>int</td>
+<td>订单状态</td>
+<td>1待付款 2待接单 3已接单 4派送中 5已完成 6已取消</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>bigint</td>
+<td>用户id</td>
+<td>逻辑外键</td>
+</tr>
+<tr>
+<td>address_book_id</td>
+<td>bigint</td>
+<td>地址id</td>
+<td>逻辑外键</td>
+</tr>
+<tr>
+<td>order_time</td>
+<td>datetime</td>
+<td>下单时间</td>
+<td></td>
+</tr>
+<tr>
+<td>checkout_time</td>
+<td>datetime</td>
+<td>付款时间</td>
+<td></td>
+</tr>
+<tr>
+<td>pay_method</td>
+<td>int</td>
+<td>支付方式</td>
+<td>1微信支付 2支付宝支付</td>
+</tr>
+<tr>
+<td>pay_status</td>
+<td>tinyint</td>
+<td>支付状态</td>
+<td>0未支付 1已支付 2退款</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>decimal(10,2)</td>
+<td>订单金额</td>
+<td></td>
+</tr>
+<tr>
+<td>remark</td>
+<td>varchar(100)</td>
+<td>备注信息</td>
+<td></td>
+</tr>
+<tr>
+<td>phone</td>
+<td>varchar(11)</td>
+<td>手机号</td>
+<td>冗余字段</td>
+</tr>
+<tr>
+<td>address</td>
+<td>varchar(255)</td>
+<td>详细地址信息</td>
+<td>冗余字段</td>
+</tr>
+<tr>
+<td>consignee</td>
+<td>varchar(32)</td>
+<td>收货人</td>
+<td>冗余字段</td>
+</tr>
+<tr>
+<td>cancel_reason</td>
+<td>varchar(255)</td>
+<td>订单取消原因</td>
+<td></td>
+</tr>
+<tr>
+<td>rejection_reason</td>
+<td>varchar(255)</td>
+<td>拒单原因</td>
+<td></td>
+</tr>
+<tr>
+<td>cancel_time</td>
+<td>datetime</td>
+<td>订单取消时间</td>
+<td></td>
+</tr>
+<tr>
+<td>estimated_delivery_time</td>
+<td>datetime</td>
+<td>预计送达时间</td>
+<td></td>
+</tr>
+<tr>
+<td>delivery_status</td>
+<td>tinyint</td>
+<td>配送状态</td>
+<td>1立即送出 0选择具体时间</td>
+</tr>
+<tr>
+<td>delivery_time</td>
+<td>datetime</td>
+<td>送达时间</td>
+<td></td>
+</tr>
+<tr>
+<td>pack_amount</td>
+<td>int</td>
+<td>打包费</td>
+<td></td>
+</tr>
+<tr>
+<td>tableware_number</td>
+<td>int</td>
+<td>餐具数量</td>
+<td></td>
+</tr>
+<tr>
+<td>tableware_status</td>
+<td>tinyint</td>
+<td>餐具数量状态</td>
+<td>1按餐量提供 0选择具体数量</td>
+</tr>
+</tbody></table>
+<p><strong>2). order_detail订单明细表</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>字段名</strong></th>
+<th><strong>数据类型</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>备注</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>bigint</td>
+<td>主键</td>
+<td>自增</td>
+</tr>
+<tr>
+<td>name</td>
+<td>varchar(32)</td>
+<td>商品名称</td>
+<td>冗余字段</td>
+</tr>
+<tr>
+<td>image</td>
+<td>varchar(255)</td>
+<td>商品图片路径</td>
+<td>冗余字段</td>
+</tr>
+<tr>
+<td>order_id</td>
+<td>bigint</td>
+<td>订单id</td>
+<td>逻辑外键</td>
+</tr>
+<tr>
+<td>dish_id</td>
+<td>bigint</td>
+<td>菜品id</td>
+<td>逻辑外键</td>
+</tr>
+<tr>
+<td>setmeal_id</td>
+<td>bigint</td>
+<td>套餐id</td>
+<td>逻辑外键</td>
+</tr>
+<tr>
+<td>dish_flavor</td>
+<td>varchar(50)</td>
+<td>菜品口味</td>
+<td></td>
+</tr>
+<tr>
+<td>number</td>
+<td>int</td>
+<td>商品数量</td>
+<td></td>
+</tr>
+<tr>
+<td>amount</td>
+<td>decimal(10,2)</td>
+<td>商品单价</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>说明：</strong>用户提交订单时，需要往订单表orders中插入一条记录，并且需要往order_detail中插入一条或多条记录。</p>
+<h3 id="2-2-代码开发"><a href="#2-2-代码开发" class="headerlink" title="2.2 代码开发"></a>2.2 代码开发</h3><h4 id="2-2-1-DTO设计"><a href="#2-2-1-DTO设计" class="headerlink" title="2.2.1 DTO设计"></a>2.2.1 DTO设计</h4><p><strong>根据用户下单接口的参数设计DTO：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356315.png" srcset="/img/loading.gif" lazyload alt="image-20221214203913803" style="zoom:50%;" /> 
+
+<p>在sky-pojo模块，OrdersSubmitDTO.java已定义</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.dto;<br><br><span class="hljs-keyword">import</span> com.fasterxml.jackson.annotation.JsonFormat;<br><span class="hljs-keyword">import</span> lombok.Data;<br><span class="hljs-keyword">import</span> java.io.Serializable;<br><span class="hljs-keyword">import</span> java.math.BigDecimal;<br><span class="hljs-keyword">import</span> java.time.LocalDateTime;<br><br><span class="hljs-meta">@Data</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OrdersSubmitDTO</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span> &#123;<br>    <span class="hljs-comment">//地址簿id</span><br>    <span class="hljs-keyword">private</span> Long addressBookId;<br>    <span class="hljs-comment">//付款方式</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> payMethod;<br>    <span class="hljs-comment">//备注</span><br>    <span class="hljs-keyword">private</span> String remark;<br>    <span class="hljs-comment">//预计送达时间</span><br>    <span class="hljs-meta">@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span><br>    <span class="hljs-keyword">private</span> LocalDateTime estimatedDeliveryTime;<br>    <span class="hljs-comment">//配送状态  1立即送出  0选择具体时间</span><br>    <span class="hljs-keyword">private</span> Integer deliveryStatus;<br>    <span class="hljs-comment">//餐具数量</span><br>    <span class="hljs-keyword">private</span> Integer tablewareNumber;<br>    <span class="hljs-comment">//餐具数量状态  1按餐量提供  0选择具体数量</span><br>    <span class="hljs-keyword">private</span> Integer tablewareStatus;<br>    <span class="hljs-comment">//打包费</span><br>    <span class="hljs-keyword">private</span> Integer packAmount;<br>    <span class="hljs-comment">//总金额</span><br>    <span class="hljs-keyword">private</span> BigDecimal amount;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-2-2-VO设计"><a href="#2-2-2-VO设计" class="headerlink" title="2.2.2 VO设计"></a>2.2.2 VO设计</h4><p><strong>根据用户下单接口的返回结果设计VO：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356316.png" srcset="/img/loading.gif" lazyload alt="image-20221214204113316" style="zoom:50%;" /> 
+
+<p>在sky-pojo模块，OrderSubmitVO.java已定义</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.vo;<br><br><span class="hljs-keyword">import</span> lombok.AllArgsConstructor;<br><span class="hljs-keyword">import</span> lombok.Builder;<br><span class="hljs-keyword">import</span> lombok.Data;<br><span class="hljs-keyword">import</span> lombok.NoArgsConstructor;<br><span class="hljs-keyword">import</span> java.io.Serializable;<br><span class="hljs-keyword">import</span> java.math.BigDecimal;<br><span class="hljs-keyword">import</span> java.time.LocalDateTime;<br><br><span class="hljs-meta">@Data</span><br><span class="hljs-meta">@Builder</span><br><span class="hljs-meta">@NoArgsConstructor</span><br><span class="hljs-meta">@AllArgsConstructor</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OrderSubmitVO</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span> &#123;<br>    <span class="hljs-comment">//订单id</span><br>    <span class="hljs-keyword">private</span> Long id;<br>    <span class="hljs-comment">//订单号</span><br>    <span class="hljs-keyword">private</span> String orderNumber;<br>    <span class="hljs-comment">//订单金额</span><br>    <span class="hljs-keyword">private</span> BigDecimal orderAmount;<br>    <span class="hljs-comment">//下单时间</span><br>    <span class="hljs-keyword">private</span> LocalDateTime orderTime;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-2-3-Controller层"><a href="#2-2-3-Controller层" class="headerlink" title="2.2.3 Controller层"></a>2.2.3 Controller层</h4><p><strong>创建OrderController并提供用户下单方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.controller.user;<br><br><span class="hljs-keyword">import</span> com.sky.dto.OrdersPaymentDTO;<br><span class="hljs-keyword">import</span> com.sky.dto.OrdersSubmitDTO;<br><span class="hljs-keyword">import</span> com.sky.result.PageResult;<br><span class="hljs-keyword">import</span> com.sky.result.Result;<br><span class="hljs-keyword">import</span> com.sky.service.OrderService;<br><span class="hljs-keyword">import</span> com.sky.vo.OrderPaymentVO;<br><span class="hljs-keyword">import</span> com.sky.vo.OrderSubmitVO;<br><span class="hljs-keyword">import</span> com.sky.vo.OrderVO;<br><span class="hljs-keyword">import</span> io.swagger.annotations.Api;<br><span class="hljs-keyword">import</span> io.swagger.annotations.ApiOperation;<br><span class="hljs-keyword">import</span> lombok.extern.slf4j.Slf4j;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.*;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 订单</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@RestController(&quot;userOrderController&quot;)</span><br><span class="hljs-meta">@RequestMapping(&quot;/user/order&quot;)</span><br><span class="hljs-meta">@Slf4j</span><br><span class="hljs-meta">@Api(tags = &quot;C端-订单接口&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OrderController</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> OrderService orderService;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 用户下单</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> ordersSubmitDTO</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@PostMapping(&quot;/submit&quot;)</span><br>    <span class="hljs-meta">@ApiOperation(&quot;用户下单&quot;)</span><br>    <span class="hljs-keyword">public</span> Result&lt;OrderSubmitVO&gt; <span class="hljs-title function_">submit</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> OrdersSubmitDTO ordersSubmitDTO)</span> &#123;<br>        log.info(<span class="hljs-string">&quot;用户下单：&#123;&#125;&quot;</span>, ordersSubmitDTO);<br>        <span class="hljs-type">OrderSubmitVO</span> <span class="hljs-variable">orderSubmitVO</span> <span class="hljs-operator">=</span> orderService.submitOrder(ordersSubmitDTO);<br>        <span class="hljs-keyword">return</span> Result.success(orderSubmitVO);<br>    &#125; <br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-2-4-Service层接口"><a href="#2-2-4-Service层接口" class="headerlink" title="2.2.4 Service层接口"></a>2.2.4 Service层接口</h4><p><strong>创建OrderService接口，并声明用户下单方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.service;<br><br><span class="hljs-keyword">import</span> com.sky.dto.*;<br><span class="hljs-keyword">import</span> com.sky.vo.OrderSubmitVO;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">OrderService</span> &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 用户下单</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> ordersSubmitDTO</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    OrderSubmitVO <span class="hljs-title function_">submitOrder</span><span class="hljs-params">(OrdersSubmitDTO ordersSubmitDTO)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-2-5-Service层实现类"><a href="#2-2-5-Service层实现类" class="headerlink" title="2.2.5 Service层实现类"></a>2.2.5 Service层实现类</h4><p><strong>创建OrderServiceImpl实现OrderService接口：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.service.impl;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 订单</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Service</span><br><span class="hljs-meta">@Slf4j</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OrderServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">OrderService</span> &#123;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> OrderMapper orderMapper;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> OrderDetailMapper orderDetailMapper;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> ShoppingCartMapper shoppingCartMapper;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> AddressBookMapper addressBookMapper;<br><br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 用户下单</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> ordersSubmitDTO</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Transactional</span><br>    <span class="hljs-keyword">public</span> OrderSubmitVO <span class="hljs-title function_">submitOrder</span><span class="hljs-params">(OrdersSubmitDTO ordersSubmitDTO)</span> &#123;<br>        <span class="hljs-comment">//异常情况的处理（收货地址为空、超出配送范围、购物车为空）</span><br>        <span class="hljs-type">AddressBook</span> <span class="hljs-variable">addressBook</span> <span class="hljs-operator">=</span> addressBookMapper.getById(ordersSubmitDTO.getAddressBookId());<br>        <span class="hljs-keyword">if</span> (addressBook == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AddressBookBusinessException</span>(MessageConstant.ADDRESS_BOOK_IS_NULL);<br>        &#125;<br><br>        <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> BaseContext.getCurrentId();<br>        <span class="hljs-type">ShoppingCart</span> <span class="hljs-variable">shoppingCart</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ShoppingCart</span>();<br>        shoppingCart.setUserId(userId);<br><br>        <span class="hljs-comment">//查询当前用户的购物车数据</span><br>        List&lt;ShoppingCart&gt; shoppingCartList = shoppingCartMapper.list(shoppingCart);<br>        <span class="hljs-keyword">if</span> (shoppingCartList == <span class="hljs-literal">null</span> || shoppingCartList.size() == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ShoppingCartBusinessException</span>(MessageConstant.SHOPPING_CART_IS_NULL);<br>        &#125;<br><br>        <span class="hljs-comment">//构造订单数据</span><br>        <span class="hljs-type">Orders</span> <span class="hljs-variable">order</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Orders</span>();<br>        BeanUtils.copyProperties(ordersSubmitDTO,order);<br>        order.setPhone(addressBook.getPhone());<br>        order.setAddress(addressBook.getDetail());<br>        order.setConsignee(addressBook.getConsignee());<br>        order.setNumber(String.valueOf(System.currentTimeMillis()));<br>        order.setUserId(userId);<br>        order.setStatus(Orders.PENDING_PAYMENT);<br>        order.setPayStatus(Orders.UN_PAID);<br>        order.setOrderTime(LocalDateTime.now());<br><br>        <span class="hljs-comment">//向订单表插入1条数据</span><br>        orderMapper.insert(order);<br><br>        <span class="hljs-comment">//订单明细数据</span><br>        List&lt;OrderDetail&gt; orderDetailList = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (ShoppingCart cart : shoppingCartList) &#123;<br>            <span class="hljs-type">OrderDetail</span> <span class="hljs-variable">orderDetail</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">OrderDetail</span>();<br>            BeanUtils.copyProperties(cart, orderDetail);<br>            orderDetail.setOrderId(order.getId());<br>            orderDetailList.add(orderDetail);<br>        &#125;<br><br>        <span class="hljs-comment">//向明细表插入n条数据</span><br>        orderDetailMapper.insertBatch(orderDetailList);<br><br>        <span class="hljs-comment">//清理购物车中的数据</span><br>        shoppingCartMapper.deleteByUserId(userId);<br><br>        <span class="hljs-comment">//封装返回结果</span><br>        <span class="hljs-type">OrderSubmitVO</span> <span class="hljs-variable">orderSubmitVO</span> <span class="hljs-operator">=</span> OrderSubmitVO.builder()<br>                .id(order.getId())<br>                .orderNumber(order.getNumber())<br>                .orderAmount(order.getAmount())<br>                .orderTime(order.getOrderTime())<br>                .build();<br><br>        <span class="hljs-keyword">return</span> orderSubmitVO;<br>    &#125;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-2-6-Mapper层"><a href="#2-2-6-Mapper层" class="headerlink" title="2.2.6 Mapper层"></a>2.2.6 Mapper层</h4><p><strong>创建OrderMapper接口和对应的xml映射文件：</strong></p>
+<p>OrderMapper.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.mapper;<br><br><span class="hljs-meta">@Mapper</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">OrderMapper</span> &#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 插入订单数据</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> order</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">insert</span><span class="hljs-params">(Orders order)</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>OrderMapper.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span> ?&gt;</span><br><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">mapper</span> <span class="hljs-keyword">PUBLIC</span> <span class="hljs-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span> <span class="hljs-string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span> &gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">&quot;com.sky.mapper.OrderMapper&quot;</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">insert</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;insert&quot;</span> <span class="hljs-attr">parameterType</span>=<span class="hljs-string">&quot;Orders&quot;</span> <span class="hljs-attr">useGeneratedKeys</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">keyProperty</span>=<span class="hljs-string">&quot;id&quot;</span>&gt;</span><br>        insert into orders<br>        (number, status, user_id, address_book_id, order_time, checkout_time, pay_method, pay_status, amount, remark,<br>         phone, address, consignee, estimated_delivery_time, delivery_status, pack_amount, tableware_number,<br>         tableware_status)<br>        values (#&#123;number&#125;, #&#123;status&#125;, #&#123;userId&#125;, #&#123;addressBookId&#125;, #&#123;orderTime&#125;, #&#123;checkoutTime&#125;, #&#123;payMethod&#125;,<br>                #&#123;payStatus&#125;, #&#123;amount&#125;, #&#123;remark&#125;, #&#123;phone&#125;, #&#123;address&#125;, #&#123;consignee&#125;,<br>                #&#123;estimatedDeliveryTime&#125;, #&#123;deliveryStatus&#125;, #&#123;packAmount&#125;, #&#123;tablewareNumber&#125;, #&#123;tablewareStatus&#125;)<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">insert</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">mapper</span>&gt;</span><br><br></code></pre></td></tr></table></figure>
+
+<p><strong>创建OrderDetailMapper接口和对应的xml映射文件：</strong></p>
+<p>OrderDetailMapper.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.mapper;<br><br><span class="hljs-keyword">import</span> com.sky.entity.OrderDetail;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-meta">@Mapper</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">OrderDetailMapper</span> &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 批量插入订单明细数据</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> orderDetails</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">insertBatch</span><span class="hljs-params">(List&lt;OrderDetail&gt; orderDetails)</span>;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>OrderDetailMapper.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span> ?&gt;</span><br><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">mapper</span> <span class="hljs-keyword">PUBLIC</span> <span class="hljs-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span> <span class="hljs-string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span> &gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">&quot;com.sky.mapper.OrderDetailMapper&quot;</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">insert</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;insertBatch&quot;</span> <span class="hljs-attr">parameterType</span>=<span class="hljs-string">&quot;list&quot;</span>&gt;</span><br>        insert into order_detail<br>        (name, order_id, dish_id, setmeal_id, dish_flavor, number, amount, image)<br>        values<br>        <span class="hljs-tag">&lt;<span class="hljs-name">foreach</span> <span class="hljs-attr">collection</span>=<span class="hljs-string">&quot;orderDetails&quot;</span> <span class="hljs-attr">item</span>=<span class="hljs-string">&quot;od&quot;</span> <span class="hljs-attr">separator</span>=<span class="hljs-string">&quot;,&quot;</span>&gt;</span><br>            (#&#123;od.name&#125;,#&#123;od.orderId&#125;,#&#123;od.dishId&#125;,#&#123;od.setmealId&#125;,#&#123;od.dishFlavor&#125;,<br>             #&#123;od.number&#125;,#&#123;od.amount&#125;,#&#123;od.image&#125;)<br>        <span class="hljs-tag">&lt;/<span class="hljs-name">foreach</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">insert</span>&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">mapper</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-3-功能测试"><a href="#2-3-功能测试" class="headerlink" title="2.3 功能测试"></a>2.3 功能测试</h3><p>登录小程序，完成下单操作</p>
+<p>下单操作时，同时会删除购物车中的数据</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356317.png" srcset="/img/loading.gif" lazyload alt="image-20221214214128415" style="zoom:50%;" /> 
+
+<p><strong>查看shopping_cart表：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356318.png" srcset="/img/loading.gif" lazyload alt="image-20221214214642428" style="zoom: 80%;" /> 
+
+<p><strong>去结算–&gt;去支付</strong></p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356319.png" srcset="/img/loading.gif" lazyload alt="image-20221214214808218" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356320.png" srcset="/img/loading.gif" lazyload alt="image-20221214214852362" style="zoom:50%;" /> </p>
+<p><strong>查看orders表：</strong></p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356321.png" srcset="/img/loading.gif" lazyload alt="image-20221214215116451"></p>
+<p><strong>查看order_detail表：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356322.png" srcset="/img/loading.gif" lazyload alt="image-20221214215250553" style="zoom:80%;" /> 
+
+<p><strong>同时，购物车表中数据删除：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356323.png" srcset="/img/loading.gif" lazyload alt="image-20221214215428516" style="zoom:80%;" /> 
+
+
+
+<h3 id="2-4-代码提交"><a href="#2-4-代码提交" class="headerlink" title="2.4 代码提交"></a>2.4 代码提交</h3><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356324.png" srcset="/img/loading.gif" lazyload alt="image-20221214215650664" style="zoom:50%;" /> 
+
+<p>后续步骤和其它功能代码提交一致，不再赘述。</p>
+<h2 id="3-订单支付"><a href="#3-订单支付" class="headerlink" title="3. 订单支付"></a>3. 订单支付</h2><h3 id="3-1-微信支付介绍"><a href="#3-1-微信支付介绍" class="headerlink" title="3.1 微信支付介绍"></a>3.1 微信支付介绍</h3><p>前面的课程已经实现了用户下单，那接下来就是订单支付，就是完成付款功能。支付大家应该都不陌生了，在现实生活中经常购买商品并且使用支付功能来付款，在付款的时候可能使用比较多的就是微信支付和支付宝支付了。在苍穹外卖项目中，选择的就是<strong>微信支付</strong>这种支付方式。</p>
+<p>要实现微信支付就需要注册微信支付的一个商户号，这个商户号是必须要有一家企业并且有正规的营业执照。只有具备了这些资质之后，才可以去注册商户号，才能开通支付权限。</p>
+<p>个人不具备这种资质，所以我们在学习微信支付时，最重要的是了解微信支付的流程，并且能够阅读微信官方提供的接口文档，能够和第三方支付平台对接起来就可以了。</p>
+<p><strong>微信支付产品：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356325.png" srcset="/img/loading.gif" lazyload alt="image-20221214223302651" style="zoom:50%;" /> 
+
+<p>本项目选择<strong>小程序支付</strong></p>
+<p>参考：<a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/static/product/product_index.shtml">https://pay.weixin.qq.com/static/product/product_index.shtml</a></p>
+<p><strong>微信支付接入流程：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356326.png" srcset="/img/loading.gif" lazyload alt="image-20221214223509246" style="zoom:50%;" /> 
+
+
+
+<p><strong>微信小程序支付时序图：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356327.png" srcset="/img/loading.gif" lazyload alt="image-20221214223910840" style="zoom:50%;" /> 
+
+
+
+<p><strong>微信支付相关接口：</strong></p>
+<p><strong>JSAPI下单：</strong>商户系统调用该接口在微信支付服务后台生成预支付交易单(对应时序图的第5步)</p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356328.png" srcset="/img/loading.gif" lazyload alt="image-20221214224409174"></p>
+<p><strong>微信小程序调起支付：</strong>通过JSAPI下单接口获取到发起支付的必要参数prepay_id，然后使用微信支付提供的小程序方法调起小程序支付(对应时序图的第10步)</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356329.png" srcset="/img/loading.gif" lazyload alt="image-20221214224551220" style="zoom:50%;" /> 
+
+
+
+<h3 id="3-2-微信支付准备工作"><a href="#3-2-微信支付准备工作" class="headerlink" title="3.2 微信支付准备工作"></a>3.2 微信支付准备工作</h3><h4 id="3-2-1-如何保证数据安全？"><a href="#3-2-1-如何保证数据安全？" class="headerlink" title="3.2.1 如何保证数据安全？"></a>3.2.1 如何保证数据安全？</h4><p>完成微信支付有两个关键的步骤：</p>
+<p><strong>第一个</strong>就是需要在商户系统当中调用微信后台的一个下单接口，就是生成预支付交易单。</p>
+<p><strong>第二个</strong>就是支付成功之后微信后台会给推送消息。</p>
+<p>这两个接口数据的安全性，要求其实是非常高的。</p>
+<p><strong>解决：</strong>微信提供的方式就是对数据进行加密、解密、签名多种方式。要完成数据加密解密，需要提前准备相应的一些文件，其实就是一些证书。</p>
+<p><strong>获取微信支付平台证书、商户私钥文件：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356330.png" srcset="/img/loading.gif" lazyload alt="image-20221214234038395" style="zoom:50%;" /> 
+
+<p>在后绪程序开发过程中，就会使用到这两个文件，需要提前把这两个文件准备好。</p>
+<h4 id="3-2-2-如何调用到商户系统？"><a href="#3-2-2-如何调用到商户系统？" class="headerlink" title="3.2.2 如何调用到商户系统？"></a>3.2.2 如何调用到商户系统？</h4><p>微信后台会调用到商户系统给推送支付的结果，在这里我们就会遇到一个问题，就是微信后台怎么就能调用到我们这个商户系统呢？因为这个调用过程，其实本质上也是一个HTTP请求。</p>
+<p>目前，商户系统它的ip地址就是当前自己电脑的ip地址，只是一个局域网内的ip地址，微信后台无法调用到。</p>
+<p><strong>解决：</strong>内网穿透。通过<strong>cpolar软件</strong>可以获得一个临时域名，而这个临时域名是一个公网ip，这样，微信后台就可以请求到商户系统了。</p>
+<p><strong>cpolar软件的使用：</strong></p>
+<p><strong>1). 下载与安装</strong></p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://dashboard.cpolar.com/get-started">https://dashboard.cpolar.com/get-started</a></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356331.png" srcset="/img/loading.gif" lazyload alt="image-20221215184407217" style="zoom:50%;" /> 
+
+<p>在资料中已提供，可无需下载。</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356332.png" srcset="/img/loading.gif" lazyload alt="image-20221215184446260" style="zoom:80%;" /> 
+
+<p>安装过程中，一直下一步即可，不再演示。</p>
+<p><strong>2). cpolar指定authtoken</strong></p>
+<p>复制authtoken：</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356333.png" srcset="/img/loading.gif" lazyload alt="image-20221215184746092" style="zoom:50%;" /> 
+
+<p>执行命令：</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356334.png" srcset="/img/loading.gif" lazyload alt="image-20221215185152869" style="zoom:50%;" /> 
+
+
+
+<p><strong>3). 获取临时域名</strong></p>
+<p>执行命令：</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356335.png" srcset="/img/loading.gif" lazyload alt="image-20221215185749163" style="zoom:50%;" /> 
+
+<p>获取域名：</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356336.png" srcset="/img/loading.gif" lazyload alt="image-20221215185833157" style="zoom:50%;" /> 
+
+
+
+<p><strong>4). 验证临时域名有效性</strong></p>
+<p><strong>访问接口文档</strong></p>
+<p>使用localhost:8080访问</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356337.png" srcset="/img/loading.gif" lazyload alt="image-20221215190440717" style="zoom:50%;" /> 
+
+<p>使用临时域名访问</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356338.png" srcset="/img/loading.gif" lazyload alt="image-20221215190525166" style="zoom:50%;" /> 
+
+<p>证明临时域名生效。</p>
+<h3 id="3-3-代码导入"><a href="#3-3-代码导入" class="headerlink" title="3.3 代码导入"></a>3.3 代码导入</h3><p>导入资料中的微信支付功能代码即可</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356339.png" srcset="/img/loading.gif" lazyload alt="image-20221215192120424" style="zoom:50%;" /> 
+
+<h4 id="3-3-1-微信支付相关配置"><a href="#3-3-1-微信支付相关配置" class="headerlink" title="3.3.1 微信支付相关配置"></a>3.3.1 微信支付相关配置</h4><p>application-dev.yml</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">sky:</span><br>  <span class="hljs-attr">wechat:</span><br>    <span class="hljs-attr">appid:</span> <span class="hljs-string">wxcd2e39f677fd30ba</span><br>    <span class="hljs-attr">secret:</span> <span class="hljs-string">84fbfdf5ea288f0c432d829599083637</span><br>    <span class="hljs-attr">mchid :</span> <span class="hljs-number">1561414331</span><br>    <span class="hljs-attr">mchSerialNo:</span> <span class="hljs-string">4B3B3DC35414AD50B1B755BAF8DE9CC7CF407606</span><br>    <span class="hljs-attr">privateKeyFilePath:</span> <span class="hljs-string">D:\apiclient_key.pem</span><br>    <span class="hljs-attr">apiV3Key:</span> <span class="hljs-string">CZBK51236435wxpay435434323FFDuv3</span><br>    <span class="hljs-attr">weChatPayCertFilePath:</span> <span class="hljs-string">D:\wechatpay_166D96F876F45C7D07CE98952A96EC980368ACFC.pem</span><br>    <span class="hljs-attr">notifyUrl:</span> <span class="hljs-string">https://www.weixin.qq.com/wxpay/pay.php</span><br>    <span class="hljs-attr">refundNotifyUrl:</span> <span class="hljs-string">https://www.weixin.qq.com/wxpay/pay.php</span><br></code></pre></td></tr></table></figure>
+
+<p>application.yml</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">sky:</span><br>  <span class="hljs-attr">wechat:</span><br>    <span class="hljs-attr">appid:</span> <span class="hljs-string">$&#123;sky.wechat.appid&#125;</span><br>    <span class="hljs-attr">secret:</span> <span class="hljs-string">$&#123;sky.wechat.secret&#125;</span><br>    <span class="hljs-attr">mchid :</span> <span class="hljs-string">$&#123;sky.wechat.mchid&#125;</span><br>    <span class="hljs-attr">mchSerialNo:</span> <span class="hljs-string">$&#123;sky.wechat.mchSerialNo&#125;</span><br>    <span class="hljs-attr">privateKeyFilePath:</span> <span class="hljs-string">$&#123;sky.wechat.privateKeyFilePath&#125;</span><br>    <span class="hljs-attr">apiV3Key:</span> <span class="hljs-string">$&#123;sky.wechat.apiV3Key&#125;</span><br>    <span class="hljs-attr">weChatPayCertFilePath:</span> <span class="hljs-string">$&#123;sky.wechat.weChatPayCertFilePath&#125;</span><br>    <span class="hljs-attr">notifyUrl:</span> <span class="hljs-string">$&#123;sky.wechat.notifyUrl&#125;</span><br>    <span class="hljs-attr">refundNotifyUrl:</span> <span class="hljs-string">$&#123;sky.wechat.refundNotifyUrl&#125;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>WeChatProperties.java：读取配置(已定义)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.properties;<br><br><span class="hljs-keyword">import</span> lombok.Data;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Value;<br><span class="hljs-keyword">import</span> org.springframework.boot.context.properties.ConfigurationProperties;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-meta">@Component</span><br><span class="hljs-meta">@ConfigurationProperties(prefix = &quot;sky.wechat&quot;)</span><br><span class="hljs-meta">@Data</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">WeChatProperties</span> &#123;<br><br>    <span class="hljs-keyword">private</span> String appid; <span class="hljs-comment">//小程序的appid</span><br>    <span class="hljs-keyword">private</span> String secret; <span class="hljs-comment">//小程序的秘钥</span><br>    <span class="hljs-keyword">private</span> String mchid; <span class="hljs-comment">//商户号</span><br>    <span class="hljs-keyword">private</span> String mchSerialNo; <span class="hljs-comment">//商户API证书的证书序列号</span><br>    <span class="hljs-keyword">private</span> String privateKeyFilePath; <span class="hljs-comment">//商户私钥文件</span><br>    <span class="hljs-keyword">private</span> String apiV3Key; <span class="hljs-comment">//证书解密的密钥</span><br>    <span class="hljs-keyword">private</span> String weChatPayCertFilePath; <span class="hljs-comment">//平台证书</span><br>    <span class="hljs-keyword">private</span> String notifyUrl; <span class="hljs-comment">//支付成功的回调地址</span><br>    <span class="hljs-keyword">private</span> String refundNotifyUrl; <span class="hljs-comment">//退款成功的回调地址</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-3-2-Mapper层"><a href="#3-3-2-Mapper层" class="headerlink" title="3.3.2 Mapper层"></a>3.3.2 Mapper层</h4><p><strong>在OrderMapper.java中添加getByNumberAndUserId和update两个方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 根据订单号和用户id查询订单</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> orderNumber</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> userId</span><br><span class="hljs-comment">    */</span><br>   <span class="hljs-meta">@Select(&quot;select * from orders where number = #&#123;orderNumber&#125; and user_id= #&#123;userId&#125;&quot;)</span><br>   Orders <span class="hljs-title function_">getByNumberAndUserId</span><span class="hljs-params">(String orderNumber, Long userId)</span>;<br><br>   <span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 修改订单信息</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> orders</span><br><span class="hljs-comment">    */</span><br>   <span class="hljs-keyword">void</span> <span class="hljs-title function_">update</span><span class="hljs-params">(Orders orders)</span>;<br></code></pre></td></tr></table></figure>
+
+<p><strong>在OrderMapper.xml中添加</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">update</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;update&quot;</span> <span class="hljs-attr">parameterType</span>=<span class="hljs-string">&quot;com.sky.entity.Orders&quot;</span>&gt;</span><br>        update orders<br>        <span class="hljs-tag">&lt;<span class="hljs-name">set</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;cancelReason != null and cancelReason!=&#x27;&#x27; &quot;</span>&gt;</span><br>                cancel_reason=#&#123;cancelReason&#125;,<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;rejectionReason != null and rejectionReason!=&#x27;&#x27; &quot;</span>&gt;</span><br>                rejection_reason=#&#123;rejectionReason&#125;,<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;cancelTime != null&quot;</span>&gt;</span><br>                cancel_time=#&#123;cancelTime&#125;,<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;payStatus != null&quot;</span>&gt;</span><br>                pay_status=#&#123;payStatus&#125;,<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;payMethod != null&quot;</span>&gt;</span><br>                pay_method=#&#123;payMethod&#125;,<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;checkoutTime != null&quot;</span>&gt;</span><br>                checkout_time=#&#123;checkoutTime&#125;,<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;status != null&quot;</span>&gt;</span><br>                status = #&#123;status&#125;,<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;deliveryTime != null&quot;</span>&gt;</span><br>                delivery_time = #&#123;deliveryTime&#125;<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">set</span>&gt;</span><br>        where id = #&#123;id&#125;<br><span class="hljs-tag">&lt;/<span class="hljs-name">update</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-3-3-Service层"><a href="#3-3-3-Service层" class="headerlink" title="3.3.3 Service层"></a>3.3.3 Service层</h4><p><strong>在OrderService.java中添加payment和paySuccess两个方法定义</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 订单支付</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> ordersPaymentDTO</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">    */</span><br>   OrderPaymentVO <span class="hljs-title function_">payment</span><span class="hljs-params">(OrdersPaymentDTO ordersPaymentDTO)</span> <span class="hljs-keyword">throws</span> Exception;<br><br>   <span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 支付成功，修改订单状态</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> outTradeNo</span><br><span class="hljs-comment">    */</span><br>   <span class="hljs-keyword">void</span> <span class="hljs-title function_">paySuccess</span><span class="hljs-params">(String outTradeNo)</span>;<br></code></pre></td></tr></table></figure>
+
+<p><strong>在OrderServiceImpl.java中实现payment和paySuccess两个方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs java">	<span class="hljs-meta">@Autowired</span><br>   <span class="hljs-keyword">private</span> UserMapper userMapper;<br><span class="hljs-meta">@Autowired</span><br>   <span class="hljs-keyword">private</span> WeChatPayUtil weChatPayUtil;<br>   <span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 订单支付</span><br><span class="hljs-comment">    *</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> ordersPaymentDTO</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">    */</span><br>   <span class="hljs-keyword">public</span> OrderPaymentVO <span class="hljs-title function_">payment</span><span class="hljs-params">(OrdersPaymentDTO ordersPaymentDTO)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>       <span class="hljs-comment">// 当前登录用户id</span><br>       <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> BaseContext.getCurrentId();<br>       <span class="hljs-type">User</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> userMapper.getById(userId);<br><br>       <span class="hljs-comment">//调用微信支付接口，生成预支付交易单</span><br>       <span class="hljs-type">JSONObject</span> <span class="hljs-variable">jsonObject</span> <span class="hljs-operator">=</span> weChatPayUtil.pay(<br>               ordersPaymentDTO.getOrderNumber(), <span class="hljs-comment">//商户订单号</span><br>               <span class="hljs-keyword">new</span> <span class="hljs-title class_">BigDecimal</span>(<span class="hljs-number">0.01</span>), <span class="hljs-comment">//支付金额，单位 元</span><br>               <span class="hljs-string">&quot;苍穹外卖订单&quot;</span>, <span class="hljs-comment">//商品描述</span><br>               user.getOpenid() <span class="hljs-comment">//微信用户的openid</span><br>       );<br><br>       <span class="hljs-keyword">if</span> (jsonObject.getString(<span class="hljs-string">&quot;code&quot;</span>) != <span class="hljs-literal">null</span> &amp;&amp; jsonObject.getString(<span class="hljs-string">&quot;code&quot;</span>).equals(<span class="hljs-string">&quot;ORDERPAID&quot;</span>)) &#123;<br>           <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">OrderBusinessException</span>(<span class="hljs-string">&quot;该订单已支付&quot;</span>);<br>       &#125;<br><br>       <span class="hljs-type">OrderPaymentVO</span> <span class="hljs-variable">vo</span> <span class="hljs-operator">=</span> jsonObject.toJavaObject(OrderPaymentVO.class);<br>       vo.setPackageStr(jsonObject.getString(<span class="hljs-string">&quot;package&quot;</span>));<br><br>       <span class="hljs-keyword">return</span> vo;<br>   &#125;<br><br>   <span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 支付成功，修改订单状态</span><br><span class="hljs-comment">    *</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> outTradeNo</span><br><span class="hljs-comment">    */</span><br>   <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">paySuccess</span><span class="hljs-params">(String outTradeNo)</span> &#123;<br>       <span class="hljs-comment">// 当前登录用户id</span><br>       <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> BaseContext.getCurrentId();<br><br>       <span class="hljs-comment">// 根据订单号查询当前用户的订单</span><br>       <span class="hljs-type">Orders</span> <span class="hljs-variable">ordersDB</span> <span class="hljs-operator">=</span> orderMapper.getByNumberAndUserId(outTradeNo, userId);<br><br>       <span class="hljs-comment">// 根据订单id更新订单的状态、支付方式、支付状态、结账时间</span><br>       <span class="hljs-type">Orders</span> <span class="hljs-variable">orders</span> <span class="hljs-operator">=</span> Orders.builder()<br>               .id(ordersDB.getId())<br>               .status(Orders.TO_BE_CONFIRMED)<br>               .payStatus(Orders.PAID)<br>               .checkoutTime(LocalDateTime.now())<br>               .build();<br><br>       orderMapper.update(orders);<br>   &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-3-4-Controller层"><a href="#3-3-4-Controller层" class="headerlink" title="3.3.4 Controller层"></a>3.3.4 Controller层</h4><p><strong>在OrderController.java中添加payment方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 订单支付</span><br><span class="hljs-comment">   *</span><br><span class="hljs-comment">   * <span class="hljs-doctag">@param</span> ordersPaymentDTO</span><br><span class="hljs-comment">   * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-meta">@PutMapping(&quot;/payment&quot;)</span><br>  <span class="hljs-meta">@ApiOperation(&quot;订单支付&quot;)</span><br>  <span class="hljs-keyword">public</span> Result&lt;OrderPaymentVO&gt; <span class="hljs-title function_">payment</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> OrdersPaymentDTO ordersPaymentDTO)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>      log.info(<span class="hljs-string">&quot;订单支付：&#123;&#125;&quot;</span>, ordersPaymentDTO);<br>      <span class="hljs-type">OrderPaymentVO</span> <span class="hljs-variable">orderPaymentVO</span> <span class="hljs-operator">=</span> orderService.payment(ordersPaymentDTO);<br>      log.info(<span class="hljs-string">&quot;生成预支付交易单：&#123;&#125;&quot;</span>, orderPaymentVO);<br>      <span class="hljs-keyword">return</span> Result.success(orderPaymentVO);<br>  &#125;<br></code></pre></td></tr></table></figure>
+
+<p>PayNotifyController.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.controller.notify;<br><br><span class="hljs-keyword">import</span> com.alibaba.druid.support.json.JSONUtils;<br><span class="hljs-keyword">import</span> com.alibaba.fastjson.JSON;<br><span class="hljs-keyword">import</span> com.alibaba.fastjson.JSONObject;<br><span class="hljs-keyword">import</span> com.sky.annotation.IgnoreToken;<br><span class="hljs-keyword">import</span> com.sky.properties.WeChatProperties;<br><span class="hljs-keyword">import</span> com.sky.service.OrderService;<br><span class="hljs-keyword">import</span> com.wechat.pay.contrib.apache.httpclient.util.AesUtil;<br><span class="hljs-keyword">import</span> lombok.extern.slf4j.Slf4j;<br><span class="hljs-keyword">import</span> org.apache.http.entity.ContentType;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RestController;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;<br><span class="hljs-keyword">import</span> java.io.BufferedReader;<br><span class="hljs-keyword">import</span> java.nio.charset.StandardCharsets;<br><span class="hljs-keyword">import</span> java.util.HashMap;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 支付回调相关接口</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(&quot;/notify&quot;)</span><br><span class="hljs-meta">@Slf4j</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PayNotifyController</span> &#123;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> OrderService orderService;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> WeChatProperties weChatProperties;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 支付成功回调</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> request</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@RequestMapping(&quot;/paySuccess&quot;)</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">paySuccessNotify</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-comment">//读取数据</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">body</span> <span class="hljs-operator">=</span> readData(request);<br>        log.info(<span class="hljs-string">&quot;支付成功回调：&#123;&#125;&quot;</span>, body);<br><br>        <span class="hljs-comment">//数据解密</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">plainText</span> <span class="hljs-operator">=</span> decryptData(body);<br>        log.info(<span class="hljs-string">&quot;解密后的文本：&#123;&#125;&quot;</span>, plainText);<br><br>        <span class="hljs-type">JSONObject</span> <span class="hljs-variable">jsonObject</span> <span class="hljs-operator">=</span> JSON.parseObject(plainText);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">outTradeNo</span> <span class="hljs-operator">=</span> jsonObject.getString(<span class="hljs-string">&quot;out_trade_no&quot;</span>);<span class="hljs-comment">//商户平台订单号</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">transactionId</span> <span class="hljs-operator">=</span> jsonObject.getString(<span class="hljs-string">&quot;transaction_id&quot;</span>);<span class="hljs-comment">//微信支付交易号</span><br><br>        log.info(<span class="hljs-string">&quot;商户平台订单号：&#123;&#125;&quot;</span>, outTradeNo);<br>        log.info(<span class="hljs-string">&quot;微信支付交易号：&#123;&#125;&quot;</span>, transactionId);<br><br>        <span class="hljs-comment">//业务处理，修改订单状态、来单提醒</span><br>        orderService.paySuccess(outTradeNo);<br><br>        <span class="hljs-comment">//给微信响应</span><br>        responseToWeixin(response);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 读取数据</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> request</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> Exception</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> String <span class="hljs-title function_">readData</span><span class="hljs-params">(HttpServletRequest request)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-type">BufferedReader</span> <span class="hljs-variable">reader</span> <span class="hljs-operator">=</span> request.getReader();<br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-type">String</span> <span class="hljs-variable">line</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">while</span> ((line = reader.readLine()) != <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">if</span> (result.length() &gt; <span class="hljs-number">0</span>) &#123;<br>                result.append(<span class="hljs-string">&quot;\n&quot;</span>);<br>            &#125;<br>            result.append(line);<br>        &#125;<br>        <span class="hljs-keyword">return</span> result.toString();<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 数据解密</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> body</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> Exception</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> String <span class="hljs-title function_">decryptData</span><span class="hljs-params">(String body)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-type">JSONObject</span> <span class="hljs-variable">resultObject</span> <span class="hljs-operator">=</span> JSON.parseObject(body);<br>        <span class="hljs-type">JSONObject</span> <span class="hljs-variable">resource</span> <span class="hljs-operator">=</span> resultObject.getJSONObject(<span class="hljs-string">&quot;resource&quot;</span>);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">ciphertext</span> <span class="hljs-operator">=</span> resource.getString(<span class="hljs-string">&quot;ciphertext&quot;</span>);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">nonce</span> <span class="hljs-operator">=</span> resource.getString(<span class="hljs-string">&quot;nonce&quot;</span>);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">associatedData</span> <span class="hljs-operator">=</span> resource.getString(<span class="hljs-string">&quot;associated_data&quot;</span>);<br><br>        <span class="hljs-type">AesUtil</span> <span class="hljs-variable">aesUtil</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AesUtil</span>(weChatProperties.getApiV3Key().getBytes(StandardCharsets.UTF_8));<br>        <span class="hljs-comment">//密文解密</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">plainText</span> <span class="hljs-operator">=</span> aesUtil.decryptToString(associatedData.getBytes(StandardCharsets.UTF_8),<br>                nonce.getBytes(StandardCharsets.UTF_8),<br>                ciphertext);<br><br>        <span class="hljs-keyword">return</span> plainText;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 给微信响应</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> response</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">responseToWeixin</span><span class="hljs-params">(HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> Exception&#123;<br>        response.setStatus(<span class="hljs-number">200</span>);<br>        HashMap&lt;Object, Object&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        map.put(<span class="hljs-string">&quot;code&quot;</span>, <span class="hljs-string">&quot;SUCCESS&quot;</span>);<br>        map.put(<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;SUCCESS&quot;</span>);<br>        response.setHeader(<span class="hljs-string">&quot;Content-type&quot;</span>, ContentType.APPLICATION_JSON.toString());<br>        response.getOutputStream().write(JSONUtils.toJSONString(map).getBytes(StandardCharsets.UTF_8));<br>        response.flushBuffer();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-4-功能测试"><a href="#3-4-功能测试" class="headerlink" title="3.4 功能测试"></a>3.4 功能测试</h3><p>测试过程中，可通过断点方式查看后台每一步执行情况。</p>
+<p><strong>下单：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356340.png" srcset="/img/loading.gif" lazyload alt="image-20221215205122716" style="zoom: 80%;" /> 
+
+<p><strong>去支付：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356341.png" srcset="/img/loading.gif" lazyload alt="image-20221215205308701" style="zoom:80%;" /> 
+
+<p><strong>确认支付：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356342.png" srcset="/img/loading.gif" lazyload alt="image-20221215205434552" style="zoom:80%;" /> 
+
+<p>进行扫码支付即可。</p>
+<h3 id="3-5-代码提交"><a href="#3-5-代码提交" class="headerlink" title="3.5 代码提交"></a>3.5 代码提交</h3><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122356343.png" srcset="/img/loading.gif" lazyload alt="image-20221215205746248" style="zoom:50%;" /> 
+
+<p> 后续步骤和其它功能代码提交一致，不再赘述。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/java/">java</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/java/">java</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%A1%B9%E7%9B%AE/">项目</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/12/13/%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96-day10/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">day10</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/12/12/%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96-day07/">
+                        <span class="hidden-mobile">day7</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.lazyComments('valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#valine",
+          app_id: "RadrImfAZkhnNhTIg2kXza0k-gzGzoHsz",
+          app_key: "gwfTOuigi1nSaHGTs4OOTzO7",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <div id="music-player-container">
+    <div class="music-player" id="music - player - container">
+        <iframe allow="autoplay" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=70 src="//music.163.com/outchain/player?type=2&id=25638340&auto=1&height=66"></iframe>
+    </div>
+</div>
+
+  <footer class="text-center mt-5 py-3">
+  
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">正在载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("11/14/2024 08:00:00");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "🚀已持续航行&nbsp"+dnum+"&nbsp天";  
+          document.getElementById("times").innerHTML = hnum + "&nbsp时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }
+      setInterval("createtime()",250);
+      </script>
+    </div>
+    
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/stars.js"></script>
+<script src="/js/mouse-star.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

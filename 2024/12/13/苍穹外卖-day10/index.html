@@ -1,0 +1,976 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="欢迎来到我的博客，让我们一起进步！">
+  <meta name="author" content="Chandler Bing">
+  <meta name="keywords" content="">
+  
+  <title>day10 - 辉のblog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/stars.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"xuhuilun.github.io","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="辉のblog" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">&nbsp;
+
+    <strong class="navbar-title">辉のblog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+
+
+
+
+
+
+          
+
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+
+
+
+          
+        
+          
+          
+          
+
+
+
+
+
+
+          
+
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+
+
+
+          
+        
+          
+          
+          
+
+
+
+
+
+
+          
+
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+
+
+
+          
+        
+          
+          
+          
+
+
+
+
+
+
+          
+
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+
+
+
+          
+        
+          
+          
+          
+
+
+
+
+
+
+          
+
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+
+
+
+          
+        
+
+
+
+
+
+
+
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+
+          <li class="nav-item"><a class="nav-link"  href="/atom.xml" target="_blank" rel="noopener noreferrer">RSS订阅</a></li>
+
+
+
+
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="day10">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2024-12-13 00:00" pubdate>
+        2024年12月13日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      56
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">day10</h1>
+            
+            <div class="markdown-body">
+              <h1 id="苍穹外卖-day10"><a href="#苍穹外卖-day10" class="headerlink" title="苍穹外卖-day10"></a>苍穹外卖-day10</h1><h2 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h2><ul>
+<li>Spring Task</li>
+<li>订单状态定时处理</li>
+<li>WebSocket</li>
+<li>来单提醒</li>
+<li>客户催单</li>
+</ul>
+<p>功能实现：<strong>订单状态定时处理</strong>、<strong>来单提醒</strong>和<strong>客户催单</strong></p>
+<p><strong>订单状态定时处理：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323070.png" srcset="/img/loading.gif" lazyload alt="image-20221218204021760" style="zoom:50%;" /> 
+
+
+
+<p><strong>来单提醒：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323072.png" srcset="/img/loading.gif" lazyload alt="image-20221218204119663" style="zoom:50%;" /> 
+
+
+
+<p><strong>客户催单：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323073.png" srcset="/img/loading.gif" lazyload alt="image-20221218204202847" style="zoom:50%;" /> 
+
+
+
+<h2 id="1-Spring-Task"><a href="#1-Spring-Task" class="headerlink" title="1. Spring Task"></a>1. Spring Task</h2><h3 id="1-1-介绍"><a href="#1-1-介绍" class="headerlink" title="1.1 介绍"></a>1.1 介绍</h3><p><strong>Spring Task</strong> 是Spring框架提供的任务调度工具，可以按照约定的时间自动执行某个代码逻辑。</p>
+<p><strong>定位：</strong>定时任务框架</p>
+<p><strong>作用：</strong>定时自动执行某段Java代码</p>
+<p> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323074.png" srcset="/img/loading.gif" lazyload alt="image-20221218183054818" style="zoom:50%;" /> 为什么要在Java程序中使用Spring Task？</p>
+<p><strong>应用场景：</strong></p>
+<p>1). 信用卡每月还款提醒</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323075.png" srcset="/img/loading.gif" lazyload alt="image-20221218183213088" style="zoom:50%;" /> 
+
+
+
+<p>2). 银行贷款每月还款提醒</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323076.png" srcset="/img/loading.gif" lazyload alt="image-20221218183410430" style="zoom:50%;" /> 
+
+
+
+<p>3). 火车票售票系统处理未支付订单</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323077.png" srcset="/img/loading.gif" lazyload alt="image-20221218183614351" style="zoom:50%;" /> 
+
+
+
+<p>4). 入职纪念日为用户发送通知</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323078.png" srcset="/img/loading.gif" lazyload alt="image-20221218183655186" style="zoom:50%;" /> 
+
+
+
+<p><strong>强调：</strong>只要是需要定时处理的场景都可以使用Spring Task</p>
+<h3 id="1-2-cron表达式"><a href="#1-2-cron表达式" class="headerlink" title="1.2 cron表达式"></a>1.2 cron表达式</h3><p><strong>cron表达式</strong>其实就是一个字符串，通过cron表达式可以<strong>定义任务触发的时间</strong></p>
+<p><strong>构成规则：</strong>分为6或7个域，由空格分隔开，每个域代表一个含义</p>
+<p>每个域的含义分别为：秒、分钟、小时、日、月、周、年(可选)</p>
+<p><strong>举例：</strong></p>
+<p>2022年10月12日上午9点整 对应的cron表达式为：<strong>0 0 9 12 10 ? 2022</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323079.png" srcset="/img/loading.gif" lazyload alt="image-20221218184412491" style="zoom:50%;" /> 
+
+<p><strong>说明：</strong>一般<strong>日</strong>和<strong>周</strong>的值不同时设置，其中一个设置，另一个用？表示。</p>
+<p><strong>比如：</strong>描述2月份的最后一天，最后一天具体是几号呢？可能是28号，也有可能是29号，所以就不能写具体数字。</p>
+<p>为了描述这些信息，提供一些特殊的字符。这些具体的细节，我们就不用自己去手写，因为这个cron表达式，它其实有在线生成器。</p>
+<p>cron表达式在线生成器：<a target="_blank" rel="noopener" href="https://cron.qqe2.com/">https://cron.qqe2.com/</a></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323080.png" srcset="/img/loading.gif" lazyload alt="image-20221218184959888" style="zoom:50%;" /> 
+
+
+
+<p>可以直接在这个网站上面，只要根据自己的要求去生成corn表达式即可。所以一般就不用自己去编写这个表达式。</p>
+<p><strong>通配符：</strong></p>
+<p>* 表示所有值； </p>
+<p>? 表示未说明的值，即不关心它为何值； </p>
+<p>- 表示一个指定的范围； </p>
+<p>, 表示附加一个可能值； </p>
+<p>/ 符号前表示开始时间，符号后表示每次递增的值；</p>
+<p><strong>cron表达式案例：</strong></p>
+<p>*/5 * * * * ? 每隔5秒执行一次</p>
+<p>0 */1 * * * ? 每隔1分钟执行一次</p>
+<p>0 0 5-15 * * ? 每天5-15点整点触发</p>
+<p>0 0/3 * * * ? 每三分钟触发一次</p>
+<p>0 0-5 14 * * ? 在每天下午2点到下午2:05期间的每1分钟触发 </p>
+<p>0 0/5 14 * * ? 在每天下午2点到下午2:55期间的每5分钟触发</p>
+<p>0 0/5 14,18 * * ? 在每天下午2点到2:55期间和下午6点到6:55期间的每5分钟触发</p>
+<p>0 0/30 9-17 * * ? 朝九晚五工作时间内每半小时</p>
+<p>0 0 10,14,16 * * ? 每天上午10点，下午2点，4点 </p>
+<h3 id="1-3-入门案例"><a href="#1-3-入门案例" class="headerlink" title="1.3 入门案例"></a>1.3 入门案例</h3><h4 id="1-3-1-Spring-Task使用步骤"><a href="#1-3-1-Spring-Task使用步骤" class="headerlink" title="1.3.1 Spring Task使用步骤"></a>1.3.1 Spring Task使用步骤</h4><p>1). 导入maven坐标 spring-context（已存在）</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323081.png" srcset="/img/loading.gif" lazyload alt="image-20221218193251182" style="zoom:50%;" /> 
+
+<p>2). 启动类添加注解 @EnableScheduling 开启任务调度</p>
+<p>3). 自定义定时任务类</p>
+<h4 id="1-3-2-代码开发"><a href="#1-3-2-代码开发" class="headerlink" title="1.3.2 代码开发"></a>1.3.2 代码开发</h4><p><strong>编写定时任务类：</strong></p>
+<p>进入sky-server模块中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.task;<br><br><span class="hljs-keyword">import</span> lombok.extern.slf4j.Slf4j;<br><span class="hljs-keyword">import</span> org.springframework.scheduling.annotation.Scheduled;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-keyword">import</span> java.util.Date;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 自定义定时任务类</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Component</span><br><span class="hljs-meta">@Slf4j</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyTask</span> &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 定时任务 每隔5秒触发一次</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Scheduled(cron = &quot;0/5 * * * * ?&quot;)</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">executeTask</span><span class="hljs-params">()</span>&#123;<br>        log.info(<span class="hljs-string">&quot;定时任务开始执行：&#123;&#125;&quot;</span>,<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>开启任务调度：</strong></p>
+<p>启动类添加注解 @EnableScheduling</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky;<br><br><span class="hljs-keyword">import</span> lombok.extern.slf4j.Slf4j;<br><span class="hljs-keyword">import</span> org.springframework.boot.SpringApplication;<br><span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;<br><span class="hljs-keyword">import</span> org.springframework.cache.annotation.EnableCaching;<br><span class="hljs-keyword">import</span> org.springframework.scheduling.annotation.EnableScheduling;<br><span class="hljs-keyword">import</span> org.springframework.transaction.annotation.EnableTransactionManagement;<br><br><span class="hljs-meta">@SpringBootApplication</span><br><span class="hljs-meta">@EnableTransactionManagement</span> <span class="hljs-comment">//开启注解方式的事务管理</span><br><span class="hljs-meta">@Slf4j</span><br><span class="hljs-meta">@EnableCaching</span><br><span class="hljs-meta">@EnableScheduling</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SkyApplication</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        SpringApplication.run(SkyApplication.class, args);<br>        log.info(<span class="hljs-string">&quot;server started&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-3-3-功能测试"><a href="#1-3-3-功能测试" class="headerlink" title="1.3.3 功能测试"></a>1.3.3 功能测试</h4><p>启动服务，查看日志</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323082.png" srcset="/img/loading.gif" lazyload alt="image-20221218194511420" style="zoom:80%;" /> 
+
+<p>每隔5秒执行一次。</p>
+<h2 id="2-订单状态定时处理"><a href="#2-订单状态定时处理" class="headerlink" title="2.订单状态定时处理"></a>2.订单状态定时处理</h2><h3 id="2-1-需求分析"><a href="#2-1-需求分析" class="headerlink" title="2.1 需求分析"></a>2.1 需求分析</h3><p>用户下单后可能存在的情况：</p>
+<ul>
+<li>下单后未支付，订单一直处于<strong>“待支付”</strong>状态</li>
+<li>用户收货后管理端未点击完成按钮，订单一直处于<strong>“派送中”</strong>状态</li>
+</ul>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323083.png" srcset="/img/loading.gif" lazyload alt="image-20221218194939516" style="zoom:50%;" />                  <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323084.png" srcset="/img/loading.gif" lazyload alt="image-20221218194951963" style="zoom:50%;" /></p>
+<p>支付超时的订单如何处理？                                                       派送中的订单一直不点击完成如何处理？</p>
+<p>对于上面两种情况需要通过<strong>定时任务</strong>来修改订单状态，具体逻辑为：</p>
+<ul>
+<li>通过定时任务每分钟检查一次是否存在支付超时订单（下单后超过15分钟仍未支付则判定为支付超时订单），如果存在则修改订单状态为“已取消”</li>
+<li>通过定时任务每天凌晨1点检查一次是否存在“派送中”的订单，如果存在则修改订单状态为“已完成”</li>
+</ul>
+<h3 id="2-2-代码开发"><a href="#2-2-代码开发" class="headerlink" title="2.2 代码开发"></a>2.2 代码开发</h3><p><strong>1). 自定义定时任务类OrderTask（待完善）：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.task;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 自定义定时任务，实现订单状态定时处理</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Component</span><br><span class="hljs-meta">@Slf4j</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OrderTask</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> OrderMapper orderMapper;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 处理支付超时订单</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Scheduled(cron = &quot;0 * * * * ?&quot;)</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">processTimeoutOrder</span><span class="hljs-params">()</span>&#123;<br>        log.info(<span class="hljs-string">&quot;处理支付超时订单：&#123;&#125;&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>());<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 处理“派送中”状态的订单</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Scheduled(cron = &quot;0 0 1 * * ?&quot;)</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">processDeliveryOrder</span><span class="hljs-params">()</span>&#123;<br>        log.info(<span class="hljs-string">&quot;处理派送中订单：&#123;&#125;&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>());<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>2). 在OrderMapper接口中扩展方法:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 根据状态和下单时间查询订单</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> status</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> orderTime</span><br><span class="hljs-comment">    */</span><br>   <span class="hljs-meta">@Select(&quot;select * from orders where status = #&#123;status&#125; and order_time &lt; #&#123;orderTime&#125;&quot;)</span><br>   List&lt;Orders&gt; <span class="hljs-title function_">getByStatusAndOrdertimeLT</span><span class="hljs-params">(Integer status, LocalDateTime orderTime)</span>;<br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>3). 完善定时任务类的processTimeoutOrder方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 处理支付超时订单</span><br><span class="hljs-comment">    */</span><br>   <span class="hljs-meta">@Scheduled(cron = &quot;0 * * * * ?&quot;)</span><br>   <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">processTimeoutOrder</span><span class="hljs-params">()</span>&#123;<br>       log.info(<span class="hljs-string">&quot;处理支付超时订单：&#123;&#125;&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>());<br><br>       <span class="hljs-type">LocalDateTime</span> <span class="hljs-variable">time</span> <span class="hljs-operator">=</span> LocalDateTime.now().plusMinutes(-<span class="hljs-number">15</span>);<br><br>       <span class="hljs-comment">// select * from orders where status = 1 and order_time &lt; 当前时间-15分钟</span><br>       List&lt;Orders&gt; ordersList = orderMapper.getByStatusAndOrdertimeLT(Orders.PENDING_PAYMENT, time);<br>       <span class="hljs-keyword">if</span>(ordersList != <span class="hljs-literal">null</span> &amp;&amp; ordersList.size() &gt; <span class="hljs-number">0</span>)&#123;<br>           ordersList.forEach(order -&gt; &#123;<br>               order.setStatus(Orders.CANCELLED);<br>               order.setCancelReason(<span class="hljs-string">&quot;支付超时，自动取消&quot;</span>);<br>               order.setCancelTime(LocalDateTime.now());<br>               orderMapper.update(order);<br>           &#125;);<br>       &#125;<br>   &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>4). 完善定时任务类的processDeliveryOrder方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 处理“派送中”状态的订单</span><br><span class="hljs-comment">    */</span><br>   <span class="hljs-meta">@Scheduled(cron = &quot;0 0 1 * * ?&quot;)</span><br>   <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">processDeliveryOrder</span><span class="hljs-params">()</span>&#123;<br>       log.info(<span class="hljs-string">&quot;处理派送中订单：&#123;&#125;&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>());<br>       <span class="hljs-comment">// select * from orders where status = 4 and order_time &lt; 当前时间-1小时</span><br>       <span class="hljs-type">LocalDateTime</span> <span class="hljs-variable">time</span> <span class="hljs-operator">=</span> LocalDateTime.now().plusMinutes(-<span class="hljs-number">60</span>);<br>       List&lt;Orders&gt; ordersList = orderMapper.getByStatusAndOrdertimeLT(Orders.DELIVERY_IN_PROGRESS, time);<br><br>       <span class="hljs-keyword">if</span>(ordersList != <span class="hljs-literal">null</span> &amp;&amp; ordersList.size() &gt; <span class="hljs-number">0</span>)&#123;<br>           ordersList.forEach(order -&gt; &#123;<br>               order.setStatus(Orders.COMPLETED);<br>               orderMapper.update(order);<br>           &#125;);<br>       &#125;<br>   &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-3-功能测试"><a href="#2-3-功能测试" class="headerlink" title="2.3 功能测试"></a>2.3 功能测试</h3><p>可以通过如下方式进行测试：</p>
+<ul>
+<li>查看控制台sql</li>
+<li>查看数据库中数据变化</li>
+</ul>
+<p><strong>支付超时的订单测试：</strong></p>
+<p><strong>1). 查看订单表</strong></p>
+<p>有一条订单，状态为1。订单状态 1待付款 2待接单 3已接单 4派送中 5已完成 6已取消</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323085.png" srcset="/img/loading.gif" lazyload alt="image-20221218202334773" style="zoom:50%;" /> 
+
+
+
+<p><strong>2). 开启定时任务</strong></p>
+<p>启动服务，观察控制台日志。处理支付超时订单任务每隔1分钟执行一次。</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323086.png" srcset="/img/loading.gif" lazyload alt="image-20221218203045089" style="zoom:50%;" /> 
+
+
+
+<p><strong>3). 再次查看订单表</strong></p>
+<p>状态已更改为6，已取消。</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323087.png" srcset="/img/loading.gif" lazyload alt="image-20221218203146535" style="zoom:80%;" /> 
+
+<p>证明定时任务已生效。</p>
+<p><strong>处理“派送中”状态的订单任务</strong>测试自已完成，测试步骤和上述一致。可适当修改cron表达式，改变任务执行频率，方便测试。</p>
+<h2 id="3-WebSocket"><a href="#3-WebSocket" class="headerlink" title="3. WebSocket"></a>3. WebSocket</h2><h3 id="3-1-介绍"><a href="#3-1-介绍" class="headerlink" title="3.1 介绍"></a>3.1 介绍</h3><p>WebSocket 是基于 TCP 的一种新的<strong>网络协议</strong>。它实现了浏览器与服务器全双工通信——浏览器和服务器只需要完成一次握手，两者之间就可以创建<strong>持久性</strong>的连接， 并进行<strong>双向</strong>数据传输。</p>
+<p><strong>HTTP协议和WebSocket协议对比：</strong></p>
+<ul>
+<li>HTTP是<strong>短连接</strong></li>
+<li>WebSocket是<strong>长连接</strong></li>
+<li>HTTP通信是<strong>单向</strong>的，基于请求响应模式</li>
+<li>WebSocket支持<strong>双向</strong>通信</li>
+<li>HTTP和WebSocket底层都是TCP连接</li>
+</ul>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323088.png" srcset="/img/loading.gif" lazyload alt="image-20221222184340172" style="zoom:50%;" />           <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323089.png" srcset="/img/loading.gif" lazyload alt="image-20221222184352573" style="zoom:50%;" /> </p>
+<p><strong>思考：</strong>既然WebSocket支持双向通信，功能看似比HTTP强大，那么我们是不是可以基于WebSocket开发所有的业务功能？</p>
+<p><strong>WebSocket缺点：</strong></p>
+<p>服务器长期维护长连接需要一定的成本<br>各个浏览器支持程度不一<br>WebSocket 是长连接，受网络限制比较大，需要处理好重连</p>
+<p><strong>结论：</strong>WebSocket并不能完全取代HTTP，它只适合在特定的场景下使用</p>
+<p><strong>WebSocket应用场景：</strong></p>
+<p>1). 视频弹幕</p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323090.png" srcset="/img/loading.gif" lazyload alt="image-20221222184616570" style="zoom:50%;" />v</p>
+<p>2). 网页聊天</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323091.png" srcset="/img/loading.gif" lazyload alt="image-20221222184641675" style="zoom:50%;" /> 
+
+
+
+<p>3). 体育实况更新</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323092.png" srcset="/img/loading.gif" lazyload alt="image-20221222184714092" style="zoom:50%;" /> 
+
+
+
+<p>4). 股票基金报价实时更新</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323093.png" srcset="/img/loading.gif" lazyload alt="image-20221222184742094" style="zoom:50%;" /> 
+
+
+
+<h3 id="3-2-入门案例"><a href="#3-2-入门案例" class="headerlink" title="3.2 入门案例"></a>3.2 入门案例</h3><h4 id="3-2-1-案例分析"><a href="#3-2-1-案例分析" class="headerlink" title="3.2.1 案例分析"></a>3.2.1 案例分析</h4><p><strong>需求：</strong>实现浏览器与服务器全双工通信。浏览器既可以向服务器发送消息，服务器也可主动向浏览器推送消息。</p>
+<p><strong>效果展示：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323094.png" srcset="/img/loading.gif" lazyload alt="image-20221222190401414" style="zoom:50%;" /> 
+
+<p><strong>实现步骤：</strong></p>
+<p>1). 直接使用websocket.html页面作为WebSocket客户端</p>
+<p>2). 导入WebSocket的maven坐标</p>
+<p>3). 导入WebSocket服务端组件WebSocketServer，用于和客户端通信</p>
+<p>4). 导入配置类WebSocketConfiguration，注册WebSocket的服务端组件</p>
+<p>5). 导入定时任务类WebSocketTask，定时向客户端推送数据</p>
+<h4 id="3-2-2-代码开发"><a href="#3-2-2-代码开发" class="headerlink" title="3.2.2 代码开发"></a>3.2.2 代码开发</h4><p>1). 定义websocket.html页面(资料中已提供)</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">HTML</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>WebSocket Demo<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">&quot;send()&quot;</span>&gt;</span>发送消息<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">&quot;closeWebSocket()&quot;</span>&gt;</span>关闭连接<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;message&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-keyword">var</span> websocket = <span class="hljs-literal">null</span>;</span><br><span class="language-javascript">    <span class="hljs-keyword">var</span> clientId = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>().<span class="hljs-title function_">toString</span>(<span class="hljs-number">36</span>).<span class="hljs-title function_">substr</span>(<span class="hljs-number">2</span>);</span><br><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-comment">//判断当前浏览器是否支持WebSocket</span></span><br><span class="language-javascript">    <span class="hljs-keyword">if</span>(<span class="hljs-string">&#x27;WebSocket&#x27;</span> <span class="hljs-keyword">in</span> <span class="hljs-variable language_">window</span>)&#123;</span><br><span class="language-javascript">        <span class="hljs-comment">//连接WebSocket节点</span></span><br><span class="language-javascript">        websocket = <span class="hljs-keyword">new</span> <span class="hljs-title class_">WebSocket</span>(<span class="hljs-string">&quot;ws://localhost:8080/ws/&quot;</span>+clientId);</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">    <span class="hljs-keyword">else</span>&#123;</span><br><span class="language-javascript">        <span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;Not support websocket&#x27;</span>)</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-comment">//连接发生错误的回调方法</span></span><br><span class="language-javascript">    websocket.<span class="hljs-property">onerror</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span><br><span class="language-javascript">        <span class="hljs-title function_">setMessageInnerHTML</span>(<span class="hljs-string">&quot;error&quot;</span>);</span><br><span class="language-javascript">    &#125;;</span><br><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-comment">//连接成功建立的回调方法</span></span><br><span class="language-javascript">    websocket.<span class="hljs-property">onopen</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span><br><span class="language-javascript">        <span class="hljs-title function_">setMessageInnerHTML</span>(<span class="hljs-string">&quot;连接成功&quot;</span>);</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-comment">//接收到消息的回调方法</span></span><br><span class="language-javascript">    websocket.<span class="hljs-property">onmessage</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>)&#123;</span><br><span class="language-javascript">        <span class="hljs-title function_">setMessageInnerHTML</span>(event.<span class="hljs-property">data</span>);</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-comment">//连接关闭的回调方法</span></span><br><span class="language-javascript">    websocket.<span class="hljs-property">onclose</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span><br><span class="language-javascript">        <span class="hljs-title function_">setMessageInnerHTML</span>(<span class="hljs-string">&quot;close&quot;</span>);</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-comment">//监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。</span></span><br><span class="language-javascript">    <span class="hljs-variable language_">window</span>.<span class="hljs-property">onbeforeunload</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;</span><br><span class="language-javascript">        websocket.<span class="hljs-title function_">close</span>();</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-comment">//将消息显示在网页上</span></span><br><span class="language-javascript">    <span class="hljs-keyword">function</span> <span class="hljs-title function_">setMessageInnerHTML</span>(<span class="hljs-params">innerHTML</span>)&#123;</span><br><span class="language-javascript">        <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;message&#x27;</span>).<span class="hljs-property">innerHTML</span> += innerHTML + <span class="hljs-string">&#x27;&lt;br/&gt;&#x27;</span>;</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-comment">//发送消息</span></span><br><span class="language-javascript">    <span class="hljs-keyword">function</span> <span class="hljs-title function_">send</span>(<span class="hljs-params"></span>)&#123;</span><br><span class="language-javascript">        <span class="hljs-keyword">var</span> message = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;text&#x27;</span>).<span class="hljs-property">value</span>;</span><br><span class="language-javascript">        websocket.<span class="hljs-title function_">send</span>(message);</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">	</span><br><span class="language-javascript">	<span class="hljs-comment">//关闭连接</span></span><br><span class="language-javascript">    <span class="hljs-keyword">function</span> <span class="hljs-title function_">closeWebSocket</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">        websocket.<span class="hljs-title function_">close</span>();</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>2). 导入maven坐标</p>
+<p>在sky-server模块pom.xml中已定义</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-websocket<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>3). 定义WebSocket服务端组件(资料中已提供)</p>
+<p>直接导入到sky-server模块即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.websocket;<br><br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><span class="hljs-keyword">import</span> javax.websocket.OnClose;<br><span class="hljs-keyword">import</span> javax.websocket.OnMessage;<br><span class="hljs-keyword">import</span> javax.websocket.OnOpen;<br><span class="hljs-keyword">import</span> javax.websocket.Session;<br><span class="hljs-keyword">import</span> javax.websocket.server.PathParam;<br><span class="hljs-keyword">import</span> javax.websocket.server.ServerEndpoint;<br><span class="hljs-keyword">import</span> java.util.Collection;<br><span class="hljs-keyword">import</span> java.util.HashMap;<br><span class="hljs-keyword">import</span> java.util.Map;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * WebSocket服务</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Component</span><br><span class="hljs-meta">@ServerEndpoint(&quot;/ws/&#123;sid&#125;&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">WebSocketServer</span> &#123;<br><br>    <span class="hljs-comment">//存放会话对象</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Map&lt;String, Session&gt; sessionMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>();<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 连接建立成功调用的方法</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@OnOpen</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onOpen</span><span class="hljs-params">(Session session, <span class="hljs-meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;客户端：&quot;</span> + sid + <span class="hljs-string">&quot;建立连接&quot;</span>);<br>        sessionMap.put(sid, session);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 收到客户端消息后调用的方法</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> message 客户端发送过来的消息</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@OnMessage</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onMessage</span><span class="hljs-params">(String message, <span class="hljs-meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;收到来自客户端：&quot;</span> + sid + <span class="hljs-string">&quot;的信息:&quot;</span> + message);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 连接关闭调用的方法</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> sid</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@OnClose</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onClose</span><span class="hljs-params">(<span class="hljs-meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;连接断开:&quot;</span> + sid);<br>        sessionMap.remove(sid);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 群发</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> message</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sendToAllClient</span><span class="hljs-params">(String message)</span> &#123;<br>        Collection&lt;Session&gt; sessions = sessionMap.values();<br>        <span class="hljs-keyword">for</span> (Session session : sessions) &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                <span class="hljs-comment">//服务器向客户端发送消息</span><br>                session.getBasicRemote().sendText(message);<br>            &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>                e.printStackTrace();<br>            &#125;<br>        &#125;<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>4). 定义配置类，注册WebSocket的服务端组件(从资料中直接导入即可)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.config;<br><br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Configuration;<br><span class="hljs-keyword">import</span> org.springframework.web.socket.server.standard.ServerEndpointExporter;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * WebSocket配置类，用于注册WebSocket的Bean</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">WebSocketConfiguration</span> &#123;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> ServerEndpointExporter <span class="hljs-title function_">serverEndpointExporter</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ServerEndpointExporter</span>();<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>5). 定义定时任务类，定时向客户端推送数据(从资料中直接导入即可)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.task;<br><br><span class="hljs-keyword">import</span> com.sky.websocket.WebSocketServer;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.scheduling.annotation.Scheduled;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><span class="hljs-keyword">import</span> java.time.LocalDateTime;<br><span class="hljs-keyword">import</span> java.time.format.DateTimeFormatter;<br><br><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">WebSocketTask</span> &#123;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> WebSocketServer webSocketServer;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 通过WebSocket每隔5秒向客户端发送消息</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Scheduled(cron = &quot;0/5 * * * * ?&quot;)</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sendMessageToClient</span><span class="hljs-params">()</span> &#123;<br>        webSocketServer.sendToAllClient(<span class="hljs-string">&quot;这是来自服务端的消息：&quot;</span> + DateTimeFormatter.ofPattern(<span class="hljs-string">&quot;HH:mm:ss&quot;</span>).format(LocalDateTime.now()));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-2-3-功能测试"><a href="#3-2-3-功能测试" class="headerlink" title="3.2.3 功能测试"></a>3.2.3 功能测试</h4><p>启动服务，打开websocket.html页面</p>
+<p><strong>浏览器向服务器发送数据：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323095.png" srcset="/img/loading.gif" lazyload alt="image-20221222192759049" style="zoom:50%;" /> 
+
+
+
+<p><strong>服务器向浏览器间隔5秒推送数据：</strong></p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323096.png" srcset="/img/loading.gif" lazyload alt="image-20221222192926954" style="zoom:50%;" /> 
+
+
+
+<h2 id="4-来单提醒"><a href="#4-来单提醒" class="headerlink" title="4. 来单提醒"></a>4. 来单提醒</h2><h3 id="4-1-需求分析和设计"><a href="#4-1-需求分析和设计" class="headerlink" title="4.1 需求分析和设计"></a>4.1 需求分析和设计</h3><p>用户下单并且支付成功后，需要第一时间通知外卖商家。通知的形式有如下两种：</p>
+<ul>
+<li>语音播报  <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323097.png" srcset="/img/loading.gif" lazyload alt="image-20221222194413901" style="zoom:50%;" /></li>
+<li>弹出提示框</li>
+</ul>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323098.png" srcset="/img/loading.gif" lazyload alt="image-20221222194450142" style="zoom:50%;" /> 
+
+
+
+<p><strong>设计思路：</strong></p>
+<ul>
+<li>通过WebSocket实现管理端页面和服务端保持长连接状态</li>
+<li>当客户支付后，调用WebSocket的相关API实现服务端向客户端推送消息</li>
+<li>客户端浏览器解析服务端推送的消息，判断是来单提醒还是客户催单，进行相应的消息提示和语音播报</li>
+<li>约定服务端发送给客户端浏览器的数据格式为JSON，字段包括：type，orderId，content<ul>
+<li>type 为消息类型，1为来单提醒 2为客户催单</li>
+<li>orderId 为订单id</li>
+<li>content 为消息内容</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-2-代码开发"><a href="#4-2-代码开发" class="headerlink" title="4.2 代码开发"></a>4.2 代码开发</h3><p><strong>在OrderServiceImpl中注入WebSocketServer对象，修改paySuccess方法，加入如下代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Autowired</span><br>   <span class="hljs-keyword">private</span> WebSocketServer webSocketServer;<br><span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 支付成功，修改订单状态</span><br><span class="hljs-comment">    *</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> outTradeNo</span><br><span class="hljs-comment">    */</span><br>   <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">paySuccess</span><span class="hljs-params">(String outTradeNo)</span> &#123;<br>       <span class="hljs-comment">// 当前登录用户id</span><br>       <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> BaseContext.getCurrentId();<br><br>       <span class="hljs-comment">// 根据订单号查询当前用户的订单</span><br>       <span class="hljs-type">Orders</span> <span class="hljs-variable">ordersDB</span> <span class="hljs-operator">=</span> orderMapper.getByNumberAndUserId(outTradeNo, userId);<br><br>       <span class="hljs-comment">// 根据订单id更新订单的状态、支付方式、支付状态、结账时间</span><br>       <span class="hljs-type">Orders</span> <span class="hljs-variable">orders</span> <span class="hljs-operator">=</span> Orders.builder()<br>               .id(ordersDB.getId())<br>               .status(Orders.TO_BE_CONFIRMED)<br>               .payStatus(Orders.PAID)<br>               .checkoutTime(LocalDateTime.now())<br>               .build();<br><br>       orderMapper.update(orders);<br>	<span class="hljs-comment">//////////////////////////////////////////////</span><br>       <span class="hljs-type">Map</span> <span class="hljs-variable">map</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>();<br>       map.put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-number">1</span>);<span class="hljs-comment">//消息类型，1表示来单提醒</span><br>       map.put(<span class="hljs-string">&quot;orderId&quot;</span>, orders.getId());<br>       map.put(<span class="hljs-string">&quot;content&quot;</span>, <span class="hljs-string">&quot;订单号：&quot;</span> + outTradeNo);<br><br>       <span class="hljs-comment">//通过WebSocket实现来单提醒，向客户端浏览器推送消息</span><br>       webSocketServer.sendToAllClient(JSON.toJSONString(map));<br>       <span class="hljs-comment">///////////////////////////////////////////////////</span><br>   &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-3-功能测试"><a href="#4-3-功能测试" class="headerlink" title="4.3 功能测试"></a>4.3 功能测试</h3><p>可以通过如下方式进行测试：</p>
+<ul>
+<li>查看浏览器调试工具数据交互过程</li>
+<li>前后端联调</li>
+</ul>
+<p><strong>1). 登录管理端后台</strong></p>
+<p>登录成功后，浏览器与服务器建立长连接</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323099.png" srcset="/img/loading.gif" lazyload alt="image-20221222200842731" style="zoom:50%;" /> 
+
+<p>查看控制台日志</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323100.png" srcset="/img/loading.gif" lazyload alt="image-20221222200941497" style="zoom:50%;" /> 
+
+
+
+<p><strong>2). 小程序端下单支付</strong></p>
+<p>修改回调地址，利用内网穿透获取域名</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323101.png" srcset="/img/loading.gif" lazyload alt="image-20221222201350616" style="zoom:50%;" /> 
+
+
+
+<p>下单支付</p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323102.png" srcset="/img/loading.gif" lazyload alt="image-20221222201718622" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323103.png" srcset="/img/loading.gif" lazyload alt="image-20221222201754866" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323104.png" srcset="/img/loading.gif" lazyload alt="image-20221222201826173" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323105.png" srcset="/img/loading.gif" lazyload alt="image-20221222202101677" style="zoom:50%;" /></p>
+<p><strong>3). 查看来单提醒</strong></p>
+<p>支付成功后，后台收到来单提醒，并有语音播报</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323106.png" srcset="/img/loading.gif" lazyload alt="image-20221222202310953" style="zoom:50%;" /> 
+
+
+
+<h3 id="4-4-代码提交"><a href="#4-4-代码提交" class="headerlink" title="4.4 代码提交"></a>4.4 代码提交</h3><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323107.png" srcset="/img/loading.gif" lazyload alt="image-20221222202632141" style="zoom:50%;" /> 
+
+<p>后续步骤和其它功能代码提交一致，不再赘述。</p>
+<h2 id="5-客户催单"><a href="#5-客户催单" class="headerlink" title="5. 客户催单"></a>5. 客户催单</h2><h3 id="5-1-需求分析和设计"><a href="#5-1-需求分析和设计" class="headerlink" title="5.1 需求分析和设计"></a>5.1 需求分析和设计</h3><p>用户在小程序中点击催单按钮后，需要第一时间通知外卖商家。通知的形式有如下两种：</p>
+<ul>
+<li>语音播报 <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323108.png" srcset="/img/loading.gif" lazyload alt="image-20221222203301218" style="zoom:50%;" /></li>
+<li>弹出提示框</li>
+</ul>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323109.png" srcset="/img/loading.gif" lazyload alt="image-20221222203345829" style="zoom:50%;" /> 
+
+
+
+<p><strong>设计思路：</strong></p>
+<ul>
+<li>通过WebSocket实现管理端页面和服务端保持长连接状态</li>
+<li>当用户点击催单按钮后，调用WebSocket的相关API实现服务端向客户端推送消息</li>
+<li>客户端浏览器解析服务端推送的消息，判断是来单提醒还是客户催单，进行相应的消息提示和语音播报<br>约定服务端发送给客户端浏览器的数据格式为JSON，字段包括：type，orderId，content<ul>
+<li>type 为消息类型，1为来单提醒 2为客户催单</li>
+<li>orderId 为订单id</li>
+<li>content 为消息内容</li>
+</ul>
+</li>
+</ul>
+<p>当用户点击催单按钮时，向服务端发送请求。</p>
+<p><strong>接口设计(催单)：</strong></p>
+<p><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323110.png" srcset="/img/loading.gif" lazyload alt="image-20221222204415339" style="zoom:50%;" /> <img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323111.png" srcset="/img/loading.gif" lazyload alt="image-20221222204434174" style="zoom:50%;" /></p>
+<h3 id="5-2-代码开发"><a href="#5-2-代码开发" class="headerlink" title="5.2 代码开发"></a>5.2 代码开发</h3><h4 id="5-2-1-Controller层"><a href="#5-2-1-Controller层" class="headerlink" title="5.2.1 Controller层"></a>5.2.1 Controller层</h4><p><strong>根据用户催单的接口定义，在user/OrderController中创建催单方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 用户催单</span><br><span class="hljs-comment">    *</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> id</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">    */</span><br>   <span class="hljs-meta">@GetMapping(&quot;/reminder/&#123;id&#125;&quot;)</span><br>   <span class="hljs-meta">@ApiOperation(&quot;用户催单&quot;)</span><br>   <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">reminder</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable(&quot;id&quot;)</span> Long id)</span> &#123;<br>       orderService.reminder(id);<br>       <span class="hljs-keyword">return</span> Result.success();<br>   &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="5-2-2-Service层接口"><a href="#5-2-2-Service层接口" class="headerlink" title="5.2.2 Service层接口"></a>5.2.2 Service层接口</h4><p><strong>在OrderService接口中声明reminder方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 用户催单</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> id</span><br><span class="hljs-comment">    */</span><br>   <span class="hljs-keyword">void</span> <span class="hljs-title function_">reminder</span><span class="hljs-params">(Long id)</span>;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="5-2-3-Service层实现类"><a href="#5-2-3-Service层实现类" class="headerlink" title="5.2.3 Service层实现类"></a>5.2.3 Service层实现类</h4><p><strong>在OrderServiceImpl中实现reminder方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 用户催单</span><br><span class="hljs-comment">    *</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> id</span><br><span class="hljs-comment">    */</span><br>   <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">reminder</span><span class="hljs-params">(Long id)</span> &#123;<br>       <span class="hljs-comment">// 查询订单是否存在</span><br>       <span class="hljs-type">Orders</span> <span class="hljs-variable">orders</span> <span class="hljs-operator">=</span> orderMapper.getById(id);<br>       <span class="hljs-keyword">if</span> (orders == <span class="hljs-literal">null</span>) &#123;<br>           <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">OrderBusinessException</span>(MessageConstant.ORDER_NOT_FOUND);<br>       &#125;<br><br>       <span class="hljs-comment">//基于WebSocket实现催单</span><br>       <span class="hljs-type">Map</span> <span class="hljs-variable">map</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>();<br>       map.put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-number">2</span>);<span class="hljs-comment">//2代表用户催单</span><br>       map.put(<span class="hljs-string">&quot;orderId&quot;</span>, id);<br>       map.put(<span class="hljs-string">&quot;content&quot;</span>, <span class="hljs-string">&quot;订单号：&quot;</span> + orders.getNumber());<br>       webSocketServer.sendToAllClient(JSON.toJSONString(map));<br>   &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>5.2.4 Mapper层</p>
+<p><strong>在OrderMapper中添加getById：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 根据id查询订单</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> id</span><br><span class="hljs-comment">    */</span><br>   <span class="hljs-meta">@Select(&quot;select * from orders where id=#&#123;id&#125;&quot;)</span><br>   Orders <span class="hljs-title function_">getById</span><span class="hljs-params">(Long id)</span>;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-3-功能测试"><a href="#5-3-功能测试" class="headerlink" title="5.3 功能测试"></a>5.3 功能测试</h3><p>可以通过如下方式进行测试：</p>
+<ul>
+<li>查看浏览器调试工具数据交互过程</li>
+<li>前后端联调</li>
+</ul>
+<p><strong>1). 登录管理端后台</strong></p>
+<p>登录成功后，浏览器与服务器建立长连接</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323099.png" srcset="/img/loading.gif" lazyload alt="image-20221222200842731" style="zoom:50%;" /> 
+
+<p>查看控制台日志</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323100.png" srcset="/img/loading.gif" lazyload alt="image-20221222200941497" style="zoom:50%;" /> 
+
+
+
+<p><strong>2). 用户进行催单</strong></p>
+<p>用户可在订单列表或者订单详情，进行催单</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323112.png" srcset="/img/loading.gif" lazyload alt="image-20221222210932942" style="zoom:50%;" /> 
+
+
+
+<p><strong>3). 查看催单提醒</strong></p>
+<p>既有催单弹窗，同时语音播报</p>
+<img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323113.png" srcset="/img/loading.gif" lazyload alt="image-20221222211238000" style="zoom:50%;" /> 
+
+
+
+<h3 id="5-4-代码提交"><a href="#5-4-代码提交" class="headerlink" title="5.4 代码提交"></a>5.4 代码提交</h3><img src="https://lxh-photo.oss-cn-nanjing.aliyuncs.com/images/202412122323114.png" srcset="/img/loading.gif" lazyload alt="image-20221222211740927" style="zoom:50%;" /> 
+
+<p>后续步骤和其它功能代码提交一致，不再赘述。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/java/">java</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/java/">java</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%A1%B9%E7%9B%AE/">项目</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/12/13/%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96-day11/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">day11</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/12/12/%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96-day08/">
+                        <span class="hidden-mobile">day8</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.lazyComments('valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#valine",
+          app_id: "RadrImfAZkhnNhTIg2kXza0k-gzGzoHsz",
+          app_key: "gwfTOuigi1nSaHGTs4OOTzO7",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <div id="music-player-container">
+    <div class="music-player" id="music - player - container">
+        <iframe allow="autoplay" frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=70 src="//music.163.com/outchain/player?type=2&id=25638340&auto=1&height=66"></iframe>
+    </div>
+</div>
+
+  <footer class="text-center mt-5 py-3">
+  
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">正在载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("11/14/2024 08:00:00");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "🚀已持续航行&nbsp"+dnum+"&nbsp天";  
+          document.getElementById("times").innerHTML = hnum + "&nbsp时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }
+      setInterval("createtime()",250);
+      </script>
+    </div>
+    
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/stars.js"></script>
+<script src="/js/mouse-star.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -36,6 +36,13 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+function reduceVolume() {
+    var iframe = document.getElementById('music-player-container').querySelector('iframe');
+    // 假设存在名为setVolume的接口函数，参数取值范围是0到1，这里设置为0.5，需根据实际接口调整
+    iframe.contentWindow.postMessage({ action: 'setVolume', volume: 0.5 }, '*');
+}
+reduceVolume();
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const starsContainer = document.createElement('div');
