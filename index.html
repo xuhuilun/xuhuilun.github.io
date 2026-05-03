@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f7f8fb">
+  <meta name="theme-color" content="#0052d9">
   <meta name="description" content="辉のblog，记录技术学习和思考。">
   <meta name="author" content="Lun XuHui">
   <title>辉のblog</title>
@@ -13,25 +13,64 @@
   <link rel="alternate" href="/atom.xml" title="辉のblog" type="application/atom+xml">
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-header home-header">
     <nav class="nav" aria-label="主导航">
       <a class="brand" href="/">辉のblog</a>
       <div class="nav-links"><a class="active" href="/">首页</a><a href="/archives/">归档</a><a href="/categories/">分类</a><a href="/tags/">标签</a><a href="/about/">关于</a><a href="/journey/">人生轨迹</a><a href="/links/">友链</a></div>
     </nav>
-    <section class="hero">
-      <p>Latest</p>
-      <h1>辉のblog</h1>
-      <span>重新开始记录技术学习。第一篇，从 Transformer 论文讲起。</span>
+    <section class="hero home-hero">
+      <div>
+        <p>Tech Notes</p>
+        <h1>记录技术学习，也记录问题被想清楚的过程。</h1>
+        <span>这里会放 AI、工程实践和长期值得回看的技术文章。先从 Transformer 论文开始。</span>
+        <div class="hero-actions">
+          <a class="primary-action" href="/2026/transformer-paper-for-beginners/">阅读最新文章</a>
+          <a class="secondary-action" href="/archives/">查看归档</a>
+        </div>
+      </div>
+      <aside class="hero-visual" aria-label="站点概览">
+        <div class="signal-card">
+          <span>Latest</span>
+          <strong>Transformer</strong>
+          <p>Attention · QKV · GPT/BERT · 面试高频点</p>
+        </div>
+        <div class="metric-grid">
+          <div><strong>1</strong><span>公开文章</span></div>
+          <div><strong>3</strong><span>技术标签</span></div>
+        </div>
+      </aside>
     </section>
   </header>
-  <main class="content">
-    <section class="article-list" aria-label="文章列表">
-      <article class="post-card">
-        <p class="kicker">2026-05-03 · AI · Transformer</p>
-        <h2><a href="/2026/transformer-paper-for-beginners/">小白也能看懂 Transformer：从论文到面试高频点</a></h2>
-        <p>用通俗类比讲清 Self-Attention、QKV、核心公式、多头注意力、位置编码、Encoder/Decoder，以及面试中最常被问到的关键点。</p>
-        <a class="read-more" href="/2026/transformer-paper-for-beginners/">阅读全文</a>
+  <main class="content home-content">
+    <section class="section-block" aria-labelledby="latest-title">
+      <div class="section-heading">
+        <p>What's New</p>
+        <h2 id="latest-title">最新动态</h2>
+        <a href="/archives/">全部文章</a>
+      </div>
+      <article class="featured-post">
+        <div class="post-date">
+          <span>2026</span>
+          <strong>05.03</strong>
+        </div>
+        <div>
+          <p class="kicker">AI · Transformer · 大模型</p>
+          <h3><a href="/2026/transformer-paper-for-beginners/">小白也能看懂 Transformer：从论文到面试高频点</a></h3>
+          <p>用通俗类比讲清 Self-Attention、QKV、核心公式、多头注意力、位置编码、Encoder/Decoder，以及面试中最常被问到的关键点。</p>
+          <a class="read-more" href="/2026/transformer-paper-for-beginners/">阅读全文</a>
+        </div>
       </article>
+    </section>
+    <section class="section-block" aria-labelledby="focus-title">
+      <div class="section-heading">
+        <p>Focus</p>
+        <h2 id="focus-title">内容方向</h2>
+      </div>
+      <div class="focus-grid">
+        <a class="focus-card" href="/categories/ai/"><strong>AI 学习</strong><span>从基础概念到论文拆解，尽量讲得清楚。</span></a>
+        <a class="focus-card" href="/tags/transformer/"><strong>模型架构</strong><span>围绕 Transformer、注意力机制和大模型底座。</span></a>
+        <a class="focus-card" href="/archives/"><strong>长期归档</strong><span>把能复用的知识沉淀成可回看的文章。</span></a>
+      </div>
     </section>
   </main>
   <footer class="footer">
