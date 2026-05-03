@@ -1,360 +1,227 @@
 /**
- * 人生轨迹地图模块
- * 可手动修改 lifePoints 数组来添加/编辑轨迹节点
+ * 人生轨迹数据入口
+ *
+ * 第一版保持空数组，不公开任何真实个人经历。
+ * 后续只需要在 journeyEvents 中添加城市、年月、事件和 SVG 百分比坐标。
+ *
+ * 数据格式：
+ * {
+ *   city: "深圳",
+ *   date: "2024-09",
+ *   title: "开始新的工作阶段",
+ *   description: "来到深圳，进入新的技术方向。",
+ *   coords: [74, 78]
+ * }
+ *
+ * 常见城市坐标参考，coords 范围为 0-100：
+ * 北京 [63, 33]，上海 [78, 57]，深圳 [72, 82]，广州 [69, 79]，成都 [47, 64]
+ * 杭州 [76, 59]，武汉 [62, 61]，西安 [52, 50]，南京 [73, 55]，重庆 [51, 67]
  */
+const journeyEvents = [];
 
-// ============ 配置区域：在此处编辑你的人生轨迹 ============
-const lifeJourneyConfig = {
-  // 人生轨迹节点数据
-  // phase: 'childhood' | 'school' | 'work' （决定颜色）
-  // city: 城市名称
-  // lnglat: [经度, 纬度] - 可使用 https://lbs.amap.com/console/show/picker 获取
-  lifePoints: [
-    {
-      id: 1,
-      city: '北京',
-      lnglat: [116.407526, 39.90403],
-      period: '1995-2005',
-      phase: 'childhood',
-      title: '童年时光',
-      description: '出生并度过快乐的童年，就读于北京市第一实验小学'
-    },
-    {
-      id: 2,
-      city: '上海',
-      lnglat: [121.473701, 31.230416],
-      period: '2005-2011',
-      phase: 'school',
-      title: '中学时代',
-      description: '就读于上海某重点中学，培养了编程兴趣'
-    },
-    {
-      id: 3,
-      city: '杭州',
-      lnglat: [120.15507, 30.274084],
-      period: '2011-2015',
-      phase: 'school',
-      title: '大学时光',
-      description: '浙江大学计算机系，本科四年，主修软件工程'
-    },
-    {
-      id: 4,
-      city: '深圳',
-      lnglat: [114.057868, 22.543099],
-      period: '2015-2018',
-      phase: 'work',
-      title: '初入职场',
-      description: '腾讯公司，从事后端开发工作'
-    },
-    {
-      id: 5,
-      city: '成都',
-      lnglat: [104.066541, 30.572269],
-      period: '2018-至今',
-      phase: 'work',
-      title: '新生活',
-      description: '加入字节跳动成都分部，享受慢节奏生活'
-    }
-  ],
-
-  // 阶段颜色配置
-  phaseColors: {
-    childhood: '#4CAF50',  // 绿色 - 童年
-    school: '#2196F3',     // 蓝色 - 求学
-    work: '#FF9800'        // 橙色 - 工作
-  },
-
-  // 阶段名称
-  phaseNames: {
-    childhood: '童年时期',
-    school: '求学阶段',
-    work: '工作时期'
-  }
-};
-
-// ============ 地图核心逻辑 ============
-class LifeJourneyMap {
-  constructor() {
-    this.map = null;
-    this.markers = [];
-    this.lines = [];
-    this.animationLine = null;
+class JourneyTimeline {
+  constructor(events) {
+    this.events = events
+      .filter((event) => this.isValidEvent(event))
+      .sort((a, b) => a.date.localeCompare(b.date));
+    this.activeIndex = 0;
+    this.routeEl = document.getElementById("journey-route");
+    this.pointsEl = document.getElementById("journey-points");
+    this.timelineEl = document.getElementById("journey-timeline");
+    this.emptyEl = document.getElementById("journey-empty");
+    this.countEl = document.getElementById("journey-count");
+    this.detailTitleEl = document.getElementById("journey-detail-title");
+    this.detailDateEl = document.getElementById("journey-detail-date");
+    this.detailCityEl = document.getElementById("journey-detail-city");
+    this.detailDescriptionEl = document.getElementById("journey-detail-description");
   }
 
   init() {
-    // 检查地图容器是否存在
-    const mapContainer = document.getElementById('journey-map');
-    if (!mapContainer) {
-      console.error('Map container not found');
+    if (!this.routeEl || !this.pointsEl || !this.timelineEl) return;
+
+    this.updateCount();
+
+    if (this.events.length === 0) {
+      this.showEmptyState();
       return;
     }
 
-    // 初始化地图
-    try {
-      this.map = new AMap.Map('journey-map', {
-        zoom: 5,
-        center: [110, 35], // 中国中心
-        viewMode: '2D',
-        mapStyle: 'amap://styles/whitesmoke' // 简约浅色风格
-      });
+    this.hideEmptyState();
+    this.renderRoute();
+    this.renderPoints();
+    this.renderTimeline();
+    this.selectEvent(0);
+  }
 
-      // 添加地图控件
-      this.map.addControl(new AMap.Scale());
-      this.map.addControl(new AMap.ToolBar({
-        position: 'RB'
-      }));
+  isValidEvent(event) {
+    return Boolean(
+      event &&
+      typeof event.city === "string" &&
+      typeof event.date === "string" &&
+      typeof event.title === "string" &&
+      typeof event.description === "string" &&
+      Array.isArray(event.coords) &&
+      event.coords.length === 2 &&
+      Number.isFinite(event.coords[0]) &&
+      Number.isFinite(event.coords[1])
+    );
+  }
 
-      // 等待地图加载完成后绘制轨迹
-      this.map.on('complete', () => {
-        this.drawJourney();
-      });
-
-    } catch (error) {
-      console.error('Map initialization failed:', error);
-      mapContainer.innerHTML = '<div style="text-align: center; padding: 50px; color: #999;">' +
-        '<p>地图加载失败，请检查网络连接或API Key配置</p>' +
-        '<p style="font-size: 12px;">错误信息: ' + error.message + '</p>' +
-        '</div>';
+  updateCount() {
+    if (this.countEl) {
+      this.countEl.textContent = `${this.events.length} 个节点`;
     }
   }
 
-  // 绘制轨迹
-  drawJourney() {
-    const points = lifeJourneyConfig.lifePoints;
+  showEmptyState() {
+    this.emptyEl?.classList.remove("is-hidden");
+    this.routeEl?.classList.add("is-hidden");
+    this.pointsEl?.classList.add("is-hidden");
+  }
 
-    if (points.length === 0) {
-      console.warn('No journey points configured');
+  hideEmptyState() {
+    this.emptyEl?.classList.add("is-hidden");
+    this.routeEl?.classList.remove("is-hidden");
+    this.pointsEl?.classList.remove("is-hidden");
+  }
+
+  renderRoute() {
+    if (this.events.length < 2) {
+      this.routeEl.setAttribute("d", "");
       return;
     }
 
-    // 准备路径数据（按顺序连接所有点）
-    const path = points.map(p => p.lnglat);
+    const [firstX, firstY] = this.events[0].coords;
+    const segments = [`M ${firstX} ${firstY}`];
 
-    // 创建分段折线（不同颜色表示不同阶段）
-    this.drawSegmentedLines(points);
+    for (let index = 1; index < this.events.length; index++) {
+      const [prevX, prevY] = this.events[index - 1].coords;
+      const [x, y] = this.events[index].coords;
+      const midX = (prevX + x) / 2;
+      const midY = (prevY + y) / 2;
+      const distanceX = x - prevX;
+      const distanceY = y - prevY;
+      const curveStrength = Math.min(9, Math.max(4, Math.hypot(distanceX, distanceY) * 0.18));
+      const controlX = midX - Math.sign(distanceY || 1) * curveStrength;
+      const controlY = midY + Math.sign(distanceX || 1) * curveStrength;
 
-    // 创建标记点
-    this.createMarkers(points);
-
-    // 调整地图视角以显示所有轨迹点
-    this.fitBounds();
-
-    // 添加动画效果（如果点多于1个）
-    if (points.length > 1) {
-      this.animatePath(path);
+      segments.push(`Q ${controlX.toFixed(2)} ${controlY.toFixed(2)} ${x} ${y}`);
     }
+
+    this.routeEl.setAttribute("d", segments.join(" "));
   }
 
-  // 绘制分阶段轨迹线
-  drawSegmentedLines(points) {
-    const colors = lifeJourneyConfig.phaseColors;
+  renderPoints() {
+    this.pointsEl.innerHTML = "";
 
-    for (let i = 0; i < points.length - 1; i++) {
-      const current = points[i];
-      const next = points[i + 1];
-
-      // 创建折线
-      const line = new AMap.Polyline({
-        path: [current.lnglat, next.lnglat],
-        strokeColor: colors[current.phase],
-        strokeWeight: 5,
-        strokeOpacity: 0.85,
-        strokeStyle: 'solid',
-        lineJoin: 'round',
-        showDir: true, // 显示方向箭头
-        dirColor: colors[current.phase],
-        extData: { segmentIndex: i, from: current.city, to: next.city }
+    this.events.forEach((event, index) => {
+      const [x, y] = event.coords;
+      const group = this.createSvgElement("g", {
+        class: "journey-point",
+        tabindex: "0",
+        role: "button",
+        "aria-label": `${event.date} ${event.city} ${event.title}`,
+        "data-index": String(index)
       });
 
-      this.map.add(line);
-      this.lines.push(line);
-    }
-  }
-
-  // 创建标记点
-  createMarkers(points) {
-    const colors = lifeJourneyConfig.phaseColors;
-
-    points.forEach((point, index) => {
-      const color = colors[point.phase];
-
-      // 创建自定义标记内容
-      const markerContent = document.createElement('div');
-      markerContent.className = 'journey-marker';
-      markerContent.innerHTML = `
-        <div style="color: ${color}; font-size: 16px; margin-bottom: 2px;">
-          <i class="iconfont icon-location-fill"></i>
-        </div>
-        <div style="font-weight: 600; color: #333;">${point.city}</div>
-        <div style="font-size: 11px; color: #666;">${point.period}</div>
-      `;
-
-      // 创建标记
-      const marker = new AMap.Marker({
-        position: point.lnglat,
-        content: markerContent,
-        offset: new AMap.Pixel(0, -10),
-        extData: point,
-        anchor: 'bottom-center'
+      const ring = this.createSvgElement("circle", {
+        class: "journey-point-ring",
+        cx: x,
+        cy: y,
+        r: 3.2
       });
-
-      // 创建信息窗口
-      const infoWindow = new AMap.InfoWindow({
-        content: this.createInfoWindowContent(point),
-        offset: new AMap.Pixel(0, -50),
-        closeWhenClickMap: true
+      const dot = this.createSvgElement("circle", {
+        class: "journey-point-dot",
+        cx: x,
+        cy: y,
+        r: 1.45
       });
-
-      // 点击标记显示信息窗口
-      marker.on('click', () => {
-        infoWindow.open(this.map, marker.getPosition());
+      const label = this.createSvgElement("text", {
+        class: "journey-point-label",
+        x,
+        y: y - 5,
+        "text-anchor": "middle"
       });
+      label.textContent = event.city;
 
-      // 鼠标悬停效果
-      marker.on('mouseover', () => {
-        markerContent.style.transform = 'scale(1.05) translateY(-2px)';
+      const date = this.createSvgElement("text", {
+        class: "journey-point-date",
+        x,
+        y: y + 6.1,
+        "text-anchor": "middle"
       });
+      date.textContent = event.date;
 
-      marker.on('mouseout', () => {
-        markerContent.style.transform = 'scale(1) translateY(0)';
-      });
-
-      this.map.add(marker);
-      this.markers.push(marker);
-    });
-  }
-
-  // 创建信息窗口内容
-  createInfoWindowContent(point) {
-    const colors = lifeJourneyConfig.phaseColors;
-    const color = colors[point.phase];
-    const phaseName = lifeJourneyConfig.phaseNames[point.phase];
-
-    return `
-      <div class="journey-info-window">
-        <h4 style="border-left: 4px solid ${color}; padding-left: 10px; margin-bottom: 12px;">
-          ${point.city}
-        </h4>
-        <div style="margin-bottom: 8px;">
-          <span style="display: inline-block; background: ${color}; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
-            ${phaseName}
-          </span>
-          <span style="color: #666; font-size: 13px; margin-left: 8px;">${point.period}</span>
-        </div>
-        <div style="font-weight: 600; color: #333; margin-bottom: 6px;">${point.title}</div>
-        <p style="color: #666; font-size: 13px; line-height: 1.5;">${point.description}</p>
-      </div>
-    `;
-  }
-
-  // 轨迹动画
-  animatePath(path) {
-    // 创建动画轨迹线
-    this.animationLine = new AMap.Polyline({
-      path: [path[0]], // 从起点开始
-      strokeColor: '#E91E63',
-      strokeWeight: 7,
-      strokeOpacity: 0.7,
-      strokeStyle: 'dashed',
-      lineDash: [10, 5],
-      showDir: true,
-      zIndex: 100
-    });
-
-    this.map.add(this.animationLine);
-
-    // 动画参数
-    let currentIndex = 0;
-    const totalSegments = path.length - 1;
-    const animationDuration = 1500; // 每段动画时长 ms
-    const framesPerSegment = 60;
-
-    const animate = () => {
-      if (currentIndex >= totalSegments) {
-        // 动画完成，闪烁几下后移除
-        this.blinkAndRemoveAnimationLine();
-        return;
-      }
-
-      const start = path[currentIndex];
-      const end = path[currentIndex + 1];
-      let frame = 0;
-
-      const segmentAnimate = () => {
-        frame++;
-        const progress = frame / framesPerSegment;
-
-        if (progress <= 1) {
-          // 插值计算当前位置
-          const currentLng = start[0] + (end[0] - start[0]) * progress;
-          const currentLat = start[1] + (end[1] - start[1]) * progress;
-
-          // 更新路径
-          const currentPath = path.slice(0, currentIndex + 1).concat([[currentLng, currentLat]]);
-          this.animationLine.setPath(currentPath);
-
-          requestAnimationFrame(segmentAnimate);
-        } else {
-          currentIndex++;
-          setTimeout(animate, 200); // 段与段之间的停顿
+      group.append(ring, dot, label, date);
+      group.addEventListener("click", () => this.selectEvent(index));
+      group.addEventListener("keydown", (keyboardEvent) => {
+        if (keyboardEvent.key === "Enter" || keyboardEvent.key === " ") {
+          keyboardEvent.preventDefault();
+          this.selectEvent(index);
         }
-      };
+      });
 
-      segmentAnimate();
-    };
-
-    // 延迟开始动画，等待地图加载
-    setTimeout(animate, 800);
+      this.pointsEl.appendChild(group);
+    });
   }
 
-  // 动画线闪烁后移除
-  blinkAndRemoveAnimationLine() {
-    let blinkCount = 0;
-    const maxBlinks = 3;
+  renderTimeline() {
+    this.timelineEl.innerHTML = "";
 
-    const blink = () => {
-      if (blinkCount >= maxBlinks * 2) {
-        this.animationLine.hide();
-        return;
-      }
-
-      if (blinkCount % 2 === 0) {
-        this.animationLine.hide();
-      } else {
-        this.animationLine.show();
-      }
-
-      blinkCount++;
-      setTimeout(blink, 300);
-    };
-
-    blink();
+    this.events.forEach((event, index) => {
+      const button = document.createElement("button");
+      button.className = "timeline-item";
+      button.type = "button";
+      button.dataset.index = String(index);
+      button.innerHTML = `
+        <span class="timeline-date">${this.escapeHtml(event.date)}</span>
+        <span class="timeline-main">
+          <strong>${this.escapeHtml(event.city)} · ${this.escapeHtml(event.title)}</strong>
+          <span>${this.escapeHtml(event.description)}</span>
+        </span>
+      `;
+      button.addEventListener("click", () => this.selectEvent(index));
+      this.timelineEl.appendChild(button);
+    });
   }
 
-  // 调整地图视角以显示所有轨迹点
-  fitBounds() {
-    if (this.markers.length === 0) return;
+  selectEvent(index) {
+    const event = this.events[index];
+    if (!event) return;
 
-    // 使用 setFitView 自动调整视野
-    this.map.setFitView(this.markers, false, [60, 60, 60, 60], 10);
+    this.activeIndex = index;
+    this.detailTitleEl.textContent = event.title;
+    this.detailDateEl.textContent = event.date;
+    this.detailCityEl.textContent = event.city;
+    this.detailDescriptionEl.textContent = event.description;
+
+    this.pointsEl.querySelectorAll(".journey-point").forEach((point) => {
+      point.classList.toggle("is-active", Number(point.dataset.index) === index);
+    });
+
+    this.timelineEl.querySelectorAll(".timeline-item").forEach((item) => {
+      item.classList.toggle("is-active", Number(item.dataset.index) === index);
+    });
+  }
+
+  createSvgElement(tagName, attributes) {
+    const element = document.createElementNS("http://www.w3.org/2000/svg", tagName);
+    Object.entries(attributes).forEach(([key, value]) => {
+      element.setAttribute(key, String(value));
+    });
+    return element;
+  }
+
+  escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
   }
 }
 
-// 页面加载完成后初始化地图
-document.addEventListener('DOMContentLoaded', () => {
-  // 检查 AMap 是否已加载
-  if (typeof AMap === 'undefined') {
-    console.error('AMap library not loaded. Please check your API key.');
-    const mapContainer = document.getElementById('journey-map');
-    if (mapContainer) {
-      mapContainer.innerHTML = '<div style="text-align: center; padding: 50px; color: #999;">' +
-        '<p>地图库加载失败，请检查高德地图 API Key 是否正确配置</p>' +
-        '<p style="font-size: 14px; margin-top: 10px;">在 journey/index.html 中替换 YOUR_KEY 为有效的高德地图 Key</p>' +
-        '</div>';
-    }
-    return;
-  }
-
-  const journeyMap = new LifeJourneyMap();
-  journeyMap.init();
+document.addEventListener("DOMContentLoaded", () => {
+  new JourneyTimeline(journeyEvents).init();
 });
