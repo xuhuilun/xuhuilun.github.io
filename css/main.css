@@ -1,3 +1,8 @@
+:root {
+  --font-family-sans-serif: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", Arial, sans-serif;
+  --font-family-monospace: "SFMono-Regular", "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
 .banner {
   height: 100%;
   position: relative;
@@ -192,7 +197,7 @@ sup > a::before,
   font-size: 0.95rem;
 }
 .footnote-list ol li:before {
-  font-family: "Helvetica Neue", monospace, "Monaco";
+  font-family: var(--font-family-monospace);
   content: "[" counter(sectioncounter) "]";
   counter-increment: sectioncounter;
 }

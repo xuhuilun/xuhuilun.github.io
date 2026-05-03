@@ -27,6 +27,14 @@ body {
   background: var(--bg);
   line-height: 1.72;
 }
+body,
+button,
+input,
+select,
+textarea,
+svg text {
+  font-family: var(--font-sans);
+}
 a { color: inherit; text-decoration: none; }
 .site-header {
   border-bottom: 1px solid var(--line);
