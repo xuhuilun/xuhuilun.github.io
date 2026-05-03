@@ -1,8 +1,8 @@
 /**
  * 人生轨迹数据入口
  *
- * 第一版保持空数组，不公开任何真实个人经历。
- * 后续只需要在 journeyEvents 中添加城市、年月、事件和 SVG 百分比坐标。
+ * 只需要在 journeyEvents 中添加城市、年月、事件和 SVG 百分比坐标。
+ * 鼠标划过城市点时，会显示对应时间和事件。
  *
  * 数据格式：
  * {
@@ -17,40 +17,42 @@
  * 北京 [63, 33]，上海 [78, 57]，深圳 [72, 82]，广州 [69, 79]，成都 [47, 64]
  * 杭州 [76, 59]，武汉 [62, 61]，西安 [52, 50]，南京 [73, 55]，重庆 [51, 67]
  */
-const journeyEvents = [];
+const journeyEvents = [
+  {
+    city: "深圳",
+    date: "2024-09",
+    title: "开始新的工作阶段",
+    description: "来到深圳，进入新的技术方向。",
+    coords: [74, 78]
+  }
+];
 
-class JourneyTimeline {
+class JourneyMap {
   constructor(events) {
     this.events = events
       .filter((event) => this.isValidEvent(event))
       .sort((a, b) => a.date.localeCompare(b.date));
-    this.activeIndex = 0;
+    this.svg = document.getElementById("journey-map");
+    this.canvas = document.getElementById("map-canvas");
+    this.viewport = document.getElementById("map-viewport");
     this.routeEl = document.getElementById("journey-route");
     this.pointsEl = document.getElementById("journey-points");
-    this.timelineEl = document.getElementById("journey-timeline");
-    this.emptyEl = document.getElementById("journey-empty");
-    this.countEl = document.getElementById("journey-count");
-    this.detailTitleEl = document.getElementById("journey-detail-title");
-    this.detailDateEl = document.getElementById("journey-detail-date");
-    this.detailCityEl = document.getElementById("journey-detail-city");
-    this.detailDescriptionEl = document.getElementById("journey-detail-description");
+    this.tooltipEl = document.getElementById("map-tooltip");
+    this.zoomInEl = document.getElementById("map-zoom-in");
+    this.zoomOutEl = document.getElementById("map-zoom-out");
+    this.resetEl = document.getElementById("map-reset");
+    this.view = { scale: 1, x: 0, y: 0 };
+    this.drag = { active: false, startX: 0, startY: 0, originX: 0, originY: 0 };
   }
 
   init() {
-    if (!this.routeEl || !this.pointsEl || !this.timelineEl) return;
+    if (!this.svg || !this.viewport || !this.pointsEl || !this.canvas) return;
 
-    this.updateCount();
-
-    if (this.events.length === 0) {
-      this.showEmptyState();
-      return;
-    }
-
-    this.hideEmptyState();
     this.renderRoute();
     this.renderPoints();
-    this.renderTimeline();
-    this.selectEvent(0);
+    this.bindZoomControls();
+    this.bindPanControls();
+    this.applyTransform();
   }
 
   isValidEvent(event) {
@@ -67,30 +69,13 @@ class JourneyTimeline {
     );
   }
 
-  updateCount() {
-    if (this.countEl) {
-      this.countEl.textContent = `${this.events.length} 个节点`;
-    }
-  }
-
-  showEmptyState() {
-    this.emptyEl?.classList.remove("is-hidden");
-    this.routeEl?.classList.add("is-hidden");
-    this.pointsEl?.classList.add("is-hidden");
-  }
-
-  hideEmptyState() {
-    this.emptyEl?.classList.add("is-hidden");
-    this.routeEl?.classList.remove("is-hidden");
-    this.pointsEl?.classList.remove("is-hidden");
-  }
-
   renderRoute() {
-    if (this.events.length < 2) {
-      this.routeEl.setAttribute("d", "");
+    if (!this.routeEl || this.events.length < 2) {
+      this.routeEl?.classList.add("is-hidden");
       return;
     }
 
+    this.routeEl.classList.remove("is-hidden");
     const [firstX, firstY] = this.events[0].coords;
     const segments = [`M ${firstX} ${firstY}`];
 
@@ -99,12 +84,9 @@ class JourneyTimeline {
       const [x, y] = this.events[index].coords;
       const midX = (prevX + x) / 2;
       const midY = (prevY + y) / 2;
-      const distanceX = x - prevX;
-      const distanceY = y - prevY;
-      const curveStrength = Math.min(9, Math.max(4, Math.hypot(distanceX, distanceY) * 0.18));
-      const controlX = midX - Math.sign(distanceY || 1) * curveStrength;
-      const controlY = midY + Math.sign(distanceX || 1) * curveStrength;
-
+      const curveStrength = Math.min(9, Math.max(4, Math.hypot(x - prevX, y - prevY) * 0.18));
+      const controlX = midX - Math.sign(y - prevY || 1) * curveStrength;
+      const controlY = midY + Math.sign(x - prevX || 1) * curveStrength;
       segments.push(`Q ${controlX.toFixed(2)} ${controlY.toFixed(2)} ${x} ${y}`);
     }
 
@@ -114,94 +96,143 @@ class JourneyTimeline {
   renderPoints() {
     this.pointsEl.innerHTML = "";
 
-    this.events.forEach((event, index) => {
+    this.events.forEach((event) => {
       const [x, y] = event.coords;
       const group = this.createSvgElement("g", {
         class: "journey-point",
         tabindex: "0",
         role: "button",
-        "aria-label": `${event.date} ${event.city} ${event.title}`,
-        "data-index": String(index)
+        "aria-label": `${event.date} ${event.city} ${event.title}`
       });
 
       const ring = this.createSvgElement("circle", {
         class: "journey-point-ring",
         cx: x,
         cy: y,
-        r: 3.2
+        r: 3.6
       });
       const dot = this.createSvgElement("circle", {
         class: "journey-point-dot",
         cx: x,
         cy: y,
-        r: 1.45
+        r: 1.55
       });
       const label = this.createSvgElement("text", {
         class: "journey-point-label",
         x,
-        y: y - 5,
+        y: y - 5.4,
         "text-anchor": "middle"
       });
       label.textContent = event.city;
 
-      const date = this.createSvgElement("text", {
-        class: "journey-point-date",
-        x,
-        y: y + 6.1,
-        "text-anchor": "middle"
-      });
-      date.textContent = event.date;
-
-      group.append(ring, dot, label, date);
-      group.addEventListener("click", () => this.selectEvent(index));
-      group.addEventListener("keydown", (keyboardEvent) => {
-        if (keyboardEvent.key === "Enter" || keyboardEvent.key === " ") {
-          keyboardEvent.preventDefault();
-          this.selectEvent(index);
-        }
-      });
+      group.append(ring, dot, label);
+      group.addEventListener("mouseenter", (pointerEvent) => this.showTooltip(event, pointerEvent));
+      group.addEventListener("mousemove", (pointerEvent) => this.moveTooltip(pointerEvent));
+      group.addEventListener("mouseleave", () => this.hideTooltip());
+      group.addEventListener("focus", () => this.showTooltipAtPoint(event, x, y));
+      group.addEventListener("blur", () => this.hideTooltip());
 
       this.pointsEl.appendChild(group);
     });
   }
 
-  renderTimeline() {
-    this.timelineEl.innerHTML = "";
+  bindZoomControls() {
+    this.zoomInEl?.addEventListener("click", () => this.zoomBy(1.18));
+    this.zoomOutEl?.addEventListener("click", () => this.zoomBy(0.84));
+    this.resetEl?.addEventListener("click", () => {
+      this.view = { scale: 1, x: 0, y: 0 };
+      this.applyTransform();
+    });
 
-    this.events.forEach((event, index) => {
-      const button = document.createElement("button");
-      button.className = "timeline-item";
-      button.type = "button";
-      button.dataset.index = String(index);
-      button.innerHTML = `
-        <span class="timeline-date">${this.escapeHtml(event.date)}</span>
-        <span class="timeline-main">
-          <strong>${this.escapeHtml(event.city)} · ${this.escapeHtml(event.title)}</strong>
-          <span>${this.escapeHtml(event.description)}</span>
-        </span>
-      `;
-      button.addEventListener("click", () => this.selectEvent(index));
-      this.timelineEl.appendChild(button);
+    this.canvas.addEventListener("wheel", (event) => {
+      event.preventDefault();
+      const factor = event.deltaY < 0 ? 1.12 : 0.9;
+      this.zoomBy(factor);
+    }, { passive: false });
+  }
+
+  bindPanControls() {
+    this.canvas.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0) return;
+      this.drag = {
+        active: true,
+        startX: event.clientX,
+        startY: event.clientY,
+        originX: this.view.x,
+        originY: this.view.y
+      };
+      this.canvas.classList.add("is-dragging");
+      this.canvas.setPointerCapture(event.pointerId);
+    });
+
+    this.canvas.addEventListener("pointermove", (event) => {
+      if (!this.drag.active) return;
+      const rect = this.svg.getBoundingClientRect();
+      const dx = ((event.clientX - this.drag.startX) / rect.width) * 100;
+      const dy = ((event.clientY - this.drag.startY) / rect.height) * 100;
+      this.view.x = this.drag.originX + dx;
+      this.view.y = this.drag.originY + dy;
+      this.applyTransform();
+    });
+
+    this.canvas.addEventListener("pointerup", (event) => this.endDrag(event));
+    this.canvas.addEventListener("pointercancel", (event) => this.endDrag(event));
+    this.canvas.addEventListener("pointerleave", () => {
+      if (!this.drag.active) return;
+      this.drag.active = false;
+      this.canvas.classList.remove("is-dragging");
     });
   }
 
-  selectEvent(index) {
-    const event = this.events[index];
-    if (!event) return;
+  endDrag(event) {
+    this.drag.active = false;
+    this.canvas.classList.remove("is-dragging");
+    if (this.canvas.hasPointerCapture?.(event.pointerId)) {
+      this.canvas.releasePointerCapture(event.pointerId);
+    }
+  }
 
-    this.activeIndex = index;
-    this.detailTitleEl.textContent = event.title;
-    this.detailDateEl.textContent = event.date;
-    this.detailCityEl.textContent = event.city;
-    this.detailDescriptionEl.textContent = event.description;
+  zoomBy(factor) {
+    const nextScale = Math.min(4, Math.max(0.75, this.view.scale * factor));
+    this.view.scale = Number(nextScale.toFixed(3));
+    this.applyTransform();
+  }
 
-    this.pointsEl.querySelectorAll(".journey-point").forEach((point) => {
-      point.classList.toggle("is-active", Number(point.dataset.index) === index);
-    });
+  applyTransform() {
+    this.viewport.setAttribute(
+      "transform",
+      `translate(${this.view.x.toFixed(2)} ${this.view.y.toFixed(2)}) scale(${this.view.scale})`
+    );
+  }
 
-    this.timelineEl.querySelectorAll(".timeline-item").forEach((item) => {
-      item.classList.toggle("is-active", Number(item.dataset.index) === index);
-    });
+  showTooltip(event, pointerEvent) {
+    this.tooltipEl.innerHTML = `
+      <strong>${this.escapeHtml(event.city)} · ${this.escapeHtml(event.title)}</strong>
+      <span>${this.escapeHtml(event.date)}</span>
+      <p>${this.escapeHtml(event.description)}</p>
+    `;
+    this.tooltipEl.classList.add("is-visible");
+    this.moveTooltip(pointerEvent);
+  }
+
+  showTooltipAtPoint(event, x, y) {
+    const svgPoint = this.svg.createSVGPoint();
+    svgPoint.x = x;
+    svgPoint.y = y;
+    const screenPoint = svgPoint.matrixTransform(this.viewport.getScreenCTM());
+    this.showTooltip(event, { clientX: screenPoint.x, clientY: screenPoint.y });
+  }
+
+  moveTooltip(pointerEvent) {
+    const stageRect = document.querySelector(".journey-map-stage").getBoundingClientRect();
+    const x = pointerEvent.clientX - stageRect.left;
+    const y = pointerEvent.clientY - stageRect.top;
+    this.tooltipEl.style.left = `${Math.min(Math.max(x, 24), stageRect.width - 24)}px`;
+    this.tooltipEl.style.top = `${Math.min(Math.max(y, 24), stageRect.height - 24)}px`;
+  }
+
+  hideTooltip() {
+    this.tooltipEl.classList.remove("is-visible");
   }
 
   createSvgElement(tagName, attributes) {
@@ -223,5 +254,5 @@ class JourneyTimeline {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  new JourneyTimeline(journeyEvents).init();
+  new JourneyMap(journeyEvents).init();
 });

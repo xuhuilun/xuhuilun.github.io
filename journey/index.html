@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0052d9">
-  <meta name="description" content="辉のblog 人生轨迹，用中国地图记录城市、时间和事件。">
+  <meta name="description" content="辉のblog 人生轨迹中国地图。">
   <meta name="author" content="Lun XuHui">
   <title>人生轨迹 - 辉のblog</title>
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
@@ -13,107 +13,59 @@
   <link rel="stylesheet" href="/css/journey.css">
   <link rel="alternate" href="/atom.xml" title="辉のblog" type="application/atom+xml">
 </head>
-<body>
-  <header class="site-header">
-    <nav class="nav" aria-label="主导航">
-      <a class="brand" href="/">辉のblog</a>
-      <div class="nav-links"><a href="/">首页</a><a href="/archives/">归档</a><a href="/categories/">分类</a><a href="/tags/">标签</a><a href="/about/">关于</a><a class="active" href="/journey/">人生轨迹</a><a href="/links/">友链</a></div>
-    </nav>
-    <section class="hero journey-hero">
-      <p>Life Journey</p>
-      <h1>人生轨迹</h1>
-      <span>用城市、时间和事件，把人生里的重要节点连成一条温柔的路线。</span>
-    </section>
-  </header>
+<body class="journey-map-page">
+  <nav class="journey-nav" aria-label="主导航">
+    <a class="brand" href="/">辉のblog</a>
+    <div class="nav-links"><a href="/">首页</a><a href="/archives/">归档</a><a href="/categories/">分类</a><a href="/tags/">标签</a><a href="/about/">关于</a><a class="active" href="/journey/">人生轨迹</a><a href="/links/">友链</a></div>
+  </nav>
 
-  <main class="content journey-page">
-    <section class="journey-shell" aria-label="人生轨迹地图">
-      <div class="journey-map-card">
-        <div class="journey-card-heading">
-          <div>
-            <p class="kicker">China Map</p>
-            <h2>中国地图轨迹</h2>
-          </div>
-          <span class="journey-count" id="journey-count">0 个节点</span>
-        </div>
+  <main class="journey-map-stage" aria-label="人生轨迹中国地图">
+    <div class="map-toolbar" aria-label="地图缩放控件">
+      <button type="button" id="map-zoom-in" aria-label="放大地图">+</button>
+      <button type="button" id="map-zoom-out" aria-label="缩小地图">-</button>
+      <button type="button" id="map-reset" aria-label="重置地图视图">重置</button>
+    </div>
 
-        <div class="china-map-frame">
-          <svg class="china-map" viewBox="0 0 100 100" role="img" aria-labelledby="china-map-title china-map-desc">
-            <title id="china-map-title">中国地图人生轨迹</title>
-            <desc id="china-map-desc">中国地图上会按时间显示城市节点和人生路线。</desc>
-            <defs>
-              <linearGradient id="mapFill" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#eef6ff"></stop>
-                <stop offset="100%" stop-color="#dbeafe"></stop>
-              </linearGradient>
-              <filter id="mapShadow" x="-10%" y="-10%" width="120%" height="120%">
-                <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#0052d9" flood-opacity="0.14"></feDropShadow>
-              </filter>
-            </defs>
-            <path class="china-shape" filter="url(#mapShadow)" fill="url(#mapFill)" d="M15 29 L23 22 L35 20 L45 15 L57 17 L66 23 L78 24 L87 34 L84 45 L90 55 L83 65 L76 78 L64 80 L54 72 L44 78 L34 73 L25 66 L16 58 L10 47 Z"></path>
-            <path class="china-shape island" d="M73 82 C77 80 80 82 80 86 C77 88 74 87 73 82 Z"></path>
-            <path class="china-shape island" d="M84 74 C86 73 88 74 88 77 C86 78 84 77 84 74 Z"></path>
-            <path class="map-grid" d="M20 42 C32 36 44 36 58 40 C70 44 78 52 85 60"></path>
-            <path class="map-grid" d="M34 22 C37 36 37 53 34 72"></path>
-            <path class="map-grid" d="M55 18 C55 34 57 52 64 79"></path>
-            <path id="journey-route" class="journey-route" d=""></path>
-            <g id="journey-points" class="journey-points"></g>
-          </svg>
+    <div class="map-canvas" id="map-canvas">
+      <svg id="journey-map" class="journey-map" viewBox="0 0 100 100" role="img" aria-labelledby="map-title map-desc">
+        <title id="map-title">中国地图人生轨迹</title>
+        <desc id="map-desc">可缩放拖拽的中国地图，鼠标划过已记录城市会显示时间和事件。</desc>
+        <defs>
+          <linearGradient id="landFill" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f8fbff"></stop>
+            <stop offset="100%" stop-color="#dbeafe"></stop>
+          </linearGradient>
+          <filter id="softMapShadow" x="-15%" y="-15%" width="130%" height="130%">
+            <feDropShadow dx="0" dy="8" stdDeviation="5" flood-color="#0052d9" flood-opacity="0.14"></feDropShadow>
+          </filter>
+        </defs>
 
-          <div class="map-empty-state" id="journey-empty">
-            <p class="kicker">暂无公开轨迹</p>
-            <h3>还没有添加人生节点</h3>
-            <p>在 <code>js/journey.js</code> 的 <code>journeyEvents</code> 数组中添加城市、年月和事件后，这里会自动生成地图标记、曲线路线和时间线。</p>
-          </div>
-        </div>
-      </div>
+        <g id="map-viewport">
+          <rect class="ocean-bg" x="-20" y="-20" width="140" height="140"></rect>
+          <g class="map-land" filter="url(#softMapShadow)">
+            <path class="province west" d="M12 33 L22 23 L34 22 L39 29 L36 40 L25 47 L14 44 Z"></path>
+            <path class="province north" d="M37 22 L48 16 L62 19 L69 27 L61 35 L47 34 L39 29 Z"></path>
+            <path class="province east" d="M62 25 L78 25 L89 36 L84 48 L72 54 L61 44 Z"></path>
+            <path class="province central" d="M36 40 L47 34 L61 35 L66 47 L59 61 L43 61 L31 52 Z"></path>
+            <path class="province southwest" d="M25 47 L36 42 L43 61 L54 72 L44 80 L30 73 L18 61 Z"></path>
+            <path class="province south" d="M59 61 L72 54 L84 57 L86 68 L75 80 L63 80 L54 72 Z"></path>
+            <path class="province northeast" d="M68 20 L79 21 L91 31 L88 39 L78 35 L69 27 Z"></path>
+            <path class="province island" d="M73 84 C77 81 81 83 81 87 C78 90 74 89 73 84 Z"></path>
+            <path class="province island" d="M86 75 C88 74 90 75 90 78 C88 79 86 78 86 75 Z"></path>
+          </g>
 
-      <aside class="journey-detail-card" aria-label="轨迹详情">
-        <p class="kicker">Selected Event</p>
-        <h2 id="journey-detail-title">等待选择节点</h2>
-        <div class="journey-detail-meta">
-          <span id="journey-detail-date">--</span>
-          <span id="journey-detail-city">未选择城市</span>
-        </div>
-        <p id="journey-detail-description">点击地图上的城市点或时间线节点后，这里会显示对应的时间和事件。</p>
-      </aside>
-    </section>
+          <path class="map-road" d="M18 45 C33 38 46 38 62 43 C75 47 83 55 87 65"></path>
+          <path class="map-road" d="M34 23 C38 40 38 57 32 74"></path>
+          <path class="map-road" d="M55 18 C55 35 58 55 66 80"></path>
+          <path id="journey-route" class="journey-route" d=""></path>
+          <g id="journey-points" class="journey-points"></g>
+        </g>
+      </svg>
+    </div>
 
-    <section class="journey-timeline-card" aria-label="人生时间线">
-      <div class="journey-card-heading">
-        <div>
-          <p class="kicker">Timeline</p>
-          <h2>时间线</h2>
-        </div>
-      </div>
-      <div class="journey-timeline" id="journey-timeline">
-        <div class="timeline-empty">
-          <strong>时间线待添加</strong>
-          <span>第一版不会公开任何真实个人经历。添加数据后，这里会按年月自动排序展示。</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="journey-guide-card" aria-label="编辑说明">
-      <p class="kicker">How To Edit</p>
-      <h2>如何添加真实轨迹</h2>
-      <p>只需要编辑 <code>js/journey.js</code> 顶部的 <code>journeyEvents</code> 数组。公开建议保持“城市 + 年月 + 事件”，不要写精确住址、学校、公司或其他敏感地点。</p>
-      <pre><code>const journeyEvents = [
-  {
-    city: "深圳",
-    date: "2024-09",
-    title: "开始新的工作阶段",
-    description: "来到深圳，进入新的技术方向。",
-    coords: [74, 78]
-  }
-];</code></pre>
-    </section>
+    <div class="map-tooltip" id="map-tooltip" role="status" aria-live="polite"></div>
   </main>
 
-  <footer class="footer">
-    <span>辉のblog</span>
-    <span>认真写一点能留下来的东西。</span>
-  </footer>
   <script src="/js/journey.js"></script>
 </body>
 </html>
