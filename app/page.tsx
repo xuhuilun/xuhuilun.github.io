@@ -1,7 +1,24 @@
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
+import { Search } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { allBlogs, allNotes, allPapers } from 'contentlayer/generated';
 
 export default function HomePage() {
+  const [query, setQuery] = useState('');
+  const router = useRouter();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (query.trim()) {
+      router.push(`/search?q=${encodeURIComponent(query.trim())}`);
+    } else {
+      router.push('/search');
+    }
+  };
+
   const posts = allBlogs.filter((post) => !post.draft).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 4);
   const notes = allNotes.filter((note) => !note.draft).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 3);
   const papers = allPapers.filter((paper) => !paper.draft).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 3);
@@ -16,14 +33,19 @@ export default function HomePage() {
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">
           基于 Transformer、LoRA、RLHF、DPO、MLSys 的学习笔记与技术总结。支持 Markdown 与数学公式，适合长期构建 AI 第二大脑。
         </p>
-        <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-center">
-          <Link href="/search" className="rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
-            立即全文搜索
-          </Link>
-          <Link href="/blog" className="rounded-full border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">
-            查看最新文章
-          </Link>
-        </div>
+        <form onSubmit={handleSearch} className="mx-auto mt-8 flex max-w-md items-center gap-3 rounded-full border border-slate-200 bg-white px-4 py-3 shadow-soft dark:border-slate-700 dark:bg-slate-800">
+          <Search className="h-5 w-5 text-slate-500 dark:text-slate-400" />
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="搜索文章、笔记、论文..."
+            className="flex-1 bg-transparent text-slate-900 outline-none placeholder:text-slate-400 dark:text-slate-100 dark:placeholder:text-slate-500"
+          />
+          <button type="submit" className="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-950 dark:hover:bg-slate-200">
+            搜索
+          </button>
+        </form>
       </section>
 
       <section className="grid gap-8 lg:grid-cols-3">

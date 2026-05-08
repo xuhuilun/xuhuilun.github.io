@@ -18,6 +18,7 @@ export type SearchItem = {
 
 interface SearchPanelProps {
   items: SearchItem[];
+  initialQuery?: string;
 }
 
 function escapeHtml(value: string) {
@@ -39,8 +40,8 @@ function highlightText(text: string, query: string) {
   return escaped.replace(new RegExp(`(${query.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi'), '<mark class="rounded bg-yellow-200 px-1 dark:bg-yellow-500/30">$1</mark>');
 }
 
-export default function SearchPanel({ items }: SearchPanelProps) {
-  const [query, setQuery] = useState('');
+export default function SearchPanel({ items, initialQuery = '' }: SearchPanelProps) {
+  const [query, setQuery] = useState(initialQuery);
 
   const results = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
