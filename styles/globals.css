@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    color: #0f172a;
+    background-color: #f8fafc;
+  }
+
+  .dark {
+    color-scheme: dark;
+    color: #f8fafc;
+    background-color: #0f172a;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100vh;
+    background: rgb(248 250 252);
+    color: rgb(15 23 42);
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  body.dark {
+    background: rgb(15 23 42);
+    color: rgb(241 245 249);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  }
+}
+
+@layer utilities {
+  .prose-img {
+    border-radius: 0.75rem;
+  }
+}
