@@ -11,6 +11,7 @@
   <link rel="icon" href="/img/favicon.png">
   <link rel="stylesheet" href="/css/clean.css">
   <link rel="stylesheet" href="/css/journey.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-o9N1j7jv7R0P06JmT6wFlrj+C1Lf+7v7oSg6BM911uo=" crossorigin="">
   <link rel="alternate" href="/atom.xml" title="辉のblog" type="application/atom+xml">
 </head>
 <body class="journey-map-page">
@@ -27,6 +28,7 @@
     </div>
 
     <div class="map-canvas" id="map-canvas">
+      <div id="amap-container" class="amap-container" aria-label="真实中国地图展示"></div>
       <svg id="journey-map" class="journey-map" viewBox="0 0 100 100" role="img" aria-labelledby="map-title map-desc">
         <title id="map-title">中国地图人生轨迹</title>
         <desc id="map-desc">可缩放拖拽的中国地图，鼠标划过已记录城市会显示时间和事件。</desc>
@@ -66,6 +68,8 @@
     <div class="map-tooltip" id="map-tooltip" role="status" aria-live="polite"></div>
   </main>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-o9N1j7jv7R0P06JmT6wFlrj+C1Lf+7v7oSg6BM911uo=" crossorigin=""></script>
+  <script src="https://webapi.amap.com/maps?v=2.0&key=8264fbd6bb0c22bc33704fd2fd215543&callback=initAMap" async defer></script>
   <script src="/js/journey.js"></script>
 </body>
 </html>
