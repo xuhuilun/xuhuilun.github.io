@@ -16,6 +16,14 @@ export default function HomePage() {
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">
           基于 Transformer、LoRA、RLHF、DPO、MLSys 的学习笔记与技术总结。支持 Markdown 与数学公式，适合长期构建 AI 第二大脑。
         </p>
+        <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-center">
+          <Link href="/search" className="rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
+            立即全文搜索
+          </Link>
+          <Link href="/blog" className="rounded-full border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">
+            查看最新文章
+          </Link>
+        </div>
       </section>
 
       <section className="grid gap-8 lg:grid-cols-3">
