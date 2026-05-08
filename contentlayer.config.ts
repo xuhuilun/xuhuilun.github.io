@@ -6,33 +6,47 @@ import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 
-export const Blog = defineDocumentType(() => ({
-  name: 'Blog',
-  filePathPattern: 'blog/**/*.mdx',
-  contentType: 'mdx',
-  fields: {
-    title: { type: 'string', required: true },
-    description: { type: 'string', required: true },
-    date: { type: 'date', required: true },
-    tags: { type: 'list', of: { type: 'string' }, required: true },
-    series: { type: 'string', required: false },
-    draft: { type: 'boolean', required: false, default: false },
-  },
-  computedFields: {
-    slug: {
-      type: 'string',
-      resolve: (doc) => doc._raw.flattenedPath.replace(/^blog\//, ''),
+const defaultFields = {
+  title: { type: 'string', required: true },
+  description: { type: 'string', required: true },
+  date: { type: 'date', required: true },
+  tags: { type: 'list', of: { type: 'string' }, required: true },
+  draft: { type: 'boolean', required: false, default: false },
+};
+
+const contentTypeOptions = {
+  contentType: 'mdx' as const,
+};
+
+const createDocumentType = (name: string, filePathPattern: string, urlPrefix: string) =>
+  defineDocumentType(() => ({
+    name,
+    filePathPattern,
+    contentType: 'mdx',
+    fields: {
+      ...defaultFields,
+      series: { type: 'string', required: false },
     },
-    url: {
-      type: 'string',
-      resolve: (doc) => `/blog/${doc._raw.flattenedPath.replace(/^blog\//, '')}`,
+    computedFields: {
+      slug: {
+        type: 'string',
+        resolve: (doc) => doc._raw.flattenedPath.replace(new RegExp(`^${urlPrefix}\/`), ''),
+      },
+      url: {
+        type: 'string',
+        resolve: (doc) => `/${urlPrefix}/${doc._raw.flattenedPath.replace(new RegExp(`^${urlPrefix}\/`), '')}`,
+      },
     },
-  },
-}));
+  }));
+
+export const Blog = createDocumentType('Blog', 'blog/**/*.mdx', 'blog');
+export const Note = createDocumentType('Note', 'notes/**/*.mdx', 'notes');
+export const Paper = createDocumentType('Paper', 'papers/**/*.mdx', 'papers');
+export const Experiment = createDocumentType('Experiment', 'experiments/**/*.mdx', 'experiments');
 
 export default makeSource({
   contentDirPath: 'content',
-  documentTypes: [Blog],
+  documentTypes: [Blog, Note, Paper, Experiment],
   mdx: {
     remarkPlugins: [remarkGfm, remarkMath],
     rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings, rehypeKatex, rehypeHighlight],

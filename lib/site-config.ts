@@ -11,6 +11,8 @@ export const siteConfig = {
 export const navigation = [
   { title: '首页', href: '/' },
   { title: '博客', href: '/blog' },
+  { title: '笔记', href: '/notes' },
+  { title: '论文', href: '/papers' },
   { title: '标签', href: '/tags' },
   { title: '关于', href: '/about' },
 ];
