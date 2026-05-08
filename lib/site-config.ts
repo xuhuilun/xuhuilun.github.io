@@ -13,6 +13,7 @@ export const navigation = [
   { title: '博客', href: '/blog' },
   { title: '笔记', href: '/notes' },
   { title: '论文', href: '/papers' },
+  { title: '搜索', href: '/search' },
   { title: '标签', href: '/tags' },
   { title: '关于', href: '/about' },
 ];
