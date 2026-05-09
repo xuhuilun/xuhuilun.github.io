@@ -110,6 +110,12 @@ a { color: inherit; text-decoration: none; }
   justify-content: space-between;
   gap: 28px;
 }
+ .nav-center {
+   flex: 1 1 auto;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
 .brand {
   flex: 0 0 auto;
   display: inline-flex;

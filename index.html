@@ -27,13 +27,13 @@
           <path d="M8 16V10H10L12 14L14 10H16V16" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </a>
+      <div class="nav-center">
+        <form class="search-bar" onsubmit="handleSearch(event)">
+          <input type="text" id="search-input" class="search-bar-input" placeholder="搜索文章、笔记、论文..." />
+        </form>
+      </div>
       <div class="nav-links"><a class="active" href="/">首页</a><a href="/archives/">归档</a><a href="/tags/">标签</a><a href="/about/">关于</a><a href="/journey/">人生轨迹</a><a href="/links/">友链</a></div>
     </nav>
-    <div class="search-bar-container">
-      <form class="search-bar" onsubmit="handleSearch(event)">
-        <input type="text" id="search-input" class="search-bar-input" placeholder="搜索文章、笔记、论文..." />
-      </form>
-    </div>
   </header>
   <header class="site-header home-header">
     <section class="hero home-hero">
@@ -41,9 +41,7 @@
         <p>Tech Notes</p>
         <h1>记录技术学习，也记录问题被想清楚的过程。</h1>
         <span>这里会放 AI、工程实践和长期值得回看的技术文章。先从 Transformer 论文开始。</span>
-        <form class="hero-search-form" onsubmit="handleSearch(event)">
-          <input type="text" id="hero-search-input" class="hero-search-input" placeholder="搜索文章、笔记、论文..." />
-        </form>
+        <!-- hero search removed to keep single nav search -->
         <div class="hero-actions">
           <a class="primary-action" href="/2026/transformer-paper-for-beginners/">阅读最新文章</a>
           <a class="secondary-action" href="/archives/">查看归档</a>
