@@ -20,13 +20,11 @@
       padding: 58px 0;
     }
     .search-page-form {
-      display: flex;
-      gap: 10px;
       margin-bottom: 40px;
       max-width: 600px;
     }
     .search-page-input {
-      flex: 1;
+      width: 100%;
       min-height: 44px;
       border: 1px solid var(--line);
       border-radius: 999px;
@@ -43,23 +41,6 @@
       outline: none;
       border-color: var(--blue);
       box-shadow: 0 0 0 3px rgba(0, 82, 217, 0.1);
-    }
-    .search-page-button {
-      min-height: 44px;
-      border: none;
-      border-radius: 999px;
-      padding: 10px 24px;
-      background: var(--blue);
-      color: #fff;
-      font-weight: 800;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: background 0.18s ease, box-shadow 0.18s ease;
-      box-shadow: 0 8px 20px rgba(0, 82, 217, 0.2);
-    }
-    .search-page-button:hover {
-      background: var(--blue-strong);
-      box-shadow: 0 12px 28px rgba(0, 82, 217, 0.3);
     }
     .search-results {
       display: grid;
@@ -153,13 +134,17 @@
       </a>
       <div class="nav-links"><a href="/">首页</a><a href="/archives/">归档</a><a href="/tags/">标签</a><a href="/about/">关于</a><a href="/journey/">人生轨迹</a><a href="/links/">友链</a></div>
     </nav>
+    <div class="search-bar-container">
+      <form class="search-bar" onsubmit="handleSearchSubmitHeader(event)">
+        <input type="text" id="search-input-header" class="search-bar-input" placeholder="搜索文章、笔记、论文..." />
+      </form>
+    </div>
   </header>
   <main class="content search-page">
     <div class="search-container">
       <h1 style="margin: 0 0 32px; font-size: 2.5rem;">搜索</h1>
       <form class="search-page-form" onsubmit="handleSearchSubmit(event)">
         <input type="text" id="search-keywords" class="search-page-input" placeholder="搜索文章、笔记、论文..." />
-        <button type="submit" class="search-page-button">搜索</button>
       </form>
       <div id="search-results" class="search-results"></div>
       <div id="search-no-results" class="no-results" style="display: none;">
@@ -261,6 +246,15 @@
     function handleSearchSubmit(event) {
       event.preventDefault();
       const query = document.getElementById('search-keywords').value;
+      const params = new URLSearchParams(window.location.search);
+      params.set('keywords', query);
+      window.history.replaceState({}, '', `?${params.toString()}`);
+      performSearch(query);
+    }
+
+    function handleSearchSubmitHeader(event) {
+      event.preventDefault();
+      const query = document.getElementById('search-input-header').value;
       const params = new URLSearchParams(window.location.search);
       params.set('keywords', query);
       window.history.replaceState({}, '', `?${params.toString()}`);

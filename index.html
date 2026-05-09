@@ -32,7 +32,6 @@
     <div class="search-bar-container">
       <form class="search-bar" onsubmit="handleSearch(event)">
         <input type="text" id="search-input" class="search-bar-input" placeholder="搜索文章、笔记、论文..." />
-        <button type="submit" class="search-bar-button">搜索</button>
       </form>
     </div>
   </header>
@@ -42,6 +41,9 @@
         <p>Tech Notes</p>
         <h1>记录技术学习，也记录问题被想清楚的过程。</h1>
         <span>这里会放 AI、工程实践和长期值得回看的技术文章。先从 Transformer 论文开始。</span>
+        <form class="hero-search-form" onsubmit="handleSearch(event)">
+          <input type="text" id="hero-search-input" class="hero-search-input" placeholder="搜索文章、笔记、论文..." />
+        </form>
         <div class="hero-actions">
           <a class="primary-action" href="/2026/transformer-paper-for-beginners/">阅读最新文章</a>
           <a class="secondary-action" href="/archives/">查看归档</a>
