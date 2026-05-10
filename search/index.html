@@ -128,16 +128,14 @@
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <nav class="nav" aria-label="主导航">
-      <div class="nav-links"><a href="/">首页</a><a href="/archives/">归档</a><a href="/tags/">标签</a><a href="/about/">关于</a><a href="/journey/">人生轨迹</a><a href="/links/">友链</a></div>
-    </nav>
-    <div class="search-bar-container">
-      <form class="search-bar" onsubmit="handleSearchSubmitHeader(event)">
-        <input type="text" id="search-input-header" class="search-bar-input" placeholder="搜索文章、笔记、论文..." />
-      </form>
-    </div>
-  </header>
+  <div id="site-header-placeholder"></div>
+  <script src="/js/include-header.js"></script>
+  <div class="search-bar-container">
+    <!-- header search form will be injected by components/header.html -->
+    <form class="search-bar" onsubmit="handleSearchSubmitHeader(event)">
+      <input type="text" id="search-input-header" class="search-bar-input" placeholder="搜索文章、笔记、论文..." />
+    </form>
+  </div>
   <main class="content search-page">
     <div class="search-container">
       <h1 style="margin: 0 0 32px; font-size: 2.5rem;">搜索</h1>
