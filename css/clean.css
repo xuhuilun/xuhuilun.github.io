@@ -572,6 +572,16 @@ a { color: inherit; text-decoration: none; }
   color: var(--muted);
   font-size: 0.92rem;
 }
+
+/* Brand logo image styling */
+.brand-logo {
+  width: 28px;
+  height: 28px;
+  display: block;
+  border-radius: 4px;
+  object-fit: contain;
+}
+
 @media (max-width: 960px) {
   .home-hero,
   .article-layout,
