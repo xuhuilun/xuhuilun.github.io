@@ -24,6 +24,11 @@ body.journey-map-page {
   backdrop-filter: blur(16px);
 }
 
+/* Ensure nav links are right-aligned even when left brand is removed */
+.journey-nav .nav-links {
+  margin-left: auto !important;
+}
+
 .journey-map-stage {
   position: fixed;
   inset: 72px 0 0;
