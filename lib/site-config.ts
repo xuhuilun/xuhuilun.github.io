@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: '辉のblog',
+  name: 'LLM论文精读',
   description: '面向 AI / CS 技术学习者的论文笔记与知识库。',
   url: 'https://xuhuilun.github.io',
   author: 'Lun XuHui',
