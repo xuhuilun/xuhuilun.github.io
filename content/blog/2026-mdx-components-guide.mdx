@@ -1,0 +1,172 @@
+---
+title: "MDX 高级组件使用指南"
+description: "学习如何使用新增的 MDX 组件让你的文章更美观、更专业"
+date: "2026-05-13"
+tags: ["MDX", "React", "Tutorial"]
+---
+
+# MDX 高级组件使用指南
+
+在这篇文章中，我们展示如何使用新增的高级组件来改进你的 MDX 内容。
+
+## 1. Callout 提示框
+
+<Callout type="info" title="信息提示">
+这是一个信息提示框。用于提供有用的背景信息或说明。
+</Callout>
+
+<Callout type="warning" title="警告">
+Transformer 的注意力复杂度是 O(n²)，这在处理长序列时可能成为瓶颈。
+</Callout>
+
+<Callout type="danger" title="危险">
+不要在生产环境中使用未经测试的代码！
+</Callout>
+
+<Callout type="success" title="成功">
+你已经成功配置了新的 MDX 系统！
+</Callout>
+
+<Callout type="tip">
+**提示**: 使用 `Callout` 组件可以让重要信息更显眼。
+</Callout>
+
+## 2. Card 卡片
+
+<Card 
+  title="CLIP: Contrastive Language-Image Pre-training"
+  description="一个革命性的多模态模型">
+OpenAI 的 CLIP 模型通过对比学习实现了文本和图像的联合编码。这个模型开启了许多零样本学习的应用。
+
+关键特性：
+- 文本-图像对齐
+- 零样本分类
+- 鲁棒的表示学习
+</Card>
+
+## 3. Tabs 选项卡
+
+<Tabs defaultIndex={0}>
+  <Tab label="Python">
+```python
+import torch
+from transformers import AutoTokenizer, AutoModel
+
+model = AutoModel.from_pretrained("clip-model")
+```
+  </Tab>
+  <Tab label="JavaScript">
+```javascript
+import { loadModel } from '@tensorflow/tfjs';
+
+const model = await loadModel('path/to/model');
+```
+  </Tab>
+  <Tab label="JAX">
+```python
+import jax
+import flax.linen as nn
+
+class ClipModel(nn.Module):
+  @nn.compact
+  def __call__(self, x):
+    return x
+```
+  </Tab>
+</Tabs>
+
+## 4. Steps 步骤
+
+<Steps>
+  <Step title="安装依赖">
+```bash
+npm install next react contentlayer
+```
+  </Step>
+  <Step title="配置 contentlayer">
+在项目根目录创建 `contentlayer.config.ts`
+  </Step>
+  <Step title="创建内容">
+在 `content/blog` 文件夹中添加 `.mdx` 文件
+  </Step>
+  <Step title="构建和部署">
+```bash
+npm run build
+npm start
+```
+  </Step>
+</Steps>
+
+## 5. 代码块语法高亮
+
+```python {3,5} filename="transformer.py"
+import numpy as np
+
+def softmax(x):
+    """Compute softmax values"""
+    exp_x = np.exp(x - np.max(x))
+    return exp_x / exp_x.sum(axis=0)
+
+def attention(Q, K, V):
+    scores = np.dot(Q, K.T) / np.sqrt(K.shape[1])
+    weights = softmax(scores)
+    return np.dot(weights, V)
+```
+
+## 6. 数学公式
+
+Transformer 中的注意力机制定义为：
+
+$$
+\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+$$
+
+多头注意力则是：
+
+$$
+\text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, \ldots, \text{head}_h)W^O
+$$
+
+其中每个头是：
+
+$$
+\text{head}_i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)
+$$
+
+## 7. 列表和引用块
+
+### 有序列表
+1. 首先，理解注意力机制的基本原理
+2. 其次，学习多头注意力的实现
+3. 最后，应用到你自己的项目中
+
+### 无序列表
+- **自注意力**: 模型可以关注同一序列中的其他位置
+- **交叉注意力**: 模型可以关注不同序列（如编码器输出）
+- **掩蔽注意力**: 防止模型看到未来的 token
+
+### 块引用
+
+> 注意力机制是现代深度学习的基础。
+> 
+> — 所有机器学习工程师
+
+## 8. 表格
+
+| 特性 | BERT | GPT | T5 | LLaMA |
+|-----|------|-----|-------|--------|
+| 模型大小 | 340M | 1.5B | 220M | 7B-70B |
+| 预训练数据 | 维基百科 + Books | CommonCrawl | C4 | CommonCrawl |
+| 任务类型 | 双向 | 自回归 | 序列转录 | 自回归 |
+| 开源 | ✅ | ❌ | ✅ | ✅ |
+
+## 最佳实践
+
+<Card title="💡 设计原则">
+- 保持信息密度适中
+- 充分利用留白
+- 保持设计一致性
+- 建立清晰的层级关系
+</Card>
+
+现在你已经掌握了所有新的 MDX 组件！开始改进你的文章吧。

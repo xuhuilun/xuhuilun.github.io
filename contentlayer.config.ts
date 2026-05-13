@@ -7,46 +7,97 @@ import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 
 const defaultFields = {
-  title: { type: 'string', required: true },
-  description: { type: 'string', required: true },
-  date: { type: 'date', required: true },
-  tags: { type: 'list', of: { type: 'string' }, required: true },
-  draft: { type: 'boolean', required: false, default: false },
+  title: { type: 'string' as const, required: true },
+  description: { type: 'string' as const, required: true },
+  date: { type: 'date' as const, required: true },
+  tags: { type: 'list' as const, of: { type: 'string' as const }, required: true },
+  draft: { type: 'boolean' as const, required: false, default: false },
 };
 
-const contentTypeOptions = {
+export const Blog = defineDocumentType(() => ({
+  name: 'Blog',
+  filePathPattern: 'blog/**/*.mdx',
   contentType: 'mdx' as const,
-};
-
-const createDocumentType = (name: string, filePathPattern: string, urlPrefix: string) =>
-  defineDocumentType(() => ({
-    name,
-    filePathPattern,
-    contentType: 'mdx',
-    fields: {
-      ...defaultFields,
-      series: { type: 'string', required: false },
+  fields: {
+    ...defaultFields,
+    series: { type: 'string' as const, required: false },
+  },
+  computedFields: {
+    slug: {
+      type: 'string' as const,
+      resolve: (doc) => doc._raw.flattenedPath.replace(/^blog\//, ''),
     },
-    computedFields: {
-      slug: {
-        type: 'string',
-        resolve: (doc) => doc._raw.flattenedPath.replace(new RegExp(`^${urlPrefix}\/`), ''),
-      },
-      url: {
-        type: 'string',
-        resolve: (doc) => `/${urlPrefix}/${doc._raw.flattenedPath.replace(new RegExp(`^${urlPrefix}\/`), '')}`,
-      },
+    url: {
+      type: 'string' as const,
+      resolve: (doc) => `/blog/${doc._raw.flattenedPath.replace(/^blog\//, '')}`,
     },
-  }));
+  },
+}));
 
-export const Blog = createDocumentType('Blog', 'blog/**/*.mdx', 'blog');
-export const Note = createDocumentType('Note', 'notes/**/*.mdx', 'notes');
-export const Paper = createDocumentType('Paper', 'papers/**/*.mdx', 'papers');
-export const Experiment = createDocumentType('Experiment', 'experiments/**/*.mdx', 'experiments');
+export const Note = defineDocumentType(() => ({
+  name: 'Note',
+  filePathPattern: 'notes/**/*.mdx',
+  contentType: 'mdx' as const,
+  fields: {
+    ...defaultFields,
+    series: { type: 'string' as const, required: false },
+  },
+  computedFields: {
+    slug: {
+      type: 'string' as const,
+      resolve: (doc) => doc._raw.flattenedPath.replace(/^notes\//, ''),
+    },
+    url: {
+      type: 'string' as const,
+      resolve: (doc) => `/notes/${doc._raw.flattenedPath.replace(/^notes\//, '')}`,
+    },
+  },
+}));
+
+export const Paper = defineDocumentType(() => ({
+  name: 'Paper',
+  filePathPattern: 'papers/**/*.mdx',
+  contentType: 'mdx' as const,
+  fields: {
+    ...defaultFields,
+    series: { type: 'string' as const, required: false },
+  },
+  computedFields: {
+    slug: {
+      type: 'string' as const,
+      resolve: (doc) => doc._raw.flattenedPath.replace(/^papers\//, ''),
+    },
+    url: {
+      type: 'string' as const,
+      resolve: (doc) => `/papers/${doc._raw.flattenedPath.replace(/^papers\//, '')}`,
+    },
+  },
+}));
+
+export const Experiment = defineDocumentType(() => ({
+  name: 'Experiment',
+  filePathPattern: 'experiments/**/*.mdx',
+  contentType: 'mdx' as const,
+  fields: {
+    ...defaultFields,
+    series: { type: 'string' as const, required: false },
+  },
+  computedFields: {
+    slug: {
+      type: 'string' as const,
+      resolve: (doc) => doc._raw.flattenedPath.replace(/^experiments\//, ''),
+    },
+    url: {
+      type: 'string' as const,
+      resolve: (doc) => `/experiments/${doc._raw.flattenedPath.replace(/^experiments\//, '')}`,
+    },
+  },
+}));
 
 export default makeSource({
   contentDirPath: 'content',
   documentTypes: [Blog, Note, Paper, Experiment],
+  disableImportAliasWarning: true,
   mdx: {
     remarkPlugins: [remarkGfm, remarkMath],
     rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings, rehypeKatex, rehypeHighlight],

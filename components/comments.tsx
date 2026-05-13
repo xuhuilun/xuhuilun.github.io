@@ -1,11 +1,11 @@
 'use client';
 
-import { Giscus } from '@giscus/react';
+import Giscus from '@giscus/react';
 
 export function Comments() {
-  const repo = process.env.NEXT_PUBLIC_GISCUS_REPO;
+  const repo = process.env.NEXT_PUBLIC_GISCUS_REPO as `${string}/${string}` | undefined;
   const repoId = process.env.NEXT_PUBLIC_GISCUS_REPOSITORY_ID;
-  const category = process.env.NEXT_PUBLIC_GISCUS_CATEGORY;
+  const category = process.env.NEXT_PUBLIC_GISCUS_CATEGORY as 'announcements' | 'ideas' | 'general' | 'q-and-a' | 'show-and-tell' | undefined;
   const categoryId = process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID;
 
   if (!repo || !repoId || !category || !categoryId) {
@@ -27,7 +27,6 @@ export function Comments() {
         reactionsEnabled="1"
         emitMetadata="0"
         theme="light"
-        darkTheme="transparent_dark"
         loading="lazy"
       />
     </div>

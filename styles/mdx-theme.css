@@ -1,47 +1,29 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @layer base {
+  /* macOS 系统字体栈 - 优先使用 San Francisco */
+  body {
+    @apply font-sans;
+  }
+
+  code,
+  pre {
+    @apply font-mono;
+  }
+
+  /* 深色模式默认 - 适合 AI/论文博客 */
   :root {
     color-scheme: light;
-    color: #0f172a;
-    background-color: #f8fafc;
   }
 
-  .dark {
-    color-scheme: dark;
-    color: #f8fafc;
-    background-color: #0f172a;
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+    }
   }
 
+  /* 平滑滚动 */
   html {
     scroll-behavior: smooth;
     @apply scroll-pt-24;
-  }
-
-  body {
-    min-height: 100vh;
-    background: rgb(248 250 252);
-    color: rgb(15 23 42);
-    /* macOS 风格字体栈 - San Francisco 优先 */
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  body.dark {
-    background: rgb(15 23 42);
-    color: rgb(241 245 249);
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  code {
-    font-family: 'SF Mono', Monaco, Inconsolata, 'Fira Code', 'Courier New', monospace;
   }
 
   /* 链接选中态 */
@@ -132,9 +114,16 @@
   .container-wide {
     @apply max-w-6xl mx-auto;
   }
+}
 
-  .prose-img {
-    @apply border-radius: 0.75rem;
+/* 深色模式文本优化 */
+@media (prefers-color-scheme: dark) {
+  body {
+    @apply text-gray-100 bg-slate-950;
+  }
+
+  a {
+    @apply transition-colors;
   }
 }
 
