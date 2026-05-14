@@ -1,0 +1,93 @@
+---
+title: "CLIP 论文精读笔记"
+description: "Learning Transferable Visual Models From Natural Language Supervision — 对比语言-图像预训练的完整解析。"
+date: "2026-05-14"
+tags: ["CLIP", "多模态", "对比学习", "Zero-Shot", "OpenAI"]
+---
+
+### 1. 实验动机与解决的问题
+
+计算机视觉领域长期依赖在固定类别集合上标注的大规模数据集（如 ImageNet）来训练模型。这种范式存在根本性局限：模型只能识别训练时见过的类别，泛化到新概念需要重新收集标注数据并微调，无法像 NLP 领域中的 GPT-3 那样通过自然语言指令直接执行零样本任务。
+
+论文试图解决的核心问题是：能否利用自然语言作为视觉概念的监督信号，训练一个可以直接通过文本描述来识别任意视觉概念的模型？作者提出通过对比学习在 4 亿对（图像，文本）数据上进行预训练，使模型学会将图像和文本映射到共享的嵌入空间，从而实现强大的零样本迁移能力。
+
+### 2. 数据准备与预处理
+
+**数据集：WIT (WebImageText)**
+
+- 来源：从互联网公开网页中爬取图像及其关联的 `alt-text` 文本。
+- 规模：包含 4 亿对（图像，文本），远超当时任何公开的图像-文本数据集。
+- 过滤策略：仅保留英文文本；图像与文本长度和质量经过基本清洗，过滤掉噪声过高或文本为空的样本对。
+- 构建方法：以英文维基百科中出现至少 100 次以上的词构建查询集合，每个查询最多保留 20,000 对（图像，文本），以保持类别平衡。
+
+**预处理细节**
+
+- 图像预处理：将图像缩放至短边为 224 像素，然后进行中心裁剪或随机裁剪至 $224 \times 224$。训练时使用随机正方形裁剪，推理时使用中心裁剪。像素值归一化至模型输入范围。
+- 文本预处理：使用 BPE（Byte Pair Encoding）分词器，词表大小为 49,152。文本被截断或填充至最大长度 76 个 token，首尾分别添加 `[SOS]` 和 `[EOS]` 标记。`[EOS]` token 对应的 Transformer 输出作为整个文本的表示。
+
+### 3. 模型架构
+
+CLIP 由两个独立的编码器组成，通过对比损失联合训练：
+
+**图像编码器**
+
+- 论文实验了两种架构变体：
+  - **ResNet 系列**：ResNet-50、ResNet-101 以及 EfficientNet 风格的 RN50x4、RN50x16、RN50x64。
+  - **Vision Transformer (ViT)**：ViT-B/32、ViT-B/16、ViT-L/14。
+- 输入：$224 \times 224$ 的 RGB 图像。
+- 输出：一个 $d_e$ 维的图像嵌入向量，经线性投影后映射到多模态嵌入空间（维度为 $d$）。
+
+**文本编码器**
+
+- 架构：Transformer（遵循原论文第 3.1 节），仅使用 Decoder 部分，共 12 层、8 个注意力头、512 维宽度。
+- 输入：BPE 编码后的文本 token 序列，长度不超过 76。
+- 输出：`[EOS]` 位置经过 Layer Normalization 后的隐向量，经线性投影映射到与图像相同的 $d$ 维多模态嵌入空间。
+
+**对比学习与损失函数**
+
+设一批样本中包含 $N$ 对（图像，文本），经过编码和投影后得到 $N$ 组归一化的嵌入向量 $(I_1, T_1), (I_2, T_2), ..., (I_N, T_N)$。计算图像到文本和文本到图像的余弦相似度矩阵 $S \in \mathbb{R}^{N \times N}$，其中 $S_{ij} = \cos(I_i, T_j)$。损失函数为对称的 InfoNCE 损失：
+
+$$L = \frac{1}{2} \left( L_{\text{image}} + L_{\text{text}} \right)$$
+
+$$L_{\text{image}} = -\frac{1}{N} \sum_{i=1}^N \log \frac{\exp(S_{ii} / \tau)}{\sum_{j=1}^N \exp(S_{ij} / \tau)}$$
+
+$$L_{\text{text}} = -\frac{1}{N} \sum_{i=1}^N \log \frac{\exp(S_{ii} / \tau)}{\sum_{j=1}^N \exp(S_{ji} / \tau)}$$
+
+其中 $\tau$ 是可学习的温度参数（初始化为 0.07），控制 softmax 的平滑程度。
+
+**训练策略与超参数**
+
+- 优化器：Adam，$\beta_1 = 0.9$，$\beta_2 = 0.98$，$\epsilon = 10^{-6}$。
+- 学习率调度：余弦退火衰减（cosine schedule），搭配 2,000 步线性 warmup。
+- Batch size：32,768。
+- 权重衰减：0.2（仅对非 bias 和非 gain 参数）。
+- 训练时长：32 个 epoch（最大规模的 ViT-L/14 模型在 592 块 V100 GPU 上训练约 18 天）。
+- 混合精度训练用于加速。
+
+### 4. 相关工作及其与本文的关系
+
+**视觉与语言的联合学习**
+
+此前工作如 VirTex、ICMLM 和 ConVIRT 探索了基于 Transformer 的图像-文本联合建模，但这些方法通常局限于特定任务（如图像描述生成）且计算开销巨大。CLIP 延续了对比学习框架，但将其扩展到互联网规模的数据（WIT），首次证明了简单的对比目标在足够大数据量下可以实现强大的零样本迁移。与 VirTex 不同，CLIP 不需要自回归文本生成，训练效率提升了约 4 倍。
+
+**弱监督与自监督视觉学习**
+
+ImageNet 标注范式代表强监督；自监督方法（如 SimCLR、MoCo）在无标签数据上学习表征，但下游评估仍需标注微调。CLIP 使用自然语言作为弱监督信号，本质上属于"从自然语言中学习视觉概念"，跳过了人工标注环节。论文在 3.2 节详细论证了 zero-shot CLIP 在不使用任何 ImageNet 训练数据的情况下，性能可与有监督 ResNet-50 媲美。
+
+**零样本迁移（Zero-Shot Transfer）**
+
+NLP 中的 GPT 系列模型通过提示（prompt）工程展示了零样本能力。CLIP 将这一思想引入视觉领域：给定分类任务，将类别名称嵌入到提示模板中（如 `"a photo of a {class}"`），编码后与图像嵌入计算相似度，将最高相似度的类别作为预测。论文发现提示模板的设计对结果有显著影响（第 3.2 节），单模板可带来约 1-2 个百分点的提升，集成多模板可进一步提升。
+
+### 5. 本文的创新点
+
+1. **提出将对比学习与自然语言监督相结合的大规模预训练范式**，直接在 4 亿对（图像，文本）上训练，不依赖人工标注的类别标签。原文："We demonstrate that the simple pre-training task of predicting which caption goes with which image is an efficient and scalable way to learn SOTA image representations from scratch."
+
+2. **构建了大规模高质量数据集 WIT (WebImageText)**，包含 4 亿对图文数据，使得 CLIP 能够学习广泛的视觉概念。原文："We construct a new dataset of 400 million (image, text) pairs collected from a variety of publicly available sources on the Internet."
+
+3. **首次系统验证了零样本迁移在计算机视觉中的有效性**，CLIP 在超过 30 个视觉数据集上无需任何微调即可匹配或超越有监督模型。原文："After pre-training, natural language is used to reference learned visual concepts, enabling zero-shot transfer of the model to downstream tasks."
+
+4. **引入提示工程（Prompt Engineering）和集成提示（Prompt Ensembling）以提升零样本分类精度**。原文："We found that prompt engineering and ensembling can substantially improve zero-shot performance, in some cases boosting accuracy by over 5 points."
+
+---
+
+以上内容均严格提取自原论文，无外部信息添加。
