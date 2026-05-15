@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f8fb">
+  <meta name="description" content="一篇从简入深讲解 Transformer RoPE 旋转位置编码的技术博客，覆盖位置编码动机、二维旋转、复数视角、相对位置本质、外推能力和工程实现细节。">
+  <meta name="author" content="Lun XuHui">
+  <title>从绝对位置到旋转空间：RoPE 位置编码的原理、本质与实践 - 辉的blog</title>
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/clean.css">
+  <link rel="alternate" href="/atom.xml" title="辉的blog" type="application/atom+xml">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="主导航">
+      <a class="brand" href="/">辉的blog</a>
+      <div class="nav-links"><a href="/">首页</a><a href="/archives/">归档</a><a href="/categories/">分类</a><a href="/tags/">标签</a><a href="/about/">关于</a><a href="/journey/">人生轨迹</a><a href="/links/">友链</a></div>
+    </nav>
+    <section class="hero article-hero">
+      <p>AI · Transformer · 2026-05-03</p>
+      <h1>从绝对位置到旋转空间：RoPE 位置编码的原理、本质与实践</h1>
+      <span>RoPE 不只是“把向量旋转一下”。它真正优雅的地方，是把 token 的绝对位置注入到 Q/K 中，却让注意力分数天然只依赖相对距离。</span>
+    </section>
+  </header>
+
+  <main class="content article-layout">
+    <aside class="article-aside" aria-label="文章目录">
+      <strong>文章目录</strong>
+      <a href="#why-position">为什么需要位置</a>
+      <a href="#old-ways">传统位置编码</a>
+      <a href="#rope-intuition">RoPE 的直觉</a>
+      <a href="#rotation">二维旋转</a>
+      <a href="#formula">RoPE 公式</a>
+      <a href="#relative">相对位置本质</a>
+      <a href="#complex">复数视角</a>
+      <a href="#attention">它怎样影响注意力</a>
+      <a href="#engineering">工程实现</a>
+      <a href="#extrapolation">长度外推</a>
+      <a href="#summary">总结</a>
+    </aside>
+
+    <article class="article-body">
+      <p>Transformer 的注意力机制很强，但它有一个天然缺陷：如果只看 Self-Attention 本身，它并不知道 token 的顺序。</p>
+      <p>句子“我喜欢你”和“你喜欢我”包含几乎相同的词，但意思完全不同。区别来自位置。位置编码要解决的，就是把“第几个 token”“两个 token 离多远”“前后顺序是什么”这类信息交给模型。</p>
+      <p>RoPE，全称 Rotary Position Embedding，中文常译作旋转位置编码。它最早由 RoFormer 系统提出，后来被 LLaMA、Qwen、ChatGLM 等大量现代大语言模型采用。它的核心思想非常漂亮：不要把位置向量简单加到 token embedding 上，而是在注意力的 Q 和 K 上按位置做旋转。</p>
+
+      <h2 id="why-position">1. 为什么 Transformer 必须额外知道位置？</h2>
+      <p>标准注意力的核心公式是：</p>
+      <pre><code>Attention(Q, K, V) = softmax(QK^T / sqrt(d_k))V</code></pre>
+      <p>这里的 <code>QK^T</code> 只是在比较 Query 和 Key 的内容相似度。如果你把输入序列整体打乱，而又不给任何位置标记，注意力机制本身无法知道“谁在前，谁在后”。</p>
+      <p>更严格地说，Self-Attention 对输入 token 的排列具有某种置换等变性：输入顺序换了，输出也只是跟着换位置，而模型内部并没有天然的时间轴或空间轴。因此 Transformer 需要额外的位置机制。</p>
+      <p>位置机制通常要回答三个问题：</p>
+      <ul>
+        <li>绝对位置：当前 token 是第 0 个、第 10 个，还是第 1000 个？</li>
+        <li>相对位置：当前 token 和另一个 token 相隔多远？</li>
+        <li>方向信息：另一个 token 在当前 token 的左边还是右边？</li>
+      </ul>
+      <p>RoPE 最迷人的地方在于：它用绝对位置去旋转 Q/K，但最终进入注意力分数时，天然表现成相对位置。</p>
+
+      <h2 id="old-ways">2. 先看传统位置编码：加法思路</h2>
+      <p>最经典的 Transformer 使用正弦位置编码：</p>
+      <pre><code>x'_m = x_m + p_m</code></pre>
+      <p>其中 <code>x_m</code> 是第 <code>m</code> 个 token 的语义向量，<code>p_m</code> 是第 <code>m</code> 个位置对应的位置向量。最后模型看到的是“语义 + 位置”的混合表示。</p>
+      <p>这种方式直观、简单，但也有一个问题：位置和语义是直接相加混在一起的。模型后续要自己学会从这个混合向量里分辨哪些维度在表达语义，哪些维度在表达位置关系。</p>
+      <p>后来又出现了可学习绝对位置编码、相对位置偏置、ALiBi 等方法。它们各有优点，但 RoPE 走了一条很有几何味道的路：位置不是一个被加上的“标签”，而是一次发生在表示空间里的“旋转”。</p>
+
+      <h2 id="rope-intuition">3. RoPE 的直觉：把位置变成角度</h2>
+      <p>先抛开高维向量，想象一个二维平面上的箭头。箭头本身有长度和方向。现在我们规定：第 <code>m</code> 个位置，就把这个箭头旋转 <code>m * theta</code> 的角度。</p>
+      <pre><code>位置 0：旋转 0 * theta
+位置 1：旋转 1 * theta
+位置 2：旋转 2 * theta
+位置 m：旋转 m * theta</code></pre>
+      <p>同一个 token 表示，如果出现在不同位置，就会被旋转到不同方向。位置越靠后，累计旋转角度越大。</p>
+      <p>这听起来像是在“编码绝对位置”。但旋转有一个关键性质：两个向量分别旋转 <code>m * theta</code> 和 <code>n * theta</code> 后，它们的内积只和角度差 <code>(m - n) * theta</code> 有关。角度差就是相对距离。</p>
+      <p>这就是 RoPE 的第一层本质：用旋转承载绝对位置，用内积自动消去公共坐标，留下相对位置信息。</p>
+
+      <h2 id="rotation">4. 二维旋转矩阵：RoPE 的最小原型</h2>
+      <p>二维平面中，把向量 <code>[x1, x2]</code> 旋转角度 <code>phi</code>，可以写成矩阵乘法：</p>
+      <pre><code>R(phi) = [ cos(phi)  -sin(phi)
+           sin(phi)   cos(phi) ]
+
+R(phi) [x1, x2]^T =
+[ x1 cos(phi) - x2 sin(phi),
+  x1 sin(phi) + x2 cos(phi) ]</code></pre>
+      <p>RoPE 做的事情，就是把高维向量拆成很多个二维小平面，每两个维度组成一组，然后每一组按自己的频率旋转。</p>
+      <pre><code>[x0, x1] 用频率 theta_0 旋转
+[x2, x3] 用频率 theta_1 旋转
+[x4, x5] 用频率 theta_2 旋转
+...</code></pre>
+      <p>为什么要用不同频率？因为语言里的位置关系有短距离和长距离之分。高频维度对短距离变化更敏感，低频维度可以表达更长周期、更长范围的位置关系。这和原始 Transformer 的 sin/cos 位置编码很像，只是 RoPE 把它从“加法信号”变成了“旋转操作”。</p>
+
+      <h2 id="formula">5. RoPE 的公式：看起来复杂，其实只有三步</h2>
+      <p>设某一层注意力里，第 <code>m</code> 个 token 的 Query 向量是 <code>q_m</code>，Key 向量是 <code>k_m</code>。RoPE 不直接用它们算内积，而是先做位置相关旋转：</p>
+      <pre><code>q'_m = R_m q_m
+k'_n = R_n k_n</code></pre>
+      <p>其中 <code>R_m</code> 表示“位置 <code>m</code> 对应的旋转矩阵”。然后注意力分数变成：</p>
+      <pre><code>score(m, n) = (q'_m)^T k'_n
+            = (R_m q_m)^T (R_n k_n)</code></pre>
+      <p>利用旋转矩阵的性质 <code>R_m^T R_n = R_{n-m}</code>，上式可以变成：</p>
+      <pre><code>score(m, n) = q_m^T R_{n-m} k_n</code></pre>
+      <p>这行公式就是 RoPE 的灵魂。虽然我们给 Q 和 K 注入的是绝对位置 <code>m</code> 和 <code>n</code>，但最终注意力分数里出现的是 <code>n - m</code>，也就是相对位置。</p>
+      <p>再把它翻译成人话：模型在判断“第 m 个 token 要不要关注第 n 个 token”时，不只看二者语义是否匹配，还会自然感知它们相隔多远、方向如何。</p>
+
+      <h2 id="relative">6. RoPE 的本质：注意力内积里的相对位置调制器</h2>
+      <p>很多介绍会说 RoPE 是“旋转位置编码”。这没错，但还不够深。更本质的说法是：</p>
+      <pre><code>RoPE 是一种作用在 Q/K 空间中的相对位置调制机制。</code></pre>
+      <p>它不是给每个 token 贴一个位置标签，也不是在注意力矩阵上额外加一个 bias，而是改变 Q 和 K 的几何关系。注意力分数来自内积，而 RoPE 正是在内积发生之前，把位置差编码进两个向量的夹角里。</p>
+      <p>这有三个重要后果：</p>
+      <ul>
+        <li>位置关系直接参与注意力打分，而不是只混在输入 embedding 中等待后续层学习。</li>
+        <li>相对位置信息天然出现，不需要显式维护一个完整的相对位置表。</li>
+        <li>旋转不改变向量长度，因此它更像改变方向的几何变换，而不是粗暴改变表示强度。</li>
+      </ul>
+      <p>如果用一句话抓住 RoPE：它让“距离”变成 Query 和 Key 之间的相位差。</p>
+
+      <h2 id="complex">7. 复数视角：RoPE 为什么叫 rotary？</h2>
+      <p>二维旋转还有一个更优雅的写法：复数乘法。</p>
+      <p>把两个维度 <code>[x_{2i}, x_{2i+1}]</code> 看成一个复数：</p>
+      <pre><code>z_i = x_{2i} + j * x_{2i+1}</code></pre>
+      <p>旋转角度 <code>m * theta_i</code>，等价于乘上单位复数：</p>
+      <pre><code>z'_i = z_i * exp(j * m * theta_i)</code></pre>
+      <p>这里的 <code>exp(j * alpha)</code> 可以根据欧拉公式写成：</p>
+      <pre><code>exp(j * alpha) = cos(alpha) + j sin(alpha)</code></pre>
+      <p>这说明 RoPE 本质上是在给每一对维度乘上一个位置相关的相位。位置越靠后，相位转得越多。不同维度组使用不同频率，所以整条向量像一组不同转速的指针。</p>
+      <p>这也是 RoPE 能表达丰富位置结构的原因：一个位置不是用单个数字表示，而是用一组跨频率的相位共同表示。短周期捕捉局部差异，长周期保留远距离变化。</p>
+
+      <h2 id="attention">8. RoPE 怎样真正影响注意力？</h2>
+      <p>注意力分数可以理解成“内容匹配”和“位置关系”的耦合结果。没有 RoPE 时，两个 token 是否互相关注，主要取决于 Q 和 K 的内容相似度。加上 RoPE 后，内容相似度会受到相对距离的调制。</p>
+      <p>这并不是说 RoPE 强迫模型只关注附近 token。它更像给模型提供了一把尺子：当两个 token 相距 1、10、100、1000 时，它们在 Q/K 内积中的几何关系不同，模型可以学会哪些距离模式更适合当前任务。</p>
+      <p>例如在自然语言里：</p>
+      <ul>
+        <li>形容词和名词常常距离很近。</li>
+        <li>主语和谓语可能跨过一些修饰成分。</li>
+        <li>长文档里的引用、标题、定义可能隔得很远。</li>
+      </ul>
+      <p>RoPE 不替模型决定这些规则，但它让模型有能力用统一的数学形式感知这些距离。</p>
+
+      <h2 id="engineering">9. 工程实现：为什么只转 Q 和 K，不转 V？</h2>
+      <p>在常见实现里，RoPE 通常只作用于 Query 和 Key，不作用于 Value。原因很直接：位置关系主要影响“该关注谁”，而这个决策发生在注意力分数 <code>QK^T</code> 里。</p>
+      <pre><code>scores = (rope(Q) @ rope(K).T) / sqrt(d_k)
+weights = softmax(scores)
+output = weights @ V</code></pre>
+      <p>Value 负责携带被聚合的信息内容。是否关注某个位置，已经由 Q/K 的旋转后内积决定；V 通常不需要再被旋转。</p>
+      <p>实际代码中，RoPE 往往不会真的构造巨大的旋转矩阵，而是预先计算 <code>cos</code> 和 <code>sin</code>，再对偶数维和奇数维做组合：</p>
+      <pre><code>rotate_half([x0, x1, x2, x3]) = [-x1, x0, -x3, x2]
+
+rope(x, pos) = x * cos(pos) + rotate_half(x) * sin(pos)</code></pre>
+      <p>这就是二维旋转公式的向量化写法。它省内存、速度快，也方便在 GPU 上批量计算。</p>
+      <p>频率通常设置为：</p>
+      <pre><code>theta_i = base^(-2i / d)
+常见 base = 10000</code></pre>
+      <p>其中 <code>d</code> 是每个 attention head 的维度。越靠前的维度组频率越高，越靠后的维度组频率越低。</p>
+
+      <h2 id="extrapolation">10. RoPE 和长度外推：优雅但不是魔法</h2>
+      <p>RoPE 常被认为比可学习绝对位置编码更适合长度外推。原因是它不是为每个位置学习一张固定表，而是通过连续的三角函数计算任意位置的旋转角度。理论上，位置 2048、4096、8192 都可以算出对应的 <code>cos/sin</code>。</p>
+      <p>但要注意：能计算，不代表模型一定会用得好。训练时如果只见过 4K 上下文，直接推到 32K 时，模型可能遇到频率分布、注意力模式和数据分布的偏移。</p>
+      <p>因此工程上出现了很多 RoPE 扩展方法，例如 position interpolation、NTK-aware scaling、YaRN 等。它们的共同目标是调整旋转频率或位置映射，让模型在更长上下文里看到的相位变化不要过度失控。</p>
+      <p>可以这样理解：RoPE 提供了外推的数学接口，但长上下文能力还需要训练数据、缩放策略和注意力实现共同配合。</p>
+
+      <h2 id="compare">11. RoPE 与其他位置编码的区别</h2>
+      <h3>RoPE vs 绝对位置编码</h3>
+      <p>绝对位置编码通常把位置向量加到输入上，强调“我在第几个位置”。RoPE 把位置作为旋转作用到 Q/K 上，最终注意力更容易得到“我和你相隔多远”。</p>
+      <h3>RoPE vs 相对位置偏置</h3>
+      <p>相对位置偏置通常是在 attention score 上加一个和距离有关的 bias。RoPE 则不是加分项，而是直接改变 Q/K 内积的几何结构。前者像在分数表上加修正项，后者像改变打分前的坐标系。</p>
+      <h3>RoPE vs ALiBi</h3>
+      <p>ALiBi 会按距离给注意力分数加入线性惩罚，简单、外推友好。RoPE 更细腻，它用多频旋转表达相对距离；但在超长外推时，也常常需要额外缩放策略。</p>
+
+      <h2 id="pitfalls">12. 常见误区</h2>
+      <h3>误区一：RoPE 编码的是绝对位置</h3>
+      <p>只说一半。RoPE 的输入确实使用绝对位置 <code>m</code> 和 <code>n</code> 来旋转 Q/K，但注意力内积里自然浮现的是 <code>n - m</code>。所以它是一种通过绝对旋转实现相对位置建模的方法。</p>
+      <h3>误区二：RoPE 会改变 token 的语义内容</h3>
+      <p>RoPE 主要改变 Q/K 的方向关系，不改变向量模长。它不是重新写 token 的语义，而是让语义匹配在不同相对位置下呈现不同分数。</p>
+      <h3>误区三：用了 RoPE 就天然支持无限上下文</h3>
+      <p>不是。RoPE 可以为任意位置生成旋转角度，但模型是否能稳定理解超出训练长度的上下文，还取决于训练长度、频率缩放、数据分布和推理实现。</p>
+
+      <h2 id="summary">13. 一句话总结</h2>
+      <p>RoPE 的表面形式是旋转，数学核心是相位，建模本质是把相对位置注入注意力内积。</p>
+      <pre><code>token 语义 -> 生成 Q/K
+位置 m/n -> 旋转 Q/K
+旋转后的内积 -> 自动出现相对距离 n - m
+注意力权重 -> 同时感知内容匹配和位置关系</code></pre>
+      <p>如果只记住一句话，可以记这句：RoPE 让位置不再是附加在 token 上的标签，而是 Query 与 Key 在几何空间里相遇时的相位差。</p>
+
+      <h2>参考资料</h2>
+      <ul>
+        <li>Su, J. et al. RoFormer: Enhanced Transformer with Rotary Position Embedding: <a href="https://arxiv.org/abs/2104.09864" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2104.09864</a></li>
+        <li>Vaswani, A. et al. Attention Is All You Need: <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/1706.03762</a></li>
+        <li>Press, O. et al. Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation: <a href="https://arxiv.org/abs/2108.12409" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2108.12409</a></li>
+      </ul>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <span>辉的blog</span>
+    <span>认真写一点能留下来的东西。</span>
+  </footer>
+</body>
+</html>
