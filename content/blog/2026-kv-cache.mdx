@@ -138,7 +138,7 @@ def dequantize_cache(kv_int8, scale):
     return kv_int8.to(torch.float16) * scale
 ```
 
-## 六、总结与展望
+## 五、总结与展望
 
 KV Cache 的核心理念只有一句话：**把历史 token 的 Key/Value 缓存下来，用显存换算力，消除自回归生成中的重复计算**。它让大模型推理从 O(n³) 的计算噩梦变成 O(n²) 的缓存读写，是今天所有推理引擎的基石。
 
