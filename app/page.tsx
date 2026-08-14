@@ -28,7 +28,7 @@ export default function HomePage() {
       <section className="mb-16 text-center">
         <p className="text-sm uppercase tracking-[0.35em] text-slate-500 dark:text-slate-400">AI / CS 技术博客</p>
         <h1 className="mt-4 text-4xl font-semibold text-slate-950 dark:text-white sm:text-5xl">
-          辉のblog：论文笔记与 AI 实践知识库
+          LLM论文精读：论文笔记与 AI 实践知识库
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">
           基于 Transformer、LoRA、RLHF、DPO、MLSys 的学习笔记与技术总结。支持 Markdown 与数学公式，适合长期构建 AI 第二大脑。

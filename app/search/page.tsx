@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import SearchPanel from '@/components/search-panel';
 import { allBlogs, allNotes, allPapers, allExperiments } from 'contentlayer/generated';
 
@@ -48,9 +49,8 @@ function buildSearchItems() {
   return allDocuments;
 }
 
-export default function SearchPage({ searchParams }: { searchParams: { q?: string } }) {
+export default function SearchPage() {
   const items = buildSearchItems();
-  const initialQuery = searchParams.q || '';
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
@@ -58,7 +58,9 @@ export default function SearchPage({ searchParams }: { searchParams: { q?: strin
         <h1 className="text-3xl font-semibold text-slate-950 dark:text-white">全文搜索</h1>
         <p className="mt-3 text-slate-600 dark:text-slate-300">在博客、笔记、论文和实验中检索关键字、概念、公式或代码。</p>
       </div>
-      <SearchPanel items={items} initialQuery={initialQuery} />
+      <Suspense fallback={<div className="rounded-3xl border border-slate-200 bg-white p-10 text-center text-slate-500 dark:border-slate-800 dark:bg-slate-950">加载中...</div>}>
+        <SearchPanel items={items} />
+      </Suspense>
     </main>
   );
 }

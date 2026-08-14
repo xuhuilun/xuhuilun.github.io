@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { allNotes } from 'contentlayer/generated';
-import { useMDXComponent } from 'next-contentlayer/hooks';
-import { components } from '@/components/mdx-components';
+import { MDXContent } from '@/components/mdx-content';
+import { JsonLd } from '@/components/json-ld';
+import { siteConfig } from '@/lib/site-config';
 
 interface NotePageProps {
   params: { slug: string };
@@ -17,18 +18,25 @@ export function generateMetadata({ params }: NotePageProps): Metadata {
   if (!note) {
     return {
       title: '笔记未找到',
-      description: '该笔记不存在。',
     };
   }
 
+  const url = `${siteConfig.url}/notes/${note.slug}`;
+
   return {
-    title: `${note.title} | 笔记 | 辉のblog`,
+    title: note.title,
     description: note.description,
+    alternates: {
+      canonical: url,
+    },
     openGraph: {
       title: note.title,
       description: note.description,
-      url: `https://xuhuilun.github.io/notes/${note.slug}`,
+      url,
       type: 'article',
+      publishedTime: note.date,
+      authors: [siteConfig.author],
+      tags: note.tags,
     },
   };
 }
@@ -39,23 +47,39 @@ export default function NotePage({ params }: NotePageProps) {
     notFound();
   }
 
-  const Component = useMDXComponent(note.body.code);
+  const url = `${siteConfig.url}/notes/${note.slug}`;
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
-      <article className="prose prose-slate mx-auto dark:prose-invert prose-headings:font-semibold prose-blockquote:border-l-slate-300 prose-code:bg-slate-100 prose-code:text-slate-950 dark:prose-code:bg-slate-800 dark:prose-code:text-slate-100">
-        <h1>{note.title}</h1>
-        <div className="flex flex-wrap gap-2 text-sm text-slate-500 dark:text-slate-400">
-          <span>{new Date(note.date).toLocaleDateString('zh-CN')}</span>
-          {note.tags.map((tag) => (
-            <span key={tag} className="rounded-full bg-slate-100 px-2 py-1 dark:bg-slate-800">
-              {tag}
-            </span>
-          ))}
-        </div>
-        <p className="mt-4 text-slate-600 dark:text-slate-300">{note.description}</p>
-        <Component components={components} />
-      </article>
-    </main>
+    <>
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: note.title,
+          description: note.description,
+          datePublished: note.date,
+          dateModified: note.date,
+          url,
+          author: { '@type': 'Person', name: siteConfig.author },
+          publisher: { '@type': 'Person', name: siteConfig.author },
+          keywords: note.tags?.join(', '),
+        }}
+      />
+      <main className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
+        <article className="prose prose-slate mx-auto dark:prose-invert prose-headings:font-semibold prose-blockquote:border-l-slate-300 prose-code:bg-slate-100 prose-code:text-slate-950 dark:prose-code:bg-slate-800 dark:prose-code:text-slate-100">
+          <h1>{note.title}</h1>
+          <div className="flex flex-wrap gap-2 text-sm text-slate-500 dark:text-slate-400">
+            <span>{new Date(note.date).toLocaleDateString('zh-CN')}</span>
+            {note.tags.map((tag) => (
+              <span key={tag} className="rounded-full bg-slate-100 px-2 py-1 dark:bg-slate-800">
+                {tag}
+              </span>
+            ))}
+          </div>
+          <p className="mt-4 text-slate-600 dark:text-slate-300">{note.description}</p>
+          <MDXContent code={note.body.code} />
+        </article>
+      </main>
+    </>
   );
 }

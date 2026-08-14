@@ -1,8 +1,10 @@
 'use client';
 
 import Giscus from '@giscus/react';
+import { useTheme } from 'next-themes';
 
 export function Comments() {
+  const { resolvedTheme } = useTheme();
   const repo = process.env.NEXT_PUBLIC_GISCUS_REPO as `${string}/${string}` | undefined;
   const repoId = process.env.NEXT_PUBLIC_GISCUS_REPOSITORY_ID;
   const category = process.env.NEXT_PUBLIC_GISCUS_CATEGORY as 'announcements' | 'ideas' | 'general' | 'q-and-a' | 'show-and-tell' | undefined;
@@ -26,7 +28,7 @@ export function Comments() {
         mapping="pathname"
         reactionsEnabled="1"
         emitMetadata="0"
-        theme="light"
+        theme={resolvedTheme === 'dark' ? 'dark' : 'light'}
         loading="lazy"
       />
     </div>

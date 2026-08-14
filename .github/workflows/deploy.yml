@@ -1,0 +1,61 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# 允许 GitHub Pages 的 GITHUB_TOKEN 部署到 Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同一时间只允许一个部署
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        # next-contentlayer@0.3.3 的 peer 依赖为 next@^12||^13，与 next@14 共存需 legacy-peer-deps
+        run: npm install --legacy-peer-deps --no-audit --no-fund
+
+      - name: Build static site
+        env:
+          NEXT_PUBLIC_GISCUS_REPO: ${{ vars.NEXT_PUBLIC_GISCUS_REPO }}
+          NEXT_PUBLIC_GISCUS_REPOSITORY_ID: ${{ vars.NEXT_PUBLIC_GISCUS_REPOSITORY_ID }}
+          NEXT_PUBLIC_GISCUS_CATEGORY: ${{ vars.NEXT_PUBLIC_GISCUS_CATEGORY }}
+          NEXT_PUBLIC_GISCUS_CATEGORY_ID: ${{ vars.NEXT_PUBLIC_GISCUS_CATEGORY_ID }}
+        run: npm run build
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

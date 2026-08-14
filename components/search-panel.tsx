@@ -1,7 +1,8 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -18,7 +19,6 @@ export type SearchItem = {
 
 interface SearchPanelProps {
   items: SearchItem[];
-  initialQuery?: string;
 }
 
 function escapeHtml(value: string) {
@@ -40,8 +40,14 @@ function highlightText(text: string, query: string) {
   return escaped.replace(new RegExp(`(${query.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi'), '<mark class="rounded bg-yellow-200 px-1 dark:bg-yellow-500/30">$1</mark>');
 }
 
-export default function SearchPanel({ items, initialQuery = '' }: SearchPanelProps) {
-  const [query, setQuery] = useState(initialQuery);
+export default function SearchPanel({ items }: SearchPanelProps) {
+  const searchParams = useSearchParams();
+  const [query, setQuery] = useState(searchParams.get('q') || '');
+
+  // 地址栏参数变化时（如从页头搜索框跳转）同步输入框
+  useEffect(() => {
+    setQuery(searchParams.get('q') || '');
+  }, [searchParams]);
 
   const results = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();

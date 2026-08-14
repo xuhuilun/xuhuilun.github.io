@@ -7,7 +7,8 @@ export function FloatingHome() {
     <Link
       href="/"
       aria-label="返回首页"
-      className="fixed left-4 top-4 z-[60] flex h-10 w-10 items-center justify-center rounded-full border border-slate-200/60 bg-white/80 shadow-sm backdrop-blur-md transition-all duration-300 hover:scale-110 hover:border-blue-400/50 hover:shadow-md hover:shadow-blue-200/30 dark:border-slate-700/60 dark:bg-slate-900/80 dark:hover:border-blue-500/50 dark:hover:shadow-blue-900/20"
+      title="返回首页"
+      className="fixed bottom-6 right-6 z-[60] flex h-11 w-11 items-center justify-center rounded-full border border-slate-200/60 bg-white/80 shadow-md backdrop-blur-md transition-all duration-300 hover:scale-110 hover:border-blue-400/50 hover:shadow-lg hover:shadow-blue-200/30 dark:border-slate-700/60 dark:bg-slate-900/80 dark:hover:border-blue-500/50 dark:hover:shadow-blue-900/20"
     >
       <svg
         viewBox="0 0 24 24"
