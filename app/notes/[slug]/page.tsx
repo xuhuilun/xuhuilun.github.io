@@ -10,12 +10,14 @@ interface NotePageProps {
 }
 
 export function generateStaticParams() {
-  return allNotes.map((note) => ({ slug: note.slug }));
+  const notes = allNotes.filter((note) => !note.draft).map((note) => ({ slug: note.slug }));
+  // output:export 要求动态路由至少有一个静态参数，无公开笔记时返回占位参数（页面内会 404）
+  return notes.length > 0 ? notes : [{ slug: '__none__' }];
 }
 
 export function generateMetadata({ params }: NotePageProps): Metadata {
   const note = allNotes.find((item) => item.slug === params.slug);
-  if (!note) {
+  if (!note || note.draft) {
     return {
       title: '笔记未找到',
     };
@@ -43,7 +45,7 @@ export function generateMetadata({ params }: NotePageProps): Metadata {
 
 export default function NotePage({ params }: NotePageProps) {
   const note = allNotes.find((item) => item.slug === params.slug);
-  if (!note) {
+  if (!note || note.draft) {
     notFound();
   }
 

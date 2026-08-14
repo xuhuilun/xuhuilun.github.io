@@ -10,12 +10,14 @@ interface PaperPageProps {
 }
 
 export function generateStaticParams() {
-  return allPapers.map((paper) => ({ slug: paper.slug }));
+  const papers = allPapers.filter((paper) => !paper.draft).map((paper) => ({ slug: paper.slug }));
+  // output:export 要求动态路由至少有一个静态参数，无公开论文时返回占位参数（页面内会 404）
+  return papers.length > 0 ? papers : [{ slug: '__none__' }];
 }
 
 export function generateMetadata({ params }: PaperPageProps): Metadata {
   const paper = allPapers.find((item) => item.slug === params.slug);
-  if (!paper) {
+  if (!paper || paper.draft) {
     return {
       title: '论文未找到',
     };
@@ -43,7 +45,7 @@ export function generateMetadata({ params }: PaperPageProps): Metadata {
 
 export default function PaperPage({ params }: PaperPageProps) {
   const paper = allPapers.find((item) => item.slug === params.slug);
-  if (!paper) {
+  if (!paper || paper.draft) {
     notFound();
   }
 

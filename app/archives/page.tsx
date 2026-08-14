@@ -11,10 +11,10 @@ type Entry = {
 
 export default function ArchivesPage() {
   const allEntries: Entry[] = [
-    ...allBlogs.map((p) => ({ title: p.title, url: p.url, date: p.date, tags: p.tags ?? [], type: 'blog' })),
-    ...allPapers.map((p) => ({ title: p.title, url: p.url, date: p.date, tags: p.tags ?? [], type: 'paper' })),
-    ...allNotes.map((p) => ({ title: p.title, url: p.url, date: p.date, tags: p.tags ?? [], type: 'note' })),
-    ...allExperiments.map((p) => ({ title: p.title, url: p.url, date: p.date, tags: p.tags ?? [], type: 'experiment' })),
+    ...allBlogs.filter((p) => !p.draft).map((p) => ({ title: p.title, url: p.url, date: p.date, tags: p.tags ?? [], type: 'blog' })),
+    ...allPapers.filter((p) => !p.draft).map((p) => ({ title: p.title, url: p.url, date: p.date, tags: p.tags ?? [], type: 'paper' })),
+    ...allNotes.filter((p) => !p.draft).map((p) => ({ title: p.title, url: p.url, date: p.date, tags: p.tags ?? [], type: 'note' })),
+    ...allExperiments.filter((p) => !p.draft).map((p) => ({ title: p.title, url: p.url, date: p.date, tags: p.tags ?? [], type: 'experiment' })),
   ]
     .filter((e) => e.date)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());

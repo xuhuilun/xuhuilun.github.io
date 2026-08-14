@@ -4,7 +4,7 @@ import { allBlogs, allNotes, allPapers, allExperiments } from 'contentlayer/gene
 
 function buildSearchItems() {
   const allDocuments = [
-    ...allBlogs.map((post) => ({
+    ...allBlogs.filter((post) => !post.draft).map((post) => ({
       id: `blog-${post.slug}`,
       title: post.title,
       description: post.description,
@@ -14,7 +14,7 @@ function buildSearchItems() {
       date: new Date(post.date).toLocaleDateString('zh-CN'),
       content: (post.body as any)?.raw ?? '',
     })),
-    ...allNotes.map((note) => ({
+    ...allNotes.filter((note) => !note.draft).map((note) => ({
       id: `note-${note.slug}`,
       title: note.title,
       description: note.description,
@@ -24,7 +24,7 @@ function buildSearchItems() {
       date: new Date(note.date).toLocaleDateString('zh-CN'),
       content: (note.body as any)?.raw ?? '',
     })),
-    ...allPapers.map((paper) => ({
+    ...allPapers.filter((paper) => !paper.draft).map((paper) => ({
       id: `paper-${paper.slug}`,
       title: paper.title,
       description: paper.description,
@@ -34,7 +34,7 @@ function buildSearchItems() {
       date: new Date(paper.date).toLocaleDateString('zh-CN'),
       content: (paper.body as any)?.raw ?? '',
     })),
-    ...allExperiments.map((experiment) => ({
+    ...allExperiments.filter((experiment) => !experiment.draft).map((experiment) => ({
       id: `experiment-${experiment.slug}`,
       title: experiment.title,
       description: experiment.description,

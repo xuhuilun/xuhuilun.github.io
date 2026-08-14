@@ -10,12 +10,14 @@ interface BlogPageProps {
 }
 
 export function generateStaticParams() {
-  return allBlogs.map((post) => ({ slug: post.slug }));
+  const posts = allBlogs.filter((post) => !post.draft).map((post) => ({ slug: post.slug }));
+  // output:export 要求动态路由至少有一个静态参数，无公开文章时返回占位参数（页面内会 404）
+  return posts.length > 0 ? posts : [{ slug: '__none__' }];
 }
 
 export function generateMetadata({ params }: BlogPageProps): Metadata {
   const post = allBlogs.find((item) => item.slug === params.slug);
-  if (!post) {
+  if (!post || post.draft) {
     return {
       title: '文章未找到',
     };
@@ -43,7 +45,7 @@ export function generateMetadata({ params }: BlogPageProps): Metadata {
 
 export default function BlogPostPage({ params }: BlogPageProps) {
   const post = allBlogs.find((item) => item.slug === params.slug);
-  if (!post) {
+  if (!post || post.draft) {
     notFound();
   }
 

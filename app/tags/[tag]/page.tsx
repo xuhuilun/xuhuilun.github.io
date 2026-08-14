@@ -22,6 +22,7 @@ const typeLabel: Record<string, string> = {
 export function generateStaticParams() {
   const tags = new Set<string>();
   for (const doc of [...allBlogs, ...allNotes, ...allPapers, ...allExperiments]) {
+    if (doc.draft) continue;
     for (const tag of doc.tags ?? []) {
       tags.add(tag);
     }
