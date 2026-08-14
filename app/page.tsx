@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { Search } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { allBlogs, allNotes, allPapers } from 'contentlayer/generated';
+import { allBlogs, allPapers } from 'contentlayer/generated';
 
 export default function HomePage() {
   const [query, setQuery] = useState('');
@@ -20,7 +20,6 @@ export default function HomePage() {
   };
 
   const posts = allBlogs.filter((post) => !post.draft).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 4);
-  const notes = allNotes.filter((note) => !note.draft).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 3);
   const papers = allPapers.filter((paper) => !paper.draft).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 3);
 
   return (
@@ -48,7 +47,7 @@ export default function HomePage() {
         </form>
       </section>
 
-      <section className="grid gap-8 lg:grid-cols-3">
+      <section className="grid gap-8 lg:grid-cols-2">
         <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-soft dark:border-slate-800 dark:bg-slate-900">
           <h2 className="text-xl font-semibold text-slate-950 dark:text-white">最新文章</h2>
           <p className="mt-2 text-slate-600 dark:text-slate-400">论文笔记与工程实践。</p>
@@ -57,19 +56,6 @@ export default function HomePage() {
               <Link key={post.slug} href={`/blog/${post.slug}`} className="block rounded-2xl p-4 transition hover:bg-slate-50 dark:hover:bg-slate-800">
                 <p className="font-medium text-slate-950 dark:text-white">{post.title}</p>
                 <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">{post.description}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-soft dark:border-slate-800 dark:bg-slate-900">
-          <h2 className="text-xl font-semibold text-slate-950 dark:text-white">最新笔记</h2>
-          <p className="mt-2 text-slate-600 dark:text-slate-400">快速记录 AI 学习与工具思路。</p>
-          <div className="mt-6 space-y-4">
-            {notes.map((note) => (
-              <Link key={note.slug} href={`/notes/${note.slug}`} className="block rounded-2xl p-4 transition hover:bg-slate-50 dark:hover:bg-slate-800">
-                <p className="font-medium text-slate-950 dark:text-white">{note.title}</p>
-                <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">{note.description}</p>
               </Link>
             ))}
           </div>
