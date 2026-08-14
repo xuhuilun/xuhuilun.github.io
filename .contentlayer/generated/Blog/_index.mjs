@@ -2,6 +2,7 @@
 
 import blog__2026KvCacheMdx from './blog__2026-kv-cache.mdx.json' assert { type: 'json' }
 import blog__2026MdxComponentsGuideMdx from './blog__2026-mdx-components-guide.mdx.json' assert { type: 'json' }
+import blog__2026PagedattentionMdx from './blog__2026-pagedattention.mdx.json' assert { type: 'json' }
 import blog__2026TransformerNotesMdx from './blog__2026-transformer-notes.mdx.json' assert { type: 'json' }
 
-export const allBlogs = [blog__2026KvCacheMdx, blog__2026MdxComponentsGuideMdx, blog__2026TransformerNotesMdx]
+export const allBlogs = [blog__2026KvCacheMdx, blog__2026MdxComponentsGuideMdx, blog__2026PagedattentionMdx, blog__2026TransformerNotesMdx]
