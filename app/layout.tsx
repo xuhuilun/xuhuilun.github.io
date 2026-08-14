@@ -3,7 +3,6 @@ import type { ReactNode } from 'react';
 import type { Metadata, Viewport } from 'next';
 import { ThemeProvider } from '@/components/theme-provider';
 import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
 import { FloatingHome } from '@/components/floating-home';
 import { siteConfig } from '@/lib/site-config';
 
@@ -85,7 +84,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <SiteHeader />
           <FloatingHome />
           <div className="flex-1">{children}</div>
-          <SiteFooter />
         </ThemeProvider>
       </body>
     </html>
