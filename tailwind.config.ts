@@ -6,12 +6,16 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        // macOS 风格字体栈
+        // Inter 拉丁字体 + 系统中文（苹方/雅黑）
         sans: [
+          'Inter',
           '-apple-system',
           'BlinkMacSystemFont',
           '"SF Pro Display"',
           '"SF Pro Text"',
+          '"PingFang SC"',
+          '"Hiragino Sans GB"',
+          '"Microsoft YaHei"',
           '"Segoe UI"',
           'Helvetica',
           'Arial',
