@@ -1,0 +1,151 @@
+---
+title: 'KV Cache —— 大模型推理的"内存怪兽"与加速利器'
+description: "从 O(n²) 重复计算到显存瓶颈：一文讲透 KV Cache 的原理、显存开销，以及 MHA/MQA/GQA/MLA、PagedAttention、量化压缩等前沿优化技术。"
+date: "2026-08-14"
+tags: ["KV Cache", "推理优化", "大模型", "Transformer"]
+---
+
+当你用大模型写一篇长文时，它每敲出一个字都要「回看」一遍整段对话。为了让这份「回看」不再重复劳动，KV Cache 应运而生——但它很快又从加速利器变成了内存怪兽。这篇文章从痛点讲起，把 KV Cache 的原理、显存账本和前沿优化一次讲透。
+
+## 一、背景与痛点
+
+大模型（Decoder-only）以自回归方式生成：每产生一个 token，都要让新 token 与历史所有 token 做一次注意力计算。问题在于，**如果没有缓存，第 N 次生成时需要把前 N-1 个 token 的 Key（K）和 Value（V）矩阵从头再算一遍**——而它们在前 N-1 轮中已经算过，并且完全没变。
+
+这带来计算量级的退化。生成 N 个 token 的过程中：
+
+- 有缓存：第 i 步只做 O(i) 的注意力计算，总计约为 $\sum_{i=1}^{N} i \approx N^2 / 2$；
+- 无缓存：第 i 步要重算整条序列的 K/V 再做 O(i²) 的注意力，总计约为 $\sum_{i=1}^{N} i^2 \approx N^3 / 3$。
+
+两者的比值约为 $2N/3$。当上下文长度 N = 16,384 时，无缓存方案的总计算量约是缓存方案的 **10,900 倍**。具体到生成第 16,384 个 token 的那一刻：需要重复计算前面 16,383 个 token 的 K/V，再做约 16K × 16K ≈ **2.7 亿次**注意力打分；而如果缓存复用，这一步只有约 1.6 万次。更糟的是，这还没算模型层数——Llama 2 7B 有 32 层，每一层都要重复这套劳动。随着上下文从 4K 走向 128K，重复计算以平方级膨胀，单靠算力已经扛不住，「缓存」成了唯一的解药。
+
+```python
+# 无 KV Cache：生成第 N 个 token 时，把前面所有 token 的 K/V 全部重算
+def generate_naive(model, prompt_ids, max_new_tokens):
+    ids = prompt_ids
+    for _ in range(max_new_tokens):
+        # 每一轮都从零开始，对「全部历史序列」做一次完整 forward
+        logits, _ = model(ids)                # 重新计算整条序列的 K/V
+        next_id = logits[:, -1].argmax(dim=-1)
+        ids = torch.cat([ids, next_id], dim=-1)
+    return ids
+```
+
+## 二、KV Cache核心原理
+
+标准自注意力公式为：
+
+$$
+\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+$$
+
+生成第 t 个 token 时，Q 只来自当前 token，而 K、V 来自全部历史 token。关键在于：**历史 token 的 K、V 一旦生成就不再改变**——它们不依赖后续任何输入。因此完全可以把每步算好的 K/V 缓存下来，后续生成只需计算当前 token 的 Q，再与缓存的 K/V 做注意力即可。这就是 KV Cache 的全部思想：**用显存换算力，把重复计算变成缓存复用**。
+
+推理因此分成两个阶段：
+
+- **Prefill（预填充）**：一次性处理整个 prompt，计算所有 token 的 K/V 并建立缓存。这一阶段是并行密集计算，GPU 利用率高。
+- **Decode（解码）**：逐 token 生成。每个新 token 只算自己的 Q，K/V 从缓存读取拼接，单步注意力计算量从 O(L²) 降为 O(L)。
+
+可以这样类比：没有缓存时，你每写一句话都要把整本书重新抄一遍；有了 KV Cache，你只是把「摘抄的笔记」放在手边，每次只翻到需要的页。或者说，KV Cache 像人类的短期记忆——已经读过的内容不必重读，只需记住要点并不断追加。
+
+```python
+# 带 KV Cache 的 Decode：每步只计算「新 token」的 Q，K/V 从缓存拼接
+def decode_step(model, last_token, past_kv, position_ids):
+    # past_kv: 每层一个 (K_cache, V_cache)，形状 [B, H, L_prev, D]
+    q, k, v = model.compute_qkv(last_token, position_ids)  # 仅当前 token 的 QKV
+    k_full = torch.cat([past_kv[0], k], dim=2)  # 新 K 追加到缓存尾部
+    v_full = torch.cat([past_kv[1], v], dim=2)
+    out = attention(q, k_full, v_full)          # 计算量 O(L)，而非 O(L²)
+    return out, (k_full, v_full)                # 更新后的缓存继续传递
+```
+
+<Callout type="info" title="只存 K/V，不存 Q">
+每个 token 的 Q 只用于产生该 token 的输出，用完即弃；而 K/V 会被后续所有 token 反复查询，所以值得长期保存。
+</Callout>
+
+## 三、KV Cache的显存开销与计算
+
+KV Cache 的显存占用可以精确计算。FP16 精度下，缓存总容量为：
+
+$$
+\text{KV Cache (bytes)} = 2 \times L \times H \times d_{\text{head}} \times S \times 2
+$$
+
+其中 L 是层数，H 是注意力头数，$d_{\text{head}}$ 是每头维度，S 是上下文长度，第一个 2 表示 K、V 各一份，最后一个 2 是 FP16 的字节数。
+
+以 Llama 2 7B（32 层、32 头、$d_{\text{head}}=128$）为例：
+
+- 每个 token 的缓存：32 × 32 × 128 × 2 × 2 = 524,288 B ≈ **0.5 MB**；
+- 生成 4,096 个 token：0.5 MB × 4,096 ≈ **2 GB**；
+- 上下文 16K 时翻到 **8 GB**，128K 上下文更是高达 **64 GB**。
+
+也就是说，仅 4096 token 的 KV Cache 就能吃掉 2GB 显存。对 24GB 显存的 RTX 3090/4090 来说，这几乎相当于模型权重（7B FP16 约 14GB）之外的最大开销。KV Cache 就这样从「解决计算瓶颈」的功臣，变成了「引发内存瓶颈」的元凶。
+
+<Callout type="warning" title="计算与显存的跷跷板">
+KV Cache 的本质是用显存换算力：缓存越多，重复计算越少；但显存是稀缺资源，长上下文场景下反而成为吞吐瓶颈。于是「如何在更小的缓存下保持质量」成为新的主战场。
+</Callout>
+
+## 四、前沿优化技术概览
+
+### 4.1 架构层面：MHA → MQA → GQA → MLA
+
+既然 KV Cache 与「KV 头」的数量成正比，最直接的办法就是减少 KV 头的数量：
+
+- **MHA**（多头注意力）：每个 Query 头配一组 K/V，KV Cache 最大；
+- **MQA**（多查询注意力）：所有 Query 头共享一组 K/V，缓存降到 1/H，但质量损失明显；
+- **GQA**（分组查询注意力）：Query 头分成 G 组、每组共享一组 K/V，是 MHA 与 MQA 的折中，也是 Llama 3 等主流模型的选择；
+- **MLA**（多头潜在注意力，DeepSeek-V2 提出）：把 K/V 压缩到低维潜在空间，缓存进一步大幅缩减。
+
+| 机制 | KV 头数（7B 规模） | 每 token KV 缓存（FP16） | 相对 MHA | 代表模型 |
+|------|------|------|------|------|
+| MHA | 32 | 512 KB | 1× | Llama 2 |
+| MQA | 1 | 16 KB | 1/32 | PaLM |
+| GQA | 8 | 128 KB | 1/4 | Llama 3 |
+| MLA | 512 维潜在向量 | ~32 KB | ~1/16 | DeepSeek-V2 |
+
+```python
+# GQA：32 个 Query 头共享 8 组 K/V 头，KV Cache 直接降到 1/4
+class GQAAttention(nn.Module):
+    def __init__(self, dim, n_heads=32, n_kv_heads=8):
+        super().__init__()
+        self.n_heads, self.n_kv_heads = n_heads, n_kv_heads
+        self.q_proj = nn.Linear(dim, dim)                     # 每个 Q 头单独投影
+        self.kv_proj = nn.Linear(dim, 2 * dim // n_heads * n_kv_heads)  # 只投影 n_kv_heads 组
+
+    def forward(self, x, past_kv=None):
+        q = self.q_proj(x).view(B, L, self.n_heads, -1).transpose(1, 2)
+        k, v = self.kv_proj(x).chunk(2, dim=-1)   # [B, L, n_kv_heads, D]
+        # 每个 Query 头按组索引到对应的 K/V 头做注意力
+        return q, k, v                            # 缓存体积只有 MHA 的 1/4
+```
+
+### 4.2 系统层面：PagedAttention 与 vLLM
+
+架构上的压缩终究有限，更彻底的优化来自系统层面。vLLM 提出的 **PagedAttention** 借鉴操作系统虚拟内存思想：把 KV Cache 切成固定大小的「页」，按需分配、离散存放，而不是为每条请求预留连续整块显存。这一设计把显存利用率从传统方案的 40% 左右提升到 **90% 以上**，还天然支持「共享前缀」（多请求复用同一段 prompt 的缓存），是当前主流推理框架的事实标准。
+
+### 4.3 压缩层面：量化与驱逐
+
+- **量化**：把缓存的 FP16 降为 INT8/FP8，显存直接减半甚至减至 1/4；配合每层独立的缩放因子，精度损失通常可忽略。
+- **驱逐**：并非所有历史 token 都同等重要——H2O、Ada-KV 等工作通过「重要性评分」只保留少数关键 token，[EvolKV](https://arxiv.org/abs/2509.08315) 更是在保持接近全量缓存性能的同时，仅用 **1.5% 的 KV Cache 预算**就完成了推理。
+
+```python
+# 对 KV Cache 做 INT8 量化：显存从 FP16 直接减半
+def quantize_cache(kv, scale):
+    # kv: [B, H, L, D] 的 FP16 缓存；scale: 每层的缩放因子
+    return (kv / scale).round().to(torch.int8), scale
+
+def dequantize_cache(kv_int8, scale):
+    # 计算前反量化回 FP16，注意力精度基本无损
+    return kv_int8.to(torch.float16) * scale
+```
+
+## 六、总结与展望
+
+KV Cache 的核心理念只有一句话：**把历史 token 的 Key/Value 缓存下来，用显存换算力，消除自回归生成中的重复计算**。它让大模型推理从 O(n³) 的计算噩梦变成 O(n²) 的缓存读写，是今天所有推理引擎的基石。
+
+展望未来，KV Cache 优化的方向清晰可见：更智能的自适应压缩（按 token 重要性动态分配缓存预算）、跨请求的缓存复用（前缀缓存 / Prompt Caching 已在不少服务中落地）、以及从注意力机制本身出发的架构创新（如 MLA 的低维潜在表示）。当上下文窗口走向百万级，KV Cache 的每一次「瘦身」，都直接转化为更低的成本和更快的响应。
+
+## 拓展阅读
+
+1. [Efficient Memory Management for Large Language Model Serving with PagedAttention（SOSP 2023）](https://arxiv.org/abs/2309.06180)
+2. [GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints](https://arxiv.org/abs/2305.13245)
+3. [H2O: Heavy-Hitter Oracle for Efficient Generative Inference of Large Language Models](https://arxiv.org/abs/2306.14048)
