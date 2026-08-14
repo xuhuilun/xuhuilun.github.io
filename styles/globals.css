@@ -5,8 +5,8 @@
 @layer base {
   :root {
     color-scheme: light;
-    color: #0f172a;
-    background-color: #f8fafc;
+    color: #202124;
+    background-color: #ffffff;
   }
 
   .dark {
@@ -22,8 +22,8 @@
 
   body {
     min-height: 100vh;
-    background: rgb(248 250 252);
-    color: rgb(15 23 42);
+    background: rgb(255 255 255);
+    color: rgb(32 33 36);
     /* macOS 风格字体栈 - San Francisco 优先 */
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -100,11 +100,6 @@
 }
 
 @layer utilities {
-  /* 文本截断 */
-  .line-clamp-2 {
-    @apply overflow-hidden text-ellipsis line-clamp-2;
-  }
-
   /* 高级盒阴影 */
   .shadow-hero {
     @apply shadow-2xl;

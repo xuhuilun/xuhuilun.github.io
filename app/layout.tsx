@@ -52,7 +52,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f8fafc' },
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
     { media: '(prefers-color-scheme: dark)', color: '#0f172a' },
   ],
   colorScheme: 'light dark',
@@ -74,7 +74,7 @@ const websiteJsonLd = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
-      <body className="flex min-h-screen flex-col bg-slate-50 text-slate-950 dark:bg-slate-950 dark:text-slate-100">
+      <body className="flex min-h-screen flex-col bg-white text-[#202124] dark:bg-slate-950 dark:text-slate-100">
         <link rel="preconnect" href="https://giscus.app" crossOrigin="anonymous" />
         <script
           type="application/ld+json"

@@ -8,14 +8,14 @@ export function FloatingHome() {
       href="/"
       aria-label="返回首页"
       title="返回首页"
-      className="fixed bottom-6 right-6 z-[60] flex h-11 w-11 items-center justify-center rounded-full border border-slate-200/60 bg-white/80 shadow-md backdrop-blur-md transition-all duration-300 hover:scale-110 hover:border-blue-400/50 hover:shadow-lg hover:shadow-blue-200/30 dark:border-slate-700/60 dark:bg-slate-900/80 dark:hover:border-blue-500/50 dark:hover:shadow-blue-900/20"
+      className="fixed bottom-6 right-6 z-[60] flex h-12 w-12 items-center justify-center rounded-full bg-[#4285F4] text-white shadow-[0_2px_8px_rgba(66,133,244,0.4)] transition-all duration-200 hover:scale-105 hover:shadow-[0_4px_16px_rgba(66,133,244,0.5)] active:scale-95"
     >
       <svg
         viewBox="0 0 24 24"
-        className="h-5 w-5 text-slate-700 dark:text-slate-200"
+        className="h-5 w-5"
         fill="none"
         stroke="currentColor"
-        strokeWidth="1.8"
+        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       >
