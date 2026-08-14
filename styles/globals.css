@@ -35,6 +35,8 @@
   }
 
   html {
+    /* 根字号 17px：整体文字比默认 16px 更大更易读 */
+    font-size: 17px;
     scroll-behavior: smooth;
     @apply scroll-pt-24;
   }
