@@ -6,8 +6,9 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        // Inter 拉丁字体 + 系统中文（苹方/雅黑）
+        // 思源黑体（子集）优先 + Inter 回退 + 系统中文
         sans: [
+          '"Source Han Sans SC"',
           'Inter',
           '-apple-system',
           'BlinkMacSystemFont',
