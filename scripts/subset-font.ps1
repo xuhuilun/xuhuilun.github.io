@@ -1,4 +1,4 @@
-﻿# 重新生成思源黑体子集（public/fonts/source-han-sans.woff2）并同步 globals.css 的 unicode-range
+# 重新生成思源黑体子集（public/fonts/source-han-sans.woff2）并同步 globals.css 的 unicode-range
 # 用法: pwsh scripts/subset-font.ps1
 # 依赖: Python + fonttools[woff]（pip install "fonttools[woff]"）
 $ErrorActionPreference = 'Stop'
@@ -43,7 +43,14 @@ if (-not $ur.StartsWith('U+')) { throw 'unicode-range 生成失败' }
 
 $cssPath = Join-Path $root 'styles\globals.css'
 $css = [System.IO.File]::ReadAllText($cssPath, $enc)
+# 安全保护：写入前必须校验，防止意外把 globals.css 写空导致整站样式丢失
+if ([string]::IsNullOrWhiteSpace($css) -or -not $css.Contains('@tailwind')) {
+  throw "[subset-font] globals.css 内容异常（为空或缺少 @tailwind 指令），已中止写入，请检查文件"
+}
 $newDecl = "unicode-range: $ur;"
 $css = [regex]::Replace($css, 'unicode-range: [^;]+;', $newDecl, 1)
+if (-not $css.Contains('@tailwind')) {
+  throw '[subset-font] 替换后 CSS 内容异常，已中止写入'
+}
 [System.IO.File]::WriteAllText($cssPath, $css, (New-Object System.Text.UTF8Encoding $false))
-Write-Host "[subset-font] 已更新 globals.css 的 unicode-range"
+Write-Host "[subset-font] 已更新 globals.css 的 unicode-range（$(($ur -split ',').Count) 个区间）"
