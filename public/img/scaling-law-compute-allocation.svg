@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Kaplan 与 Chinchilla 的计算预算分配对比</title>
+  <desc id="desc">当训练计算预算增加十倍时，Kaplan 建议参数量增加约 5.4 倍、训练 token 增加约 1.9 倍；Chinchilla 建议两者都增加约 3.2 倍。</desc>
+  <rect width="1200" height="700" fill="#ffffff" />
+  <rect x="32" y="32" width="1136" height="636" rx="8" fill="#ffffff" stroke="#dadce0" stroke-width="2" />
+
+  <text x="84" y="92" fill="#202124" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700">训练计算预算增加 10 倍，应该投向哪里？</text>
+  <text x="84" y="126" fill="#5f6368" font-family="Inter, Arial, sans-serif" font-size="17">两篇论文都研究 compute-optimal，但得到不同的参数量/token 增长速度</text>
+
+  <rect x="82" y="170" width="500" height="420" rx="8" fill="#f8f9fa" stroke="#dadce0" stroke-width="2" />
+  <rect x="618" y="170" width="500" height="420" rx="8" fill="#f8f9fa" stroke="#dadce0" stroke-width="2" />
+
+  <circle cx="124" cy="218" r="17" fill="#4285f4" />
+  <text x="156" y="226" fill="#202124" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="700">Kaplan 2020</text>
+  <text x="124" y="264" fill="#5f6368" font-family="Inter, Arial, sans-serif" font-size="16">Nopt ∝ C<tspan baseline-shift="super" font-size="12">0.73</tspan>，Dopt ∝ C<tspan baseline-shift="super" font-size="12">0.27</tspan></text>
+
+  <text x="124" y="326" fill="#202124" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">参数量</text>
+  <rect x="124" y="344" width="390" height="46" rx="6" fill="#dfe7fd" />
+  <rect x="124" y="344" width="350" height="46" rx="6" fill="#4285f4" />
+  <text x="490" y="375" text-anchor="end" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">×5.4</text>
+
+  <text x="124" y="432" fill="#202124" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">训练 token</text>
+  <rect x="124" y="450" width="390" height="46" rx="6" fill="#dfe7fd" />
+  <rect x="124" y="450" width="124" height="46" rx="6" fill="#fbbc05" />
+  <text x="264" y="481" fill="#5f4300" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">×1.9</text>
+
+  <text x="124" y="548" fill="#5f6368" font-family="Inter, Arial, sans-serif" font-size="15">新增预算主要投入更大的模型</text>
+
+  <circle cx="660" cy="218" r="17" fill="#34a853" />
+  <text x="692" y="226" fill="#202124" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="700">Chinchilla 2022</text>
+  <text x="660" y="264" fill="#5f6368" font-family="Inter, Arial, sans-serif" font-size="16">Nopt ∝ C<tspan baseline-shift="super" font-size="12">≈0.5</tspan>，Dopt ∝ C<tspan baseline-shift="super" font-size="12">≈0.5</tspan></text>
+
+  <text x="660" y="326" fill="#202124" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">参数量</text>
+  <rect x="660" y="344" width="390" height="46" rx="6" fill="#dcefe1" />
+  <rect x="660" y="344" width="230" height="46" rx="6" fill="#4285f4" />
+  <text x="906" y="375" fill="#174ea6" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">×3.2</text>
+
+  <text x="660" y="432" fill="#202124" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">训练 token</text>
+  <rect x="660" y="450" width="390" height="46" rx="6" fill="#dcefe1" />
+  <rect x="660" y="450" width="230" height="46" rx="6" fill="#34a853" />
+  <text x="906" y="481" fill="#137333" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">×3.2</text>
+
+  <text x="660" y="548" fill="#5f6368" font-family="Inter, Arial, sans-serif" font-size="15">模型与数据近似等比例增长</text>
+
+  <rect x="270" y="614" width="660" height="32" rx="6" fill="#fce8e6" />
+  <text x="600" y="636" text-anchor="middle" fill="#a50e0e" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">这些倍率来自论文拟合，不是跨架构、数据和目标都成立的常数</text>
+</svg>
