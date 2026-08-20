@@ -1,0 +1,545 @@
+---
+title: "Speculative Decoding 技术笔记：用草稿模型加速无损推理"
+description: "从接受-拒绝采样、分布等价证明到速度模型与工程实现，系统拆解 Speculative Decoding 如何用小模型草拟、多 token 并行验证来降低大模型解码延迟。"
+date: "2026-08-20"
+tags: ["Speculative Decoding", "LLM 推理", "推理优化", "Transformer"]
+---
+
+## 摘要
+
+自回归模型生成 $K$ 个 token，通常需要串行执行 $K$ 次目标模型。**Speculative Decoding（推测解码）**将其中一部分串行工作转移给更快的草稿模型：草稿模型先提出 $γ$ 个候选 token，目标模型再用一次并行前向计算同时验证这些位置。候选若通过就批量提交；第一次拒绝时，则从一个经过修正的残差分布重新采样。
+
+关键并不只是“让小模型先猜”。如果直接接受小模型的预测，输出必然被小模型偏置。Leviathan、Kalman 与 Matias 在《Fast Inference from Transformers via Speculative Decoding》中给出的核心结果是：以
+
+$$
+a(x)=\min\left(1,\frac{p(x)}{q(x)}\right)
+$$
+
+接受草稿，并在拒绝时从 $\operatorname{norm}([p-q]_+)$ 采样，最终 token 的条件分布**严格等于目标模型分布 $p$**。因此它减少的是目标模型调用的串行深度，而不牺牲目标分布；代价是更多并行计算与实现复杂度。论文在 batch size 为 1 的单 TPU-v4 上，以 T5-small 为草稿、T5-XXL 11B 为目标模型，报告了约 **2.3–3.4 倍**的实测加速（§4.1，Table 2）。
+
+> **一句话概括**：用便宜模型串行猜一小段，用昂贵模型并行批改；接受规则负责复用猜对的部分，残差分布负责把猜错造成的概率偏差精确补回来。
+
+## 1. 论文要解决什么问题
+
+### 1.1 自回归依赖制造了串行瓶颈
+
+给定前缀 $x_{<t}$，目标模型 $M_p$ 定义下一个 token 的分布：
+
+$$
+p(x_t\mid x_{<t}).
+$$
+
+标准解码先从该分布得到 $x_t$，再把它加入前缀，计算 $x_{t+1}$。后一个位置依赖前一个位置的实际结果，因此生成 $K$ 个 token 要经过 $K$ 次串行目标模型调用：
+
+```text
+x<t -> Mp -> x_t -> Mp -> x_{t+1} -> Mp -> x_{t+2} -> ...
+```
+
+训练时整段序列已知，Transformer 可以并行计算所有位置；推理时未来 token 未知，这种并行性消失。更麻烦的是，大模型在小 batch 解码时经常受模型权重读取、KV cache 读取和设备通信限制，而不是受算术吞吐限制。一次只生成一个 token，昂贵的权重搬运很难被充分摊薄（论文 §1、§3.4）。
+
+### 1.2 优化目标不是减少 FLOPs，而是降低延迟
+
+Speculative Decoding 的出发点是：语言生成中有些位置很难，但标点、固定搭配、格式片段等位置相对容易，便宜模型也可能给出与大模型重叠很高的分布。于是可以让小模型负责**提出候选**，让大模型负责**最终裁决**。
+
+这是一种延迟优化，不是无条件的算力优化：
+
+| 维度 | 标准自回归解码 | Speculative Decoding |
+|---|---|---|
+| 每轮确认 token 数 | 固定为 1 | 1 到 $\gamma+1$ |
+| 目标模型串行调用 | 多 | 更少 |
+| 目标模型单轮工作 | 1 个位置 | 并行验证 $\gamma+1$ 个位置 |
+| 总算术操作量 | 基线 | 通常上升 |
+| 输出分布 | $p$ | 严格保持为 $p$ |
+| 收益前提 | 无额外前提 | 草稿便宜、接受率高、硬件有并行余量 |
+
+论文的核心贡献不是把目标模型替换成小模型，而是让小模型成为一个**不会改变目标分布的性能提示器**。
+
+## 2. 符号与前置约定
+
+为避免两篇同期论文的符号方向不同，本文统一采用 Leviathan et al. 的记法：
+
+| 符号 | 含义 |
+|---|---|
+| $M_p$ | 慢而强的目标模型（target model） |
+| $M_q$ | 快而弱的近似/草稿模型（approximation/draft model） |
+| $p_i(x)$ | 给定当前前缀和前 $i-1$ 个草稿 token，目标模型的下一 token 分布 |
+| $q_i(x)$ | 相同前缀下草稿模型的下一 token 分布 |
+| $x_i$ | 第 $i$ 个草稿 token，满足 $x_i\sim q_i$ |
+| $\gamma$ | 每轮预先草拟的 token 数，也称 lookahead |
+| $\alpha$ | 跨前缀的平均接受率 |
+| $c$ | 草稿模型单步耗时与目标模型单步耗时之比 |
+
+温度、top-k、nucleus sampling、argmax 等策略，都可以先转化为一个经过截断或重标定并重新归一化的概率分布。后续的 $p$ 表示目标模型在应用指定解码策略后的分布，$q$ 同理（论文 §2.2）。因此“保持目标分布”是保持这个**最终采样分布**，不是保持未经温度或 top-k 处理的原始 softmax。
+
+## 3. 一轮 Speculative Decoding 如何运行
+
+给定已经确认的前缀 `prefix`，一轮算法分为四步。
+
+### 3.1 Draft：草稿模型串行提出 $\gamma$ 个 token
+
+草稿模型仍然自回归运行，但因为它足够小，这部分成本较低：
+
+$$
+x_i\sim q_i(x)=q(x\mid \text{prefix},x_1,\ldots,x_{i-1}),
+\quad i=1,\ldots,\gamma.
+$$
+
+这里必须保留每个已采样 token 在 $q_i$ 中的概率，因为验证阶段要计算 $p_i(x_i)/q_i(x_i)$。
+
+### 3.2 Verify：目标模型一次并行计算所有位置
+
+把整段草稿拼在已确认前缀后，目标模型通过一次序列前向计算得到：
+
+$$
+p_1(x),p_2(x),\ldots,p_{\gamma+1}(x).
+$$
+
+$p_i$ 用来验证草稿 $x_i$；多出来的 $p_{\gamma+1}$ 在全部草稿通过时用于额外采一个 token。这里的“并行”不是说未来条件未知，而是草稿已经临时给出了所有条件，目标模型可以像 teacher forcing 一样同时为这些位置打分。
+
+### 3.3 Accept：从左到右依次验收
+
+对每个草稿 token $x_i$ 采样 $r_i\sim U(0,1)$，当
+
+$$
+r_i\le \min\left(1,\frac{p_i(x_i)}{q_i(x_i)}\right)
+$$
+
+时接受。验证必须从左到右进行，一旦第 $i$ 个 token 被拒绝，后面的 $x_{i+1},\ldots,x_\gamma$ 全部作废，因为它们依赖的前缀已经不再成立。
+
+这个规则可以直观地拆成两种情况：
+
+- 若 $p_i(x_i)\ge q_i(x_i)$，草稿模型没有给该 token 分配过多概率，必然接受；
+- 若 $p_i(x_i)<q_i(x_i)$，草稿模型高估了它，只以 $p_i(x_i)/q_i(x_i)$ 的概率接受。
+
+### 3.4 Correct：拒绝时修正，全部接受时奖励一个 token
+
+若第一个拒绝发生在位置 $i$，从残差分布
+
+$$
+p_i'(x)
+=\operatorname{norm}\left(\max(0,p_i(x)-q_i(x))\right)
+=\frac{[p_i(x)-q_i(x)]_+}{\sum_y[p_i(y)-q_i(y)]_+}
+$$
+
+采一个修正 token 并结束本轮。若 $\gamma$ 个草稿全部被接受，则直接从 $p_{\gamma+1}$ 再采一个 token。于是每轮至少产出 1 个、至多产出 $\gamma+1$ 个 token。
+
+```text
+草稿:      x1  x2  x3  x4  x5
+目标验证:   ✓   ✓   ✓   ✗
+提交:      x1  x2  x3  y
+                        └─ y 来自位置 4 的残差分布，x5 作废
+
+全部通过:   ✓   ✓   ✓   ✓   ✓  +  z
+                                  └─ z 来自目标模型 p6
+```
+
+### 3.5 与论文 Algorithm 1 对齐的伪代码
+
+```python
+def speculative_step(prefix, target_model, draft_model, gamma):
+    guesses = []
+    q_distributions = []
+
+    # 1. Draft autoregressively with the cheap model.
+    for _ in range(gamma):
+        q = draft_model.next_token_distribution(prefix + guesses)
+        guesses.append(sample(q))
+        q_distributions.append(q)
+
+    # 2. Score gamma guesses and one extra position in parallel.
+    p_distributions = target_model.score_continuation(prefix, guesses)
+
+    # 3. Accept the longest valid prefix.
+    accepted = []
+    for i, token in enumerate(guesses):
+        p = p_distributions[i]
+        q = q_distributions[i]
+        if uniform_0_1() <= min(1, p[token] / q[token]):
+            accepted.append(token)
+            continue
+
+        # 4a. Correct the first rejected position and stop.
+        residual = normalize(positive_part(p - q))
+        return prefix + accepted + [sample(residual)]
+
+    # 4b. All guesses passed: use the already computed extra distribution.
+    return prefix + accepted + [sample(p_distributions[gamma])]
+```
+
+实际代码还要处理 EOS、最大长度、浮点下溢、批内不同接受长度和 KV cache 生命周期，但这些不改变概率算法。
+
+## 4. 为什么拒绝采样能严格保持目标分布
+
+这是整篇论文最值得掌握的部分。没有这一步，算法只是一个会改变模型行为的启发式加速器。
+
+### 4.1 接受分支拿走了多少概率质量
+
+先忽略位置下标，草稿样本 $X\sim q$。最终通过“草稿为 $x$ 且被接受”输出 $x$ 的概率为：
+
+$$
+\begin{aligned}
+P(\text{接受且 }X=x)
+&=q(x)\min\left(1,\frac{p(x)}{q(x)}\right)\\
+&=\min(p(x),q(x)).
+\end{aligned}
+$$
+
+也就是说，接受分支恰好复用了 $p$ 与 $q$ 的重叠概率质量。
+
+总接受概率记为 $\beta$：
+
+$$
+\beta=\sum_x\min(p(x),q(x)).
+$$
+
+### 4.2 拒绝分支补回剩余概率质量
+
+目标分布中尚未由接受分支覆盖的质量为：
+
+$$
+p(x)-\min(p(x),q(x))=[p(x)-q(x)]_+.
+$$
+
+它的总质量正好是拒绝概率：
+
+$$
+\sum_x[p(x)-q(x)]_+=1-\beta.
+$$
+
+所以拒绝后从归一化残差分布 $p'$ 采样，输出 $x$ 的无条件概率是：
+
+$$
+P(\text{拒绝后输出 }x)
+=(1-\beta)p'(x)
+=p(x)-\min(p(x),q(x)).
+$$
+
+两条路径相加：
+
+$$
+\begin{aligned}
+P(X_{\text{final}}=x)
+&=\min(p(x),q(x))\\
+&\quad+p(x)-\min(p(x),q(x))\\
+&=p(x).
+\end{aligned}
+$$
+
+这就是 Appendix A.1 的正确性证明。它对任意离散分布 $p,q$ 成立，不要求草稿模型与目标模型同架构，也不要求 $q$ 本身足够准确；$q$ 的质量只影响速度，不影响最终分布正确性。
+
+### 4.3 一个可手算的三 token 例子
+
+设词表只有 `A/B/C`：
+
+| token | 草稿分布 $q$ | 目标分布 $p$ | 接受路径质量 $\min(p,q)$ | 未覆盖质量 $[p-q]_+$ |
+|---|---:|---:|---:|---:|
+| A | 0.50 | 0.30 | 0.30 | 0.00 |
+| B | 0.30 | 0.40 | 0.30 | 0.10 |
+| C | 0.20 | 0.30 | 0.20 | 0.10 |
+| 合计 | 1.00 | 1.00 | 0.80 | 0.20 |
+
+总接受概率为 $\beta=0.8$，拒绝概率为 $0.2$。残差分布为：
+
+$$
+p'=\frac{(0,0.1,0.1)}{0.2}=(0,0.5,0.5).
+$$
+
+最终三个 token 的概率分别是：
+
+$$
+P(A)=0.30+0.20\times0=0.30,
+$$
+
+$$
+P(B)=0.30+0.20\times0.50=0.40,
+$$
+
+$$
+P(C)=0.20+0.20\times0.50=0.30.
+$$
+
+结果完整恢复了 $p=(0.3,0.4,0.3)$。特别注意：若拒绝后直接从原始 $p$ 重采，而不是从 $[p-q]_+$ 重采，接受路径已覆盖的概率会被重复计算，最终分布就不再是 $p$。
+
+### 4.4 从单 token 到完整序列
+
+Appendix A.1 直接证明的是单个条件分布。在每个已经确认的前缀下，算法都产生
+
+$$
+x_t\sim p(x_t\mid x_{<t}).
+$$
+
+由自回归链式法则，完整序列概率为：
+
+$$
+P(x_{1:T})=\prod_{t=1}^{T}p(x_t\mid x_{<t}),
+$$
+
+因此整条序列的分布也与目标模型单独解码一致。这里的“一致”指**分布一致**，不表示在随机采样下换一种随机数消费顺序后，相同 seed 仍会逐 token 产生相同样本。对于 argmax，经过标准化后的 $p$ 和 $q$ 都是 one-hot 分布：草稿 token 与目标 argmax 相同就接受，否则拒绝并确定性修正为目标 argmax，因而输出 token 与目标模型一致。
+
+## 5. 接受率由什么决定
+
+论文定义了一个对称散度 $D_{\mathrm{LK}}$：
+
+$$
+D_{\mathrm{LK}}(p,q)
+=\frac{1}{2}\sum_x|p(x)-q(x)|
+=1-\sum_x\min(p(x),q(x)).
+$$
+
+它在数学上就是总变差距离。由接受概率的定义可得（论文 Theorem 3.5）：
+
+$$
+\beta=1-D_{\mathrm{LK}}(p,q)
+=\sum_x\min(p(x),q(x)).
+$$
+
+这比“草稿 top-1 是否猜对”更精确。接受率衡量的是两个**完整分布的重叠质量**：即使 top-1 不同，只要采到的 token 在目标分布中仍有足够概率，就可能被接受。
+
+论文把跨前缀的平均接受率记为：
+
+$$
+\alpha=\mathbb E[\beta].
+$$
+
+$\alpha$ 取决于目标模型、草稿模型、任务域、当前上下文和采样变换。草稿模型变大通常提高 $\alpha$，但也提高成本 $c$；最好的草稿模型不是最准确的那个，而是**接受率与延迟之比最合适**的那个。
+
+## 6. 一轮平均能生成多少 token
+
+论文为得到闭式表达，近似假设各位置的接受事件独立同分布，平均接受率均为 $\alpha$。设一轮最终产出长度为 $L$，则：
+
+$$
+P(L=k)=\alpha^{k-1}(1-\alpha),
+\quad 1\le k\le\gamma,
+$$
+
+$$
+P(L=\gamma+1)=\alpha^\gamma.
+$$
+
+这是一条截断几何分布。用尾和公式可得（论文 Equation 1）：
+
+$$
+\begin{aligned}
+\mathbb E[L]
+&=\sum_{k=1}^{\gamma+1}P(L\ge k)\\
+&=\sum_{k=0}^{\gamma}\alpha^k\\
+&=\frac{1-\alpha^{\gamma+1}}{1-\alpha}.
+\end{aligned}
+$$
+
+当 $\alpha\to1$ 时，期望趋近 $\gamma+1$；当 $\alpha\to0$ 时，期望退化为 1。由于后面的 token 只有在前面全部通过时才有机会被提交，增加 $\gamma$ 的边际收益按 $\alpha^\gamma$ 快速衰减。
+
+例如 $\alpha=0.75,\gamma=7$：
+
+$$
+\mathbb E[L]
+=\frac{1-0.75^8}{1-0.75}
+\approx3.60.
+$$
+
+也就是说，一次目标模型验证平均确认约 3.6 个 token，而不是固定确认 8 个。
+
+## 7. 什么时候能真正加速
+
+### 7.1 论文的墙钟时间模型
+
+设目标模型生成一步耗时为 $T$，草稿模型一步耗时为 $cT$。一轮算法需要：
+
+- 草稿模型串行运行 $\gamma$ 次，耗时 $\gamma cT$；
+- 目标模型并行验证一次，理想化耗时 $T$。
+
+于是每轮耗时为 $(\gamma c+1)T$。除以每轮期望产出，再与标准解码每 token 的 $T$ 对比，得到论文 Theorem 3.8 的预期加速比：
+
+$$
+S(\alpha,\gamma,c)
+=\frac{1-\alpha^{\gamma+1}}
+{(1-\alpha)(\gamma c+1)}.
+$$
+
+沿用上例并取论文中 T5-small 的 profiler 估计 $c=0.02$：
+
+$$
+S\approx\frac{3.60}{1+7\times0.02}
+\approx3.16.
+$$
+
+论文在 EnDe、temperature 0 的对应设置中预测 3.2 倍、实测 3.4 倍（Appendix A.3，Table 4）。公式与实测不会完全相等，因为它假设各位置接受率 i.i.d.，也理想化了并行验证和实现开销。
+
+Corollary 3.9 给出一个简单条件：若 $\alpha>c$，至少存在某个 $\gamma$ 能带来加速。取 $\gamma=1$ 就有：
+
+$$
+S=\frac{1+\alpha}{1+c}>1.
+$$
+
+### 7.2 为什么“更大的草稿模型”可能更慢
+
+加大草稿模型通常能让 $q$ 更接近 $p$，提高 $\alpha$；但草稿阶段是串行的，$c$ 同时增大。论文 Table 2 中，EnDe、temperature 0 时：
+
+| 草稿模型 | 参数量 | $\alpha$ | $c$（profiler 估计） | 实测加速 |
+|---|---:|---:|---:|---:|
+| T5-small | 77M | 0.75 | 0.02 | **3.4×** |
+| T5-base | 250M | 0.80 | 0.04 | 2.8× |
+| T5-large | 800M | 0.82 | 0.11 | 1.7× |
+
+T5-large 的接受率最高，却最慢。工程选型应该直接优化端到端延迟，而不是单独优化接受率。
+
+### 7.3 它可能增加总 FLOPs
+
+令 $\hat c$ 为草稿模型与目标模型每 token 算术操作量之比。论文 Theorem 3.11 给出总算术操作量相对基线的期望倍数：
+
+$$
+R_{\mathrm{ops}}
+=\frac{(1-\alpha)(\gamma\hat c+\gamma+1)}
+{1-\alpha^{\gamma+1}}.
+$$
+
+候选被拒绝时，目标模型为后续位置做的计算会浪费。因此 Speculative Decoding 常常是**以更多并行 FLOPs 换更少串行时间**。它能变快，是因为一次目标模型执行可以复用权重和 KV cache 的读取，并让原本闲置的算术单元处理多个位置；如果硬件本来已经 compute-bound 或高 batch 已把计算单元占满，这个交换可能不划算。
+
+## 8. 工程实现中的关键边界
+
+以下是把论文算法映射到常见 Transformer 推理引擎时必须处理的状态边界。
+
+### 8.1 KV cache 只能提交已确认前缀
+
+草稿模型和目标模型各自维护独立 KV cache。目标模型验证整段候选后会临时产生 $\gamma$ 个候选位置的 KV：
+
+- 接受前 $n$ 个草稿时，只提交对应的目标 KV；
+- 第 $n+1$ 个草稿被拒绝后，后续目标 KV 全部裁剪；
+- 修正 token 通常需要在下一轮或专门步骤写入正确 KV，具体取决于引擎如何对齐 logits 与 cache；
+- 全部接受时，可提交整段并利用已算出的 $p_{\gamma+1}$ 采额外 token。
+
+这里最危险的 bug 不是概率公式，而是把依赖错误候选前缀的 KV 留在缓存中。
+
+### 8.2 采样变换必须在正确的位置应用
+
+温度缩放、top-k、top-p 和 logit mask 都会改变概率分布。精确性证明要求接受比和残差修正使用实际参与采样的 $p,q$：先应用各自规定的变换与归一化，再计算
+
+$$
+\min(1,p(x)/q(x))
+$$
+
+和 $[p-q]_+$。若用变换前概率做验收、变换后概率做采样，证明不再成立。论文实验对 $p$ 与 $q$ 使用相同的标准化方式；算法正确性本身不要求两者同架构。
+
+### 8.3 批处理会引入不规则控制流
+
+同一 batch 中，不同请求的第一个拒绝位置不同：有人接受 0 个，有人接受 5 个。引擎需要处理变长提交、cache 裁剪、重新组 batch 和 EOS。论文的实测是 batch size 1，并不能直接推出高并发服务下仍有相同加速。
+
+### 8.4 $\gamma$ 是延迟和浪费之间的旋钮
+
+$\gamma$ 太小，目标模型调用次数降得不够；$\gamma$ 太大，则草稿串行耗时增加，而且越靠后的验证位置越可能因前面一次拒绝而作废。论文 §3.5 建议根据 $\alpha$ 与 $c$ 数值求解使 $S(\alpha,\gamma,c)$ 最大的整数 $\gamma$。固定 $\gamma$ 易实现；按请求、领域或实时接受率动态调整可能更优，但属于论文留下的后续方向。
+
+### 8.5 “无损”仍受有限精度实现约束
+
+数学证明建立在精确概率运算上。真实系统中的 softmax、截断、归一化和 $[p-q]_+$ 都使用有限精度。实现时至少应保证：
+
+- 对 $q(x)=0$ 的位置避免无效除法；实际从 $q$ 采到的 token 理论上满足 $q(x)>0$；
+- 对微小负残差执行显式 clamp；
+- 对残差总质量重新归一化；
+- 在 greedy、多最大值、EOS 和词表 mask 情况下定义确定行为；
+- 用分布统计而不是相同随机种子的逐 token 比较验证随机采样一致性。
+
+论文证明的是数学分布等价；同期开源的 Speculative Sampling 论文更谨慎地表述为“within hardware numerics”。
+
+## 9. 实验结果应该如何解读
+
+### 9.1 T5-XXL 的实测墙钟加速
+
+主论文 §4.1 使用 T5 v1.1 XXL 11B 作为目标模型，在单 TPU-v4、batch size 1 上与 T5X 标准实现比较。任务包括 WMT English-to-German 翻译和 CNN/DailyMail 摘要，草稿均使用已有 checkpoint，无需修改架构或重新训练。
+
+| 任务 | 草稿模型 | Temperature | $\gamma$ | $\alpha$ | 实测加速 |
+|---|---|---:|---:|---:|---:|
+| EnDe | T5-small | 0 | 7 | 0.75 | **3.4×** |
+| EnDe | T5-small | 1 | 7 | 0.62 | **2.6×** |
+| CNN/DM | T5-small | 0 | 5 | 0.65 | **3.1×** |
+| CNN/DM | T5-small | 1 | 5 | 0.53 | **2.3×** |
+
+表中只摘录每个任务/温度下最快的草稿配置。完整 Table 2 还显示，T5-base 与 T5-large 虽有更高接受率，却常因自身延迟更高而降低最终加速。
+
+### 9.2 哪些结果不是墙钟实测
+
+论文 §4.2 还报告了 GPT-like 97M 与 LaMDA 137B 的接受率。例如 GPT-like 6M 草稿对应 $\alpha=0.88/0.89$（temperature 0/1），LaMDA 8B 草稿对应 $\alpha=0.75/0.74$。但作者明确说明只为 T5 实现并测量了实际墙钟加速，因此不能把这些接受率写成 GPT 或 LaMDA 的实测速度提升。
+
+### 9.3 与同期 Speculative Sampling 工作的关系
+
+Chen et al. 的《Accelerating Large Language Model Decoding with Speculative Sampling》与本工作独立并行开展，核心接受-拒绝思想相同。该工作更强调分布式大模型服务：以 4B 草稿模型加速 Chinchilla 70B，在 batch size 1、lookahead $K=4$ 下报告：
+
+- XSum nucleus sampling：1.92×；
+- XSum greedy：2.01×；
+- HumanEval nucleus sampling：2.46×。
+
+它还展示了一个重要的工程现象：增大 lookahead 后，平均速度会平台化甚至回退，同时延迟方差上升。两篇论文共同奠定了今天“draft model + parallel verification + modified rejection sampling”这一算法族，名称上则分别突出 Speculative Decoding 与 Speculative Sampling。
+
+## 10. 与相关方法的区别
+
+| 方法 | 是否保持目标分布 | 是否需改模型/训练 | 主要收益来源 |
+|---|---|---|---|
+| 量化、剪枝、蒸馏 | 通常会有数值或质量变化 | 视方法而定 | 降低每次模型调用成本 |
+| Early exit / adaptive computation | 通常不保证 | 通常需要 | 简单 token 少算几层 |
+| Blockwise Parallel Decoding | 原工作仅覆盖 greedy，不保证一般随机采样分布 | 需要定制训练 | 并行预测多个 token |
+| Shallow Aggressive Decoding | 不覆盖一般随机采样 | 受输入复制场景限制 | 并行验证输入片段 |
+| Speculative Decoding | **严格保持** | 可直接使用现成模型 | 降低目标模型串行调用深度 |
+
+Speculative Decoding 与量化、GQA/MQA、低层 kernel 优化并不互斥。前者重排解码依赖，后者降低一次调用的成本或内存流量。但组合后的收益必须重新测量：某种优化如果让目标模型从 memory-bound 变成 compute-bound，也可能削弱推测解码的并行收益。
+
+## 11. 论文的创新点
+
+论文在 §1 明确总结了两项贡献：
+
+1. **将推测执行推广到随机场景，并提出 speculative sampling。** 接受概率与残差修正让系统能够复用近似模型的随机候选，同时严格恢复目标分布。
+2. **提出无需改变模型架构、训练流程和输出分布的 speculative decoding。** 现成的小模型即可作为近似模型，在合适硬件条件下用一次目标模型调用确认多个 token。
+
+从技术影响看，真正可迁移的思想是把“候选质量”和“结果正确性”解耦：草稿模型只决定接受率与速度，目标分布由验证算法兜底。
+
+## 12. 局限与适用条件
+
+### 适合
+
+- 小 batch、交互式生成，优化目标是单请求延迟；
+- 目标模型受权重带宽、KV 带宽或设备通信限制；
+- 有一个延迟远低于目标模型、tokenizer 兼容且分布较接近的草稿模型；
+- 生成序列足够长，可以摊薄初始化和至少一次目标调用的固定成本；
+- 系统有额外并行计算余量。
+
+### 不一定适合
+
+- 大 batch 已把算术单元吃满，目标模型处于 compute-bound；
+- 草稿模型跨设备通信昂贵，或必须在 CPU/GPU 间频繁搬运；
+- 领域偏移导致 $p,q$ 重叠低，接受率持续偏低；
+- 输出极短，或首 token 延迟比后续 token 延迟更重要；
+- 服务系统无法高效处理变长接受、KV 回滚和动态 batching。
+
+主论文还存在明确的证据边界：墙钟实验只有 T5-XXL、两个任务、单 TPU-v4、batch size 1；未报告置信区间、能耗、成本、峰值内存和尾延迟；beam search 只在 Appendix A.4 给出初步方案；实验仅覆盖文本模态。因此“2–3 倍”是特定设置下的结果，不是所有模型和硬件的通用常数。
+
+## 13. 实现与评测清单
+
+在自己的推理栈落地时，应至少观测以下指标：
+
+1. **正确性**：随机采样的词频、序列指标和分布检验；greedy 输出逐 token 对齐。
+2. **接受行为**：平均接受率 $\alpha$、每轮接受长度分布、不同任务/温度下的分层结果。
+3. **端到端延迟**：time to first token、inter-token latency、P50/P95/P99，而不只看平均 tokens/s。
+4. **成本**：草稿耗时 $c$、目标验证随 $\gamma$ 的实际耗时曲线、被拒绝位置后的浪费比例。
+5. **资源**：目标/草稿 KV cache、峰值显存、设备通信、GPU 利用率和总 FLOPs。
+6. **参数搜索**：在真实请求分布上联合选择草稿模型与整数 $\gamma$，不要只追求最高 $\alpha$。
+
+一个可靠的上线判据不是“接受率看起来很高”，而是：在保持目标采样分布的自动化测试通过后，端到端尾延迟和单位请求成本都在真实负载上达到目标。
+
+## 14. 总结
+
+Speculative Decoding 抓住了大模型解码中的结构性错配：自回归依赖要求 token 顺序确认，但现代加速器更擅长并行计算。小模型先补出临时依赖，目标模型便能一次验证多个位置；modified rejection sampling 再把近似候选严格投影回目标分布。
+
+理解它可以压缩为四条：
+
+- **草拟**：$M_q$ 串行提出 $\gamma$ 个便宜候选；
+- **并行验证**：$M_p$ 一次算出 $\gamma+1$ 个位置的分布；
+- **精确纠偏**：按 $\min(1,p/q)$ 接受，拒绝后从 $[p-q]_+$ 重采；
+- **性能权衡**：收益由接受率 $\alpha$、草稿成本 $c$、lookahead $\gamma$ 和硬件并行余量共同决定。
+
+它不是“用小模型近似大模型输出”，而是“用小模型预测大模型接下来可能需要做的工作”。预测可以错，最终分布不能错；这正是推测执行思想在随机生成中的关键扩展。
+
+## 参考文献
+
+1. Leviathan, Y., Kalman, M., & Matias, Y. (2023). [Fast Inference from Transformers via Speculative Decoding](https://proceedings.mlr.press/v202/leviathan23a.html). ICML 2023, PMLR 202:19274–19286. [arXiv:2211.17192](https://arxiv.org/abs/2211.17192).
+2. Chen, C., Borgeaud, S., Irving, G., Lespiau, J.-B., Sifre, L., & Jumper, J. (2023). [Accelerating Large Language Model Decoding with Speculative Sampling](https://arxiv.org/abs/2302.01318). arXiv:2302.01318.
+3. Stern, M., Shazeer, N., & Uszkoreit, J. (2018). [Blockwise Parallel Decoding for Deep Autoregressive Models](https://arxiv.org/abs/1811.03115). NeurIPS 2018.
+
+> 来源说明：核心算法、证明、性能模型和 T5 实验数据均来自 Leviathan et al. 正式 ICML 版本；Chinchilla 结果来自 Chen et al. 原文。PMLR 页面未提供论文配套代码，本文不将第三方复现视为作者官方实现。
