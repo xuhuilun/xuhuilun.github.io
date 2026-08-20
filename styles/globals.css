@@ -114,6 +114,23 @@
     @apply font-serif text-sm;
   }
 
+  /* KaTeX 公式：保持正文节奏，并在窄屏完整保留长公式 */
+  .prose .katex {
+    font-size: 1.05em;
+  }
+
+  .prose .katex-display {
+    margin: 2rem 0;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.5rem 0.25rem;
+  }
+
+  .prose .katex-display > .katex {
+    min-width: max-content;
+  }
+
   /* TOC 链接激活态 */
   .toc-active {
     @apply font-semibold text-blue-600 dark:text-blue-400 border-l-2 border-blue-600 dark:border-blue-400 pl-3;

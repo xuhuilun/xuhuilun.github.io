@@ -69,10 +69,14 @@ PagedAttention 将每条请求的 KV 缓存划分为固定大小的**逻辑块**
 
 ### 块级注意力计算
 
-Attention 计算按块进行。对第 $i$ 个逻辑块，其注意力分数为：
+Attention 计算按块进行。对第 $i$ 个逻辑块，先计算缩放点积得分 $s_i$，再归一化为注意力权重 $\alpha_i$：
 
 $$
-\text{softmax}(Q K_i^T) = \frac{\exp(Q K_i^T / \sqrt{d_k})}{\sum_{j=1}^{n} \exp(Q K_j^T / \sqrt{d_k})}
+\begin{aligned}
+s_i &= \frac{Q K_i^T}{\sqrt{d_k}}, \\
+\alpha_i &= \operatorname{softmax}(s)_i
+= \frac{\exp(s_i)}{\sum_{j=1}^{n} \exp(s_j)}
+\end{aligned}
 $$
 
 PagedAttention kernel 逐个读取块表中的物理块参与计算；对于最后一块（可能不满 16 个 token），通过掩码忽略无效位置，保证结果与不缓存时完全一致。该 kernel 与 FlashAttention 的 tiling 思路兼容，可将分页读取与访存优化结合。
