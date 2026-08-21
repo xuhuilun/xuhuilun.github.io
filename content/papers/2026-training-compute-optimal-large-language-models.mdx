@@ -1,0 +1,498 @@
+---
+title: "Training Compute-Optimal Large Language Models 技术笔记：Chinchilla 如何重算模型与数据配比"
+description: "系统拆解 Chinchilla 论文的三种计算最优估计方法、参数与数据联合损失函数、最优前沿推导、Gopher 对照实验，以及 20 token/参数经验法则的工程边界。"
+date: "2026-08-21"
+tags: ["Chinchilla", "Scaling Law", "语言模型", "预训练", "Compute-Optimal"]
+---
+
+## 摘要
+
+给定一笔固定的预训练计算预算，应该训练一个更大的模型、少看一些数据，还是训练一个更小的模型、多看一些数据？Hoffmann 等人在 2022 年的 **Training Compute-Optimal Large Language Models** 中重新回答了这个问题。
+
+论文训练了 400 多个自回归 Transformer，参数量从 7000 万到 160 亿以上，训练数据量从 50 亿到 5000 亿 token。作者用三种方法估计固定 FLOP 预算下的最低损失点，得到一致结论：**计算预算增加时，模型参数量 $N$ 和训练 token 数 $D$ 应近似等比例增长**。因为训练计算量近似满足 $C\approx6ND$，所以二者都大致随 $C^{1/2}$ 增长。
+
+这个结果修正了 Kaplan 2020 的配方。Kaplan 认为计算增加 10 倍时，模型参数应增加约 5.5 倍、训练 token 只增加约 1.8 倍；Chinchilla 则认为两者都应增加约 $\sqrt{10}\approx3.2$ 倍。换句话说，当时的许多大模型并非参数不够多，而是**相对其参数量训练得不够久**。
+
+作者随后用近似相同的训练计算量对照 Gopher 280B 和 Chinchilla 70B：前者训练约 300B token，后者训练 1.4T token。Chinchilla 参数量只有四分之一，却在论文覆盖的大多数任务上更强，同时推理和微调所需的模型计算量也更低。
+
+> **一句话概括**：固定训练 FLOP 时，不能只问“能训练多大的模型”，还要问“这个模型能看到多少 token”；Chinchilla 的答案是，把预算更均衡地分给模型容量和训练数据。
+
+## 1. 论文究竟优化什么
+
+论文研究的是一个带约束优化问题：给定训练计算预算 $C$，选择模型参数量 $N$ 和训练 token 数 $D$，使验证损失 $L$ 最低。
+
+| 符号 | 含义 | 论文中的作用 |
+| --- | --- | --- |
+| $N$ | 模型参数量 | 决定模型的表示容量 |
+| $D$ | 训练过程中处理的 token 数 | 决定优化步数和数据覆盖 |
+| $C$ | 训练计算量，单位为 FLOP | 预先给定的资源约束 |
+| $L(N,D)$ | 验证交叉熵损失 | 要最小化的目标 |
+
+对稠密 Transformer，常用一级近似是：
+
+$$
+C\approx6ND.
+$$
+
+每个 token 的一次前向传播大约需要 $2N$ 次浮点运算，反向传播约为前向的两倍，因此训练总量约为 $6ND$。Chinchilla 的正式分析使用了包含 embedding、注意力和输出层在内的更细 FLOP 计数；附录 F 显示，在论文测试的 73M 到 6.8B 模型上，详细计数与 $6ND$ 的比值约为 0.99 到 1.10，所以该近似不会改变论文结论。
+
+<Callout type="warning" title="计算最优的目标很窄">
+  论文优化的是给定预训练 FLOP 下的验证损失。它不直接优化训练时间、显存、数据采集成本、推理吞吐、后训练效果或安全性，也不保证同一配方适用于 MoE、多模态和长上下文模型。
+</Callout>
+
+### 1.1 “训练不足”不等于“没有收敛”
+
+论文所说的 undertrained 是一个**相对概念**：在同一计算预算下，如果缩小模型并把释放的算力用于更多 token，可以得到更低损失，那么原模型就是相对计算最优前沿训练不足。
+
+这不意味着计算最优模型必须训练到完全收敛。Kaplan 与 Chinchilla 都认为，固定计算预算下通常不值得把一个模型训练到渐近损失；分歧在于应该多早停止。Chinchilla 认为 Kaplan 推荐的停止点太早，低估了数据和训练时长的价值。
+
+## 2. Chinchilla 修正了什么
+
+Kaplan 等人在 2020 年得到的计算最优缩放关系近似为：
+
+$$
+N_{\mathrm{opt}}\propto C^{0.73},
+\qquad
+D_{\mathrm{opt}}\propto C^{0.27}.
+$$
+
+因此预算增加 10 倍时：
+
+$$
+10^{0.73}\approx5.4,
+\qquad
+10^{0.27}\approx1.9.
+$$
+
+新增预算主要被分配给参数量。GPT-3、Gopher、MT-NLG 等模型的参数量相差很大，但训练 token 大多仍在约 300B 的数量级，这正符合当时“优先扩模型”的思路。
+
+Chinchilla 的三种分析给出如下结果（论文 Table 2）：
+
+| 方法 | $N_{\mathrm{opt}}\propto C^a$ | $D_{\mathrm{opt}}\propto C^b$ |
+| --- | ---: | ---: |
+| 训练曲线最低包络 | 0.50 | 0.50 |
+| IsoFLOP 曲线 | 0.49 | 0.51 |
+| 参数化损失函数 | 0.46 | 0.54 |
+| Kaplan 2020 | 0.73 | 0.27 |
+
+三种方法的具体指数略有差别，但方向一致：参数量和 token 数都应随计算量近似开平方增长。由于 $a+b=1$，也始终满足 $ND\propto C$。
+
+论文还用 100 次 bootstrap 估计不确定性：每次抽取 80% 实验点，报告第 10 和第 90 百分位。方法一的 $a/b$ 区间分别为 $(0.488,0.502)$ 与 $(0.501,0.512)$；方法二为 $(0.462,0.534)$ 与 $(0.483,0.529)$。这些是拟合稳定性的经验区间，不是严格的 95% 置信区间。论文对方法三把 $a$ 写成 `0.46 (0.454, 0.455)`，中心值与区间存在显示精度差异，因此不应从最后两位小数推导额外结论。
+
+<Image
+  src="/img/scaling-law-compute-allocation.svg"
+  alt="训练计算预算增加十倍时，Kaplan 与 Chinchilla 对参数量和训练 token 增长倍率的对比"
+  caption="图 1：预算增加 10 倍时的相对增长。Kaplan 把更多预算分给参数量，Chinchilla 则让参数与数据近似等比例增长。"
+  width={1200}
+  height={700}
+/>
+
+如果需要先理解幂律、联合数据瓶颈和 Kaplan 的推导，可以先阅读 [Scaling Laws for Neural Language Models 论文精读](/papers/2026-scaling-laws-for-neural-language-models)。本文以下部分专注于 Chinchilla 如何得到新前沿。
+
+## 3. 三种方法如何寻找计算最优点
+
+这篇论文最重要的方法论贡献，不是给出一条单独的拟合线，而是用三种不同实验设计回答同一个问题，并检查结论是否一致。
+
+### 3.1 共同实验基础
+
+作者训练了 400 多个 decoder-only Transformer：
+
+- 参数量覆盖约 70M 到 16B 以上；
+- 训练数据量覆盖约 5B 到 500B token；
+- 主要数据来自 MassiveText，补充实验还在 C4 和 GitHub 代码上复现 IsoFLOP 趋势；
+- 不同模型规模和训练长度都使用与目标训练长度匹配的 cosine 学习率日程。
+
+实验不是固定 300B token 后比较谁更好，而是同时改变 $N$ 与 $D$，让每个计算预算附近都有多个候选配置可比较。
+
+### 3.2 方法一：取训练曲线的最低包络
+
+方法一固定一组模型规模，对每个规模训练 4 个不同长度的 cosine 日程，最长与最短训练长度相差 16 倍。模型范围约为 70M 到 10B。
+
+作者先对每条训练 loss 曲线进行平滑和插值，得到连续映射：
+
+$$
+C\longmapsto L_N(C).
+$$
+
+然后在 1500 个对数间隔的 FLOP 位置上，对所有模型和训练日程取最低损失：
+
+$$
+L_{\min}(C)=\min_N L_N(C).
+$$
+
+产生最低损失的模型规模和已处理 token 数，就是该预算下的经验最优点 $(N_{\mathrm{opt}},D_{\mathrm{opt}})$。再对这些点拟合幂律，得到：
+
+$$
+N_{\mathrm{opt}}\propto C^{0.50},
+\qquad
+D_{\mathrm{opt}}\propto C^{0.50}.
+$$
+
+这里容易误解为“比较每次训练结束时的 loss”。实际上，方法一利用了**整条训练轨迹**；某个中间 checkpoint 也可以进入最低包络。论文还指出，被选中的点都位于对应训练的最后 15% 内，支持“cosine 日程长度应与目标 token 数匹配”的设置。
+
+### 3.3 方法二：直接构造 IsoFLOP 曲线
+
+方法二固定 9 档训练预算，从 $6\times10^{18}$ 到 $3\times10^{21}$ FLOP。对每一档预算，作者选择多种模型规模，并令 token 数满足固定计算约束：
+
+$$
+D\approx\frac{C}{6N}.
+$$
+
+每个运行的 cosine 日程都与该次训练的目标 token 数匹配。训练结束后，在同一预算内画出最终损失关于模型规模的曲线：
+
+$$
+N\longmapsto L(N,C/(6N)).
+$$
+
+如果 $N$ 太小，模型容量成为瓶颈；如果 $N$ 太大，可用于训练的 token 太少，数据和优化成为瓶颈。因此每条曲线呈现一个清晰低谷。作者对 loss 与对数参数量拟合抛物线，以最低点估计 $N_{\mathrm{opt}}$，得到：
+
+$$
+N_{\mathrm{opt}}\propto C^{0.49},
+\qquad
+D_{\mathrm{opt}}\propto C^{0.51}.
+$$
+
+与方法一相比，IsoFLOP 的优点是实验问题与决策问题完全对齐：**在确切相同的预算下，哪个配置的最终损失最低？** 缺点是每档预算都要训练多个完整模型，成本更高。
+
+### 3.4 方法三：拟合联合损失函数
+
+方法三汇总前两种实验的最终 loss，拟合一个可解释的联合函数：
+
+$$
+\hat L(N,D)=E+\frac{A}{N^\alpha}+\frac{B}{D^\beta}.
+$$
+
+三项分别表示：
+
+| 项 | 含义 | 极限行为 |
+| --- | --- | --- |
+| $E$ | 理想生成过程在数据分布上的不可约损失 | $N,D\to\infty$ 时保留 |
+| $A/N^\alpha$ | 有限模型容量造成的逼近误差 | 扩大模型时下降 |
+| $B/D^\beta$ | 有限训练数据与优化步数造成的误差 | 增加 token 时下降 |
+
+论文用 L-BFGS 最小化预测 log loss 与观测 log loss 之间的 Huber 损失，Huber 参数为 $\delta=10^{-3}$，并通过多组初值降低局部极小值影响。附录 D.2 报告的拟合结果是：
+
+$$
+\hat L(N,D)
+=1.69+\frac{406.4}{N^{0.34}}+\frac{410.7}{D^{0.28}}.
+$$
+
+这个表达式把“模型太小”和“训练 token 太少”显式拆成两个瓶颈，也允许在任意计算约束下解析求最优点。
+
+<Callout type="warning" title="E 不是已测得的语言熵常数">
+  论文把 $E$ 解释为理想生成过程的损失，并将其联系到自然文本熵；但 1.69 是特定数据、tokenizer、模型族与拟合区间下的外推参数，不应当作自然语言的普适熵。
+</Callout>
+
+## 4. 固定计算预算下的解析推导
+
+令：
+
+$$
+K=\frac{C}{6}.
+$$
+
+由 $C\approx6ND$ 得到 $ND=K$，所以：
+
+$$
+D=\frac{K}{N}.
+$$
+
+代入联合损失函数：
+
+$$
+\begin{aligned}
+\hat L(N\mid C)
+&=E+AN^{-\alpha}+B\left(\frac{K}{N}\right)^{-\beta}\\
+&=E+AN^{-\alpha}+BK^{-\beta}N^\beta.
+\end{aligned}
+$$
+
+对 $N$ 求导并令其为 0：
+
+$$
+-\alpha A N^{-\alpha-1}
++\beta B K^{-\beta}N^{\beta-1}=0.
+$$
+
+整理得到：
+
+$$
+N^{\alpha+\beta}
+=\frac{\alpha A}{\beta B}K^\beta.
+$$
+
+因此：
+
+$$
+N_{\mathrm{opt}}(C)
+=G\left(\frac{C}{6}\right)^a,
+$$
+
+$$
+D_{\mathrm{opt}}(C)
+=G^{-1}\left(\frac{C}{6}\right)^b,
+$$
+
+其中：
+
+$$
+G=\left(\frac{\alpha A}{\beta B}\right)^{\frac{1}{\alpha+\beta}},
+\qquad
+a=\frac{\beta}{\alpha+\beta},
+\qquad
+b=\frac{\alpha}{\alpha+\beta}.
+$$
+
+代入 $\alpha=0.34$、$\beta=0.28$：
+
+$$
+a=\frac{0.28}{0.34+0.28}\approx0.45,
+$$
+
+$$
+b=\frac{0.34}{0.34+0.28}\approx0.55.
+$$
+
+论文 Table 2 将完整拟合和自助采样结果报告为 0.46 与 0.54。手算结果的细微差别来自表中 $\alpha,\beta$ 已被四舍五入。
+
+### 4.1 为什么两个指数必然相加为 1
+
+因为：
+
+$$
+a+b
+=\frac{\beta}{\alpha+\beta}
++\frac{\alpha}{\alpha+\beta}
+=1.
+$$
+
+所以：
+
+$$
+N_{\mathrm{opt}}D_{\mathrm{opt}}\propto C^{a+b}=C,
+$$
+
+与 $C\propto ND$ 的计算约束一致。若模型容量项下降较慢，也就是 $\alpha$ 较小，最优方案会把更多新增计算分给参数；若数据项下降较慢，也就是 $\beta$ 较小，则会把更多计算分给 token。
+
+### 4.2 10 倍预算意味着什么
+
+使用方法一的 $(a,b)=(0.5,0.5)$：
+
+$$
+\frac{N_{\mathrm{opt}}(10C)}{N_{\mathrm{opt}}(C)}
+=10^{0.5}\approx3.16,
+$$
+
+$$
+\frac{D_{\mathrm{opt}}(10C)}{D_{\mathrm{opt}}(C)}
+=10^{0.5}\approx3.16.
+$$
+
+两者乘积约为 10，恰好耗尽新增预算。与 Kaplan 的约 5.4 倍参数、1.9 倍 token 相比，Chinchilla 选择更小但训练更充分的模型。
+
+## 5. “20 token/参数”从哪里来
+
+论文方法一给出的计算最优估计包括（Table 3）：
+
+| 参数量 | 训练 token | token/参数 |
+| ---: | ---: | ---: |
+| 400M | 8.0B | 20.0 |
+| 1B | 20.2B | 20.2 |
+| 10B | 205.1B | 20.5 |
+| 67B | 1.5T | 约 22.4 |
+
+在论文覆盖和外推的主要区间内，可以把它记成：
+
+$$
+D_{\mathrm{opt}}\approx20N.
+$$
+
+再与 $C\approx6ND$ 联立：
+
+$$
+C\approx120N^2,
+$$
+
+$$
+N\approx\sqrt{\frac{C}{120}},
+\qquad
+D\approx20\sqrt{\frac{C}{120}}.
+$$
+
+例如训练预算约为 $6\times10^{23}$ FLOP：
+
+$$
+N\approx\sqrt{\frac{6\times10^{23}}{120}}
+\approx7.07\times10^{10},
+$$
+
+即约 **70.7B 参数**；对应：
+
+$$
+D\approx20N\approx1.41\times10^{12},
+$$
+
+即约 **1.41T token**。这正好接近 Chinchilla 的 70B/1.4T 配置。
+
+<Callout type="warning" title="20 不是普适常数">
+  这个比值是特定稠密 Transformer、MassiveText 数据分布、tokenizer、训练目标和单次训练设置下的经验起点。论文对 67B 以上规模已经在外推；数据重复、数据质量、架构和上下文长度变化都会移动最优点。
+</Callout>
+
+## 6. Chinchilla 如何验证缩放结论
+
+### 6.1 同训练计算量的模型/数据交换
+
+作者根据前三种方法估计，Gopher 训练预算下的最优模型约在 40B 到 70B 参数之间。最终出于数据和计算效率考虑，选择区间上端，训练了 70B 参数的 Chinchilla。
+
+| 模型 | 参数量 | 训练 token | token/参数 | 训练计算量 |
+| --- | ---: | ---: | ---: | ---: |
+| Gopher | 280B | 约 300B | 约 1.1 | 与 Chinchilla 近似相同 |
+| Chinchilla | 70B | 1.4T | 20 | 与 Gopher 近似相同 |
+
+这不是“少花四分之一训练算力”。Chinchilla 把参数量缩小到四分之一，同时把数据量提高到约 4.7 倍，两者乘积接近，因此预训练计算量仍近似相同。收益来自**重新分配同一笔预算**。
+
+论文 Table 3 以 Gopher 预算 $5.76\times10^{23}$ FLOP 做缩放估计；附录 F 使用更细计数重新得到约 $6.3\times10^{23}$ FLOP。两个口径存在小幅差异，但不影响 70B/1.4T 的数量级和主要结论。
+
+### 6.2 模型并非只改变了 N 和 D
+
+Chinchilla 与 Gopher 使用相同的基本 Transformer 架构和 MassiveText 数据集，但并不是严格只改变两个变量。论文 §4.1 还列出：
+
+- Chinchilla 使用 AdamW，Gopher 使用 Adam；
+- 数据子集采样比例略有变化；
+- SentencePiece tokenizer 不再做 NFKC 归一化，两个词表有 94.15% token 相同；
+- 优化器状态和数值精度设置有调整。
+
+因此大模型对照是对计算最优配方的强实证验证，但不是一个只有参数量和 token 数变化的纯消融实验。三种小规模缩放分析才是因果论证的主体，大规模 Chinchilla 是外推后的系统级验证。
+
+### 6.3 下游结果
+
+论文报告的代表性结果包括：
+
+| 评测 | Gopher 280B | Chinchilla 70B | 来源 |
+| --- | ---: | ---: | --- |
+| WikiText-103 perplexity | 7.75 | 7.16 | §4.2.1 |
+| MMLU 5-shot 平均准确率 | 60.0% | 67.6% | Table 6 |
+| BIG-bench 62 项平均准确率 | 54.4% | 65.1% | §4.2.4 |
+| LAMBADA zero-shot | 74.5% | 77.4% | Table 7 |
+
+MMLU 上，Chinchilla 在 57 项任务中的 51 项更好、2 项持平、4 项更差。BIG-bench 上，62 项中只有 4 项低于 Gopher。论文摘要将 MMLU 结果写为 67.5%，Table 6 的更具体值为 67.6%，这里采用表格口径。
+
+语言建模结果需要额外谨慎：Chinchilla 看过的数据更多，测试集泄漏概率也可能更高。论文因此更重视 MMLU、BIG-bench、闭卷问答和常识任务，但这些基准同样不能单独证明所有能力都随验证 loss 改善。
+
+### 6.4 推理成本是额外收益
+
+在相同预训练计算量下，Chinchilla 的参数量只有 Gopher 的四分之一。对同类稠密 Transformer，这通常意味着：
+
+- 模型权重显存约缩小到四分之一；
+- 单 token 推理的权重读取和矩阵计算显著降低；
+- 全参数微调的计算和内存需求下降；
+- 同等硬件更容易获得较低延迟或更高吞吐。
+
+这些收益不是论文最优化目标的一部分，却使“更小、训练更久”在全生命周期内往往比单看预训练 loss 更有吸引力。
+
+## 7. 为什么 Kaplan 与 Chinchilla 得到不同答案
+
+两篇论文都观察到平滑幂律，也都主张不要把固定规模模型训练到完全收敛。差异主要来自如何采样实验点和估计最优前沿。
+
+### 7.1 更直接的固定预算实验
+
+Chinchilla 的 IsoFLOP 方法在同一 FLOP 下直接比较不同 $N/D$ 配置，并保证每条曲线覆盖低谷两侧。它比从单变量缩放关系间接拼出最优点更接近实际训练决策。
+
+### 7.2 学习率日程与训练长度匹配
+
+论文附录 B 表明，如果 cosine 周期比实际训练长度长 25% 以上，最终性能会明显变差。若在为长训练设计的日程中途读取 checkpoint，把它当作短训练的最终结果，就会系统性低估短 token 配置的训练质量，也会扭曲不同训练长度的比较。
+
+Chinchilla 为每个目标 token 数匹配学习率周期，并在方法一中为同一模型训练 4 种日程。这个控制变量对判断“更多 token 是否值得”很关键。
+
+### 7.3 覆盖更大的模型和更多组合
+
+论文观察到 FLOP-loss 最优前沿存在曲率：只用最小规模实验点拟合，与使用更大模型点拟合会得到不同外推。Chinchilla 使用 400 多次训练并覆盖到 16B 以上，但附录 E 仍明确承认曲率尚未被模型化，超出实验区间的远距离外推具有显著不确定性。
+
+### 7.4 小规模正面对照
+
+附录 D.4 在 $10^{21}$ FLOP 下训练两个近似同形状模型：Kaplan 配方预测约 4.68B，Chinchilla 方法一预测约 2.86B。实际训练使用 4.74B 和 2.80B，后者在训练结束时取得更低损失。这为“更小模型、更多 token”提供了一次受控的直接验证。
+
+## 8. 工程上如何使用这篇论文
+
+正确用法不是直接把所有项目设置成 20 token/参数，而是把它作为实验先验。
+
+### 第一步：统一计算口径
+
+先明确参数是否包含 embedding、FLOP 是否包含注意力和输出层、token 数是唯一 token 还是累计处理 token。若上下文很长或架构不是标准稠密 Transformer，应使用算子级 FLOP 估算，不要只依赖 $6ND$。
+
+### 第二步：用 Chinchilla 比例确定搜索中心
+
+在缺少本域数据时，可先用：
+
+$$
+D\approx20N,
+\qquad
+N\approx\sqrt{C/120}
+$$
+
+得到中心点。然后在固定预算下选取偏小/多数据、中心、偏大/少数据等多个配置，而不是只训练一个点。
+
+### 第三步：运行本域 IsoFLOP 实验
+
+在多个较小预算上训练一组模型，保证每档预算都能看到 loss 低谷。每次运行都应：
+
+1. 使用与目标 token 数匹配的学习率日程；
+2. 保持 tokenizer、数据混合、批量和架构规则一致；
+3. 记录验证 loss、详细 FLOP 与实际吞吐；
+4. 对最优点做 bootstrap 或重复实验，报告不确定区间。
+
+### 第四步：拟合并外推自己的前沿
+
+可以从简单的 IsoFLOP 抛物线开始；实验点足够多时，再拟合：
+
+$$
+L(N,D)=E+AN^{-\alpha}+BD^{-\beta}.
+$$
+
+外推目标规模前，应检查残差、不同预算区间的斜率和前沿曲率。如果小预算与大预算拟合出的指数明显不同，单一幂律已经不足以支持远距离外推。
+
+### 第五步：加入产品约束再决策
+
+训练 loss 近似相同的多个配置中，高调用量产品通常更偏好小模型和更多 token，因为推理成本会被重复支付。若高质量数据受限、训练周期紧张或模型必须具备特定容量，则最优点可能向更大模型移动。
+
+## 9. 结论的适用边界
+
+### 9.1 token 不是同质资源
+
+$D$ 只计算数量，不表达去重、领域覆盖、难度、噪声和污染。同样的 1T token，经过高质量筛选的数据与机械重复的数据不具有同等训练价值。论文在 C4 和 GitHub 代码上观察到近似等比例趋势，但也明确把“不超过一个 epoch”作为相关实验条件。
+
+### 9.2 架构变化会改变 N、D、C 的含义
+
+MoE 的总参数量与每 token 激活参数量不同；检索增强把知识容量移到外部索引；长上下文让注意力计算不再能被 $6ND$ 准确描述；多模态 token 的计算价值也不相同。此时应重新定义资源变量并重新拟合。
+
+### 9.3 验证 loss 最优不等于下游全面最优
+
+平均 next-token loss 是平滑代理指标。推理、代码生成、事实性、长上下文、工具调用和后训练可塑性可能有不同的最优配比。论文的大规模评测支持 loss 改善能够迁移到许多任务，但不是对所有能力的保证。
+
+### 9.4 更强的语言模型不自动更安全
+
+论文的 Winogender 结果显示 Chinchilla 整体准确率提高，但不同性别组的改善并不均匀，偏差仍然存在。无提示生成的 toxicity 分数与 Gopher 差异很小。更好的预训练 loss 不能替代安全数据、对齐训练和系统性风险评估。
+
+### 9.5 论文外推本身有不确定性
+
+主要缩放实验最大约 16B 参数、500B token，而 Chinchilla 是 70B/1.4T。更大规模表格中的 175B、280B、1T 乃至 10T 参数配置都是幂律外推，不是逐一训练验证。离实验域越远，数据、架构和前沿曲率造成的误差越大。
+
+## 10. 结论
+
+Training Compute-Optimal Large Language Models 的核心贡献可以归纳为六点：
+
+1. 固定训练计算预算时，模型参数量与训练 token 必须联合优化；
+2. 训练曲线包络、IsoFLOP 和参数化损失三种方法都指向近似 $N,D\propto C^{1/2}$；
+3. 联合损失函数把有限容量与有限数据造成的误差拆开，并给出可解析的计算最优前沿；
+4. Gopher 与 Chinchilla 表明，同等预训练计算下，较小但训练更久的模型可以同时获得更低 loss、更强下游表现和更低推理成本；
+5. 约 20 token/参数是有用的历史基线，不是跨数据、架构和时代的固定常数；
+6. 最可迁移的方法不是背住比例，而是围绕目标预算做本域 IsoFLOP 实验，再把训练最优与部署成本、数据约束和产品目标共同优化。
+
+Chinchilla 真正改变的不是某一个数字，而是训练大模型时的提问方式：**先确定计算预算，再联合设计模型与数据；不要先决定参数规模，再用剩余预算决定训练多久。**
+
+## 参考文献
+
+1. Hoffmann J, Borgeaud S, Mensch A, et al. [Training Compute-Optimal Large Language Models](https://proceedings.neurips.cc/paper_files/paper/2022/hash/c1e2faff6f588870935f114ebe04a3e5-Abstract-Conference.html). NeurIPS 2022. [终版 PDF](https://proceedings.neurips.cc/paper_files/paper/2022/file/c1e2faff6f588870935f114ebe04a3e5-Paper-Conference.pdf)；[补充材料](https://proceedings.neurips.cc/paper_files/paper/2022/file/c1e2faff6f588870935f114ebe04a3e5-Supplemental-Conference.pdf)；[arXiv HTML](https://arxiv.org/html/2203.15556).
+2. Google DeepMind. [An empirical analysis of compute-optimal large language model training](https://deepmind.google/blog/an-empirical-analysis-of-compute-optimal-large-language-model-training/), 2022.
+3. Kaplan J, McCandlish S, Henighan T, et al. [Scaling Laws for Neural Language Models](https://arxiv.org/abs/2001.08361). arXiv:2001.08361, 2020.
+4. Rae J W, Borgeaud S, Cai T, et al. [Scaling Language Models: Methods, Analysis & Insights from Training Gopher](https://arxiv.org/abs/2112.11446). arXiv:2112.11446, 2021.
