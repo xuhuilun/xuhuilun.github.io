@@ -5,6 +5,7 @@ import { Card } from '@/components/mdx/card';
 import { Tabs, Tab } from '@/components/mdx/tabs';
 import { Steps, Step } from '@/components/mdx/steps';
 import { EnhancedImage, MDXImage } from '@/components/mdx/image';
+import { CodeBlock } from '@/components/mdx/code-block';
 
 const Typography = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
   <div className={cn('prose prose-slate dark:prose-invert mx-auto', className)} {...props} />
@@ -34,47 +35,8 @@ export const components = {
   ),
 
   // Code blocks
-  pre: ({ className, ...props }: any) => (
-    <pre
-      className={cn(
-        'my-4 rounded-lg bg-slate-950 p-4 overflow-x-auto border border-slate-700',
-        'shadow-lg',
-        className
-      )}
-      {...props}
-    />
-  ),
-
-  code: ({ className, children, ...props }: any) => {
-    // Inline code
-    if (!className) {
-      return (
-        <code
-          className={cn(
-            'rounded-md bg-slate-100 px-1.5 py-0.5 text-sm font-mono text-slate-900',
-            'dark:bg-slate-800 dark:text-slate-100',
-            className
-          )}
-          {...props}
-        >
-          {children}
-        </code>
-      );
-    }
-
-    // Code block (handled by pre tag)
-    return (
-      <code
-        className={cn(
-          'font-mono text-sm text-slate-100',
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </code>
-    );
-  },
+  pre: CodeBlock,
+  code: ({ className, ...props }: any) => <code className={className} {...props} />,
 
   // Links
   a: ({ className, href, ...props }: any) => (

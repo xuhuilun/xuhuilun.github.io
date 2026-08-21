@@ -37,7 +37,7 @@ A client component owns fenced-code presentation and copy interaction. It receiv
 3. The original `pre` and highlighted `code` tree without altering syntax tokens.
 4. A screen-reader live region for copy feedback.
 
-The component extracts plain text from nested React children for the Clipboard API. Copy success changes the icon and accessible label to "已复制" for two seconds. Copy failure leaves the default state and does not interrupt reading.
+The component reads the rendered `pre.textContent` for the Clipboard API, which preserves highlighted nested spans and their source text. Copy success changes the icon and accessible label to "已复制" for two seconds. Copy failure leaves the default state and does not interrupt reading.
 
 ### MDX component mapping
 
